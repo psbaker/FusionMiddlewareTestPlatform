@@ -1,0 +1,117 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns3="urn:stub.onair.sintecmedia.com" xmlns:ns1="urn:abcaus.onair.sintecmedia.com">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns1:ePGResp>
+         <Success>true</Success>
+         <EPGResponse>
+            <Parameters>
+               <FromDate>2014-10-13</FromDate>
+               <FromUTCDate>2014-10-13</FromUTCDate>
+               <ToDate>2014-10-13</ToDate>
+               <ToUTCDate>2014-10-13</ToUTCDate>
+               <DayTypeID>1307001</DayTypeID>
+               <ChannelID>9682</ChannelID>
+               <ChannelName>ABC1 SA</ChannelName>
+               <DaylightOffset>01:00</DaylightOffset>
+               <DaylightStartDate>2014-10-05</DaylightStartDate>
+               <DaylightEndDate>2015-04-04</DaylightEndDate>
+               <FullSchedule>false</FullSchedule>
+            </Parameters>
+            <Event>
+               <EventID>75538770</EventID>
+               <Channel>
+                  <ChannelID>9682</ChannelID>
+                  <ChannelName>ABC1 SA</ChannelName>
+               </Channel>
+               <Channel>
+                  <ChannelID>9702</ChannelID>
+                  <ChannelName>ABC1 SA Regional</ChannelName>
+               </Channel>
+               <Channel>
+                  <ChannelID>9704</ChannelID>
+                  <ChannelName>ABC1 SA Metro</ChannelName>
+               </Channel>
+               <EventType>Series</EventType>
+               <StartDate>2014-10-13</StartDate>
+               <StartUTCDate>2014-10-13</StartUTCDate>
+               <Day>Monday</Day>
+               <WeekNumber>42</WeekNumber>
+               <StartTime>19:00:00:00</StartTime>
+               <StartUTCTime>08:30:00:00</StartUTCTime>
+               <ExpireTime>19:00:00:00</ExpireTime>
+               <ExpireUTCTime>08:30:00:00</ExpireUTCTime>
+               <GrossDuration>00:30:00:00</GrossDuration>
+               <Billed>true</Billed>
+               <BilledStartTime>19:00:00:00</BilledStartTime>
+               <Live>true</Live>
+               <LogicalMediaCaptioned>true</LogicalMediaCaptioned>
+               <LogicalMediaCaptionedDescription>CL</LogicalMediaCaptionedDescription>
+               <PhysicalMediaCaptioned>false</PhysicalMediaCaptioned>
+               <Title>ABC News</Title>
+               <PlaylistTitle>ABC News</PlaylistTitle>
+               <GenreID>500029660</GenreID>
+               <GenreDescription>News</GenreDescription>
+               <AudienceGenreID>226</AudienceGenreID>
+               <AudienceGenreDescription>News / Current Affairs - News</AudienceGenreDescription>
+               <AudienceGenre>News/Current Affairs</AudienceGenre>
+               <AudienceSubGenre>News</AudienceSubGenre>
+               <OnlineGenreID>525030576</OnlineGenreID>
+               <OnlineGenreDescription>News</OnlineGenreDescription>
+               <ProductionCountryID>754</ProductionCountryID>
+               <ProductionCountryDescription>Australia</ProductionCountryDescription>
+               <ProductionYear>2014</ProductionYear>
+               <EpisodeNumber>286</EpisodeNumber>
+               <SeriesNumber>2014</SeriesNumber>
+               <Premiere>true</Premiere>
+               <Final>false</Final>
+               <ProductionTypeID>1140002</ProductionTypeID>
+               <ProductionTypeDescription>In-House Production</ProductionTypeDescription>
+               <ProgramHouseNumber>NC1435S</ProgramHouseNumber>
+               <EpisodeHouseNumber>NC1435S286S00</EpisodeHouseNumber>
+               <LogicalMediaHouseNumber>NC1435S286S00MA1</LogicalMediaHouseNumber>
+               <LogicalMediaClassificationID>500029720</LogicalMediaClassificationID>
+               <LogicalMediaClassificationDescription>Exempt</LogicalMediaClassificationDescription>
+               <Format>525031638</Format>
+               <FormatDescription>DV50 - SD Linear</FormatDescription>
+               <PhysicalMediaHouseNumber>NC1435S286S00MA1D1</PhysicalMediaHouseNumber>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1237</SynopsisTypeID>
+                  <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
+                  <SynopsisText>Local, National and International News hosted by Jessica Harmsen (Mon-Fri) and Emma Rebellato (Sat-Sun).</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1403</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Raw Reference</SynopsisTypeDescription>
+                  <SynopsisText>abcnewsgeneric.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1402</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image DX Master</SynopsisTypeDescription>
+                  <SynopsisText>NC1435S.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1240</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
+                  <SynopsisText>NC1435S_460.jpg</SynopsisText>
+               </Synopsis>
+               <Highlights>
+                  <ComingUp>false</ComingUp>
+                  <DontMiss>false</DontMiss>
+                  <CatchUp>false</CatchUp>
+                  <Flag1>false</Flag1>
+                  <Flag2>false</Flag2>
+                  <Flag3>false</Flag3>
+               </Highlights>
+            </Event>
+         </EPGResponse>
+      </ns1:ePGResp>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,10 @@
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+   <env:Header/>
+   <env:Body>
+      <ns:LookupResp xmlns:ns="http://osb.abc.net.au/lookup/client/1.0">
+         <ns:OnAirChannelID>9676</ns:OnAirChannelID>
+         <ns:ChannelName>ABC1</ns:ChannelName>
+         <ns:ChannelDesc>ABC1</ns:ChannelDesc>
+      </ns:LookupResp>
+   </env:Body>
+</env:Envelope>

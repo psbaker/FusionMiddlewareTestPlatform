@@ -1,0 +1,17 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:login.onair.sintecmedia.com" xmlns:ns2="urn:stub.onair.sintecmedia.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>EOracleError</faultcode>
+         <faultstring>There are no Events</faultstring>
+         <detail>
+            <fault xsi:type="ns2:ServerException">
+               <ns2:message>
+                  <ns2:code>EOracleError</ns2:code>
+                  <ns2:description>There are no Events</ns2:description>
+               </ns2:message>
+            </fault>
+         </detail>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

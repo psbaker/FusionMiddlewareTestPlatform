@@ -1,0 +1,13 @@
+<testcase>  
+  
+  <protocol>file</protocol>
+  
+  <file order="1">/home/bakerp2y/TEST/7PMb_MurderDiveCore_2805.xml</file>
+  <file order="2">/home/bakerp2y/TEST/7PMb_MurderDiveCore_2805_1024x576.jpg</file>
+  <file order="3">/home/bakerp2y/TEST/7PMb_MurderDiveCore_2805.xml.sem</file>   
+  
+  <drop>/home/bakerp2y/TEST/NSE/NSE_OSB_Pickup/</drop>
+  
+  <validate>/mnt/WCMS/wcmsinteg/WCMSImport/VisionBytes/inbox/7PMb_MurderDiveCore_2805.xml.sem.DONE</validate>
+    
+</testcase>

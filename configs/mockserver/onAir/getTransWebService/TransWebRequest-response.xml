@@ -1,0 +1,89 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns="http://osb.abc.net.au/transweb/client/scheduler/1.0" xmlns:ns1="urn:abcaus.onair.sintecmedia.com" xmlns:ns2="urn:stub.onair.sintecmedia.com" xmlns:ns3="urn:stub.onair.sintecmedia.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+
+<ns1:transwebResp>
+  <Parameters>
+    <ChannelID>9733</ChannelID>
+    <ChannelName>iView</ChannelName>
+    <DayTypeID>1307001</DayTypeID>
+    <FromDate>2014-08-15</FromDate>
+    <ToDate>2014-08-16</ToDate>
+    <FromTime>10:00:00:00</FromTime>
+    <ToTime>12:00:00:00</ToTime>
+  </Parameters>
+  <Event>
+    <EventID>89588702</EventID>
+    <EventType>Programs/Series</EventType>
+    <StartDate>2014-08-15</StartDate>
+    <StartTime>10:00:00:00</StartTime>
+    <ExpireDate>2014-09-14</ExpireDate>
+    <ExpireTime>10:00:00:00</ExpireTime>
+    <EventStatusID>3200000</EventStatusID>
+    <EventStatusDescription>Planning</EventStatusDescription>
+    <Live>false</Live>
+    <Title>Lockie Leonard</Title>
+    <EpisodeTitle>Brothers</EpisodeTitle>
+    <EpisodeUniqueTitle>Lockie Leonard (1), 16</EpisodeUniqueTitle>
+    <SeriesNumber>1</SeriesNumber>
+    <Premiere>false</Premiere>
+    <Final>false</Final>
+    <PlaylistTitle>Lockie Leonard</PlaylistTitle>
+    <GenreID>500029644</GenreID>
+    <GenreDescription>Childrens C</GenreDescription>
+    <SubGenreID>500002634</SubGenreID>
+    <SubGenreDescription>Drama</SubGenreDescription>
+    <AudienceGenreID>127</AudienceGenreID>
+    <AudienceGenreDescription>Children's Programs - Children's Comedy</AudienceGenreDescription>
+    <EpisodeNumber>16</EpisodeNumber>
+    <EpisodeAiringNumber>16</EpisodeAiringNumber>
+    <ProgramHouseNumber>ZX6564A</ProgramHouseNumber>
+    <EpisodeHouseNumber>ZX6564A016S00</EpisodeHouseNumber>
+    <LogicalMediaHouseNumber>ZX6564A016S00MA1</LogicalMediaHouseNumber>
+    <NumberOfEpisodes>26</NumberOfEpisodes>
+    <LogicalMediaClassificationID>500029722</LogicalMediaClassificationID>
+    <LogicalMediaClassificationDescription>G</LogicalMediaClassificationDescription>
+    <Synopsis>
+      <SynopsisLevelID>500029916</SynopsisLevelID>
+      <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
+      <SynopsisTypeID>1237</SynopsisTypeID>
+      <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
+      <SynopsisText>Now he's ? popular, Lockie's getting a big head. And a short fuse. When the dancing challenged Lockie realises he's expected to bust some moves at the upcoming Blue Light Disco, he takes his insecurities out on Phillip</SynopsisText>
+    </Synopsis>   
+    <TargetMedia>
+      <MediaTitle>ZX6564A016S00MA1M1</MediaTitle>
+      <BoxNumber>ZX6564A016S00MA1M1</BoxNumber>
+      <CompressionID>525031650</CompressionID>
+      <CompressionDescription>M1 - MP401 - iView</CompressionDescription>
+      <ReadyForTX>false</ReadyForTX>
+      <SourceMedia>
+        <SourceMediaTitle>ZX6564A016S00MA1D1</SourceMediaTitle>
+        <Captioned>true</Captioned>
+        <CCSourceID>500029708</CCSourceID>
+        <CCSourceDescription>Closed Caption</CCSourceDescription>
+        <BoxNumber>ZX6564A016S00MA1D1</BoxNumber>
+        <CompressionID>525031638</CompressionID>
+        <CompressionDescription>DV50 - SD Linear</CompressionDescription>
+        <ReadyForTX>true</ReadyForTX>
+        <TCIn>00:00:00:00</TCIn>
+        <TCOut>00:23:51:00</TCOut>
+        <Duration>00:23:51:00</Duration>
+      </SourceMedia>
+    </TargetMedia>
+    <Territories>
+      <TerritoryID>991</TerritoryID>
+      <TerritoryDescription>Australia</TerritoryDescription>
+      <Platforms>
+        <PlatformID>41</PlatformID>
+        <PlatformDescription>Available</PlatformDescription>
+      </Platforms>
+    </Territories>
+    <LogicalMediaDuration>00:23:51:00</LogicalMediaDuration>
+    <NetDuration>00:23:51:00</NetDuration>
+  </Event>
+  
+  
+</ns1:transwebResp>
+
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

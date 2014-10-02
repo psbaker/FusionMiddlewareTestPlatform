@@ -1,0 +1,86 @@
+<mockserver-config>
+ 
+    <!-- OnAir System -->
+	<system>
+		<system-id>onAir</system-id>
+		<system-uri>/onAir</system-uri>
+	
+		<!-- OnAir Login Token -->      
+		<service>
+			<service-id>loginToken</service-id>	
+			<service-uri>/LoginTokenWS</service-uri>
+			
+			<operation>				
+				<operation-id>LoginToken</operation-id>	
+				<token>fmw:process</token>		
+			</operation>				
+		</service>
+      
+      	<!-- OnAir EPG Download -->
+        <service>
+			<service-id>getEPGService</service-id>	
+			<service-uri>/getEPGService</service-uri>
+			
+			<operation>				
+				<operation-id>EPGRequest</operation-id>	
+				<token>2014-10-15</token>
+			</operation>				
+            <operation>				
+				<operation-id>EPGRequestNoEvents</operation-id>	
+				<token>2014-10-14</token>
+              	<http-code>500</http-code>
+			</operation>				
+		</service>
+      
+      	<!-- OnAir TransWeb -->
+		<service>
+			<service-id>getTransWebService</service-id>	
+			<service-uri>/getTransWebService</service-uri>
+			
+			<operation>				
+				<operation-id>TransWebRequest</operation-id>	
+				<token>transwebReq</token>		
+			</operation>				
+		</service>
+      
+		<service>
+			<service-id>channelLookup</service-id>	
+			<service-uri>/ChannelLookupWS</service-uri>
+			
+			<operation>				
+				<operation-id>LookupRequest</operation-id>	
+				<token>LookupReq</token>		
+			</operation>				
+		</service>
+      
+        <service>
+			<service-id>seriesIDService</service-id>	
+			<service-uri>/seriesIDService</service-uri>
+			
+			<operation>				
+                <operation-id>DbMergeEPGEventAndGetSeriesID</operation-id>
+				<token>P_EPG_EVENTLIST</token>		
+			</operation>				
+		</service>
+      
+	</system>
+  
+   <!-- Wallace System -->
+    <system>
+		<system-id>Wallace</system-id>
+		<system-uri>/Wallace</system-uri>
+	
+		<service>
+			<service-id>ResourceLibrary</service-id>	
+          <service-uri>/reslib/asp/importav.asp</service-uri>
+			
+			<operation>				
+				<operation-id>Importav</operation-id>	
+				<token>job-status</token>		
+			</operation>				
+		</service>
+     
+     </system>
+   
+		
+</mockserver-config>

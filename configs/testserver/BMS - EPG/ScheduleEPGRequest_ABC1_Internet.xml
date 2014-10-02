@@ -1,0 +1,49 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://127.0.0.1:7001/EPG_SB/Proxy_Services/EPG</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
+  
+  <request>
+    
+    <![CDATA[        
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/epg/client/scheduler/1.0">
+	<soapenv:Header/>
+	    <soapenv:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	      <scheduleEpgReq xmlns="http://osb.abc.net.au/epg/client/scheduler/1.0">
+		  <EPGSchedule>
+		    <Output>
+              <ABCIntranetSchedule>false</ABCIntranetSchedule>
+              <ABCInternetGuide>true</ABCInternetGuide>
+              <FTAEPG>false</FTAEPG>
+              <ExternalOutputs>false</ExternalOutputs>
+              <Mobile>false</Mobile>
+              <EBROADCAST>false</EBROADCAST>
+		    </Output>
+		    <InputDateRange>
+              <DateFrom>2013-12-01</DateFrom>
+              <ScheduledDate>false</ScheduledDate>
+              <DateHence>1 week hence</DateHence>
+		    </InputDateRange>
+		    <Channels>
+              <Channel>
+                <Name>ABC1</Name>
+                <Selected>true</Selected>
+              </Channel>			
+		    </Channels>
+		    <ScheduleConfiguration>
+              <Frequency>Immediate</Frequency>
+              <Time>00:00:00</Time>
+              <Inperpetuity>false</Inperpetuity>
+		    </ScheduleConfiguration>
+		  </EPGSchedule>
+	      </scheduleEpgReq>
+	</soapenv:Body>
+      </soapenv:Envelope> 
+    ]]>
+    
+  </request>
+  
+</testcase>

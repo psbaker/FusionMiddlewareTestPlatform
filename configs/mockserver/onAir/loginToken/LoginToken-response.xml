@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fmw="http://xmlns.oracle.com/ABCApplication_jws/FMWOnAirLoginService/FMWOnAirLoginService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <fmw:processResponse xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+         <fmw:token>VMxaHgHxSBv5wDkvt+xd93qZkTKATAnLDhUdDbo0mFuzfSfT+A/Mh5tR1Q==</fmw:token>
+      </fmw:processResponse>
+   </soapenv:Body>
+</soapenv:Envelope>
