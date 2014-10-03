@@ -4,8 +4,11 @@ package org.mocksmtpserver;
 import org.slf4j.LoggerFactory;*/
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Single client connection loop; performs full cycle of SMTP client-server interaction
@@ -59,8 +62,16 @@ class Connection implements Runnable {
         System.out.println("Exiting client connection loop for " + socket.getRemoteSocketAddress());
 
         mailStore.push(conversation.getMessage());
+        String smtpDownloadDir = System.getProperty("user.dir") + "/../logs/smtp/";
         
-
+        String fileName = new SimpleDateFormat("yyyyMMddhhmm'.txt'").format(new Date());
+   	 
+    	File file = new File(smtpDownloadDir + fileName);
+    	FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(conversation.getMessage());
+        fileWriter.flush();
+        fileWriter.close();
+        
       } finally {
         socket.close();
       }

@@ -1,5 +1,7 @@
 package au.net.abc.utils;
 
+import java.net.InetAddress;
+
 import org.mocksmtpserver.Server;
 
 public class MockSmtpServerUtils
@@ -22,8 +24,10 @@ public class MockSmtpServerUtils
 		{
 			smtpServer = new Server();
 			
-			smtpServer.setHost("localhost");
-			smtpServer.setHost("2525");
+			String machineName = InetAddress.getLocalHost().getHostName();
+			System.out.println("Machine Name: " + machineName);
+			smtpServer.setHost(machineName);
+			smtpServer.setPort(2525);
 					  
 			smtpServer.start();
 		}
