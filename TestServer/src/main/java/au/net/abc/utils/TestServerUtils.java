@@ -14,7 +14,7 @@ public class TestServerUtils
 {	
 	public static String getConfigDir()
 	{		
-		return System.getProperty("user.home") + "/testserver";		
+		return System.getProperty("user.dir") + "/../../configs/testserver";
 	}
 	
 	//method to convert Document to String

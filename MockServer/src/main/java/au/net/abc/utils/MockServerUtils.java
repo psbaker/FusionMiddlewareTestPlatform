@@ -15,7 +15,7 @@ public class MockServerUtils
 	//TODO: Make configurable via UI & store in a .properties file
 	public static String getConfigDir()
 	{		
-		return System.getProperty("user.home") + "/mockserver";		
+		return System.getProperty("user.dir") + "/../../configs/mockserver";
 	}
 	
 	public static String getXmlConfigPath()
