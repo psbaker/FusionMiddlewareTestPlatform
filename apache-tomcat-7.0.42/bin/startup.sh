@@ -21,6 +21,9 @@
 # $Id: startup.sh 1202062 2011-11-15 06:50:02Z mturk $
 # -----------------------------------------------------------------------------
 
+export JPDA_ADDRESS=8000
+export JPDA_TRANSPORT=dt_socket
+
 # Better OS/400 detection: see Bugzilla 31132
 os400=false
 case "`uname`" in
@@ -59,4 +62,4 @@ else
   fi
 fi
 
-exec "$PRGDIR"/"$EXECUTABLE" start "$@"
+exec "$PRGDIR"/"$EXECUTABLE" jpda start "$@"
