@@ -1,4 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+  <parent>
+    <groupId>au.net.abc</groupId>
+    <artifactId>FusionMiddlewareTestPlatform</artifactId>
+    <version>1.0.1</version>
+  </parent>  
+  
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>au.net.abc</groupId>
 	<artifactId>MockServerWebApp</artifactId>
@@ -12,7 +19,7 @@
 		<junit.version>4.11</junit.version>
 		<jdk.version>1.6</jdk.version>
 	</properties>
- 
+	 
 	<dependencies>
  
 		<!-- Spring 3 dependencies -->
@@ -84,6 +91,11 @@
 			<version>1.5.2</version>
 		</dependency>		-->
 		            
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
 		
 		
 		
@@ -150,7 +162,7 @@
             			<phase>package</phase>
             			<configuration>
                 			<target>
-                    			<copy file="${project.build.directory}/MockServerWebApp.war" tofile="/home/bakerp2y/apache-tomcat-7.0.42/webapps/MockServerWebApp.war"/>
+                    			<copy file="${project.build.directory}/MockServerWebApp.war" tofile="${project.build.directory}/../../apache-tomcat-7.0.42/webapps/MockServerWebApp.war"/>
                 			</target>
             			</configuration>
             			<goals>
