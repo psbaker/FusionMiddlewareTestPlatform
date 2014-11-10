@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>au.net.abc</groupId>
 	<artifactId>TestServerWebApp</artifactId>
@@ -6,88 +7,110 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>TestServerWebApp Maven Webapp</name>
 	<url>http://maven.apache.org</url>
- 
+
 	<properties>
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<jdk.version>1.6</jdk.version>
 	</properties>
- 
+
 	<dependencies>
- 
+
 		<!-- Spring 3 dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
- 
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
- 
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring-test</artifactId>
-        	<version>2.5</version>
-      	</dependency>
-      	
-      	<dependency>
-        	<groupId>org.hamcrest</groupId>
-        	<artifactId>hamcrest-all</artifactId>
-        	<version>1.3</version>
-      	</dependency>
- 
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>org.apache.tomcat</groupId>
-    		<artifactId>tomcat-servlet-api</artifactId>
-    		<version>7.0.30</version>
-    		<scope>provided</scope>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.30</version>
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>jstl</groupId>
-    		<artifactId>jstl</artifactId>
-    		<version>1.2</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>4.0-alpha4</version>
-		</dependency>          
-		
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 			<version>2.0</version>
-		</dependency>        
+		</dependency>
 
 	</dependencies>
+
+
 	<build>
 		<finalName>TestServerWebApp</finalName>
-		<plugins>			
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.11</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.surefire</groupId>
+						<artifactId>surefire-junit47</artifactId>
+						<version>2.12</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+					<includes>
+						<include>**/*.class</include>
+					</includes>
+					<excludedGroups>au.net.abc.IntegrationTest</excludedGroups>
+				</configuration>
+			    </plugin> 
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -99,21 +122,79 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
-	    		<version>1.6</version>
-    			<executions>
-        			<execution>
-            			<phase>package</phase>
-            			<configuration>
-                			<target>
-                    			<copy file="${project.build.directory}/TestServerWebApp.war" tofile="/home/bakerp2y/apache-tomcat-7.0.42/webapps/TestServerWebApp.war"/>
-                			</target>
-            			</configuration>
-            			<goals>
-                			<goal>run</goal>
-            			</goals>
-        			</execution>
-   				</executions>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<target>
+								<copy file="${project.build.directory}/TestServerWebApp.war"
+									tofile="${project.build.directory}/../../apache-tomcat-7.0.42/webapps/TestServerWebApp.war" />
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+			<!--  <plugin>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <executions>
+			    <execution>
+			      <id>Deploy Application</id>
+			      <phase>package</phase>
+			      <goals>
+				<goal>exec</goal>
+			      </goals>
+			      <configuration>
+				<executable>/home/bakerp2y/Oracle/Middleware/user_projects/domains/osb_domain/servers/AdminServer/upload/SubscriptionNotificationOSBZip-bakerp2y.local-1.0.1/import.sh</executable>
+				  <arguments>
+				    <argument>-u</argument>
+				    <argument>weblogic</argument>
+				    <argument>-p</argument>
+				    <argument>weblogic123</argument>
+				    <argument>-s</argument>
+				    <argument>t3://localhost:7001</argument>
+				    <argument>-f</argument>
+				    <argument>SubscriptionNotification-bakerp2y.local-1.0.1.jar</argument>
+				    <argument>-c</argument>
+				    <argument>ALSBCustomizationFile.xml</argument>
+				    <argument>-m</argument>
+				    <argument>Test</argument>
+				  </arguments>
+				<workingDirectory>/home/bakerp2y/Oracle/Middleware/user_projects/domains/osb_domain/servers/AdminServer/upload/SubscriptionNotificationOSBZip-bakerp2y.local-1.0.1</workingDirectory>		
+			      </configuration>
+			    </execution>
+			  </executions>
+			</plugin>	
+			<plugin>
+			 <artifactId>maven-failsafe-plugin</artifactId>
+			 <version>2.12</version>
+			 <dependencies>
+			  <dependency>
+			   <groupId>org.apache.maven.surefire</groupId>
+			  <artifactId>surefire-junit47</artifactId>
+			   <version>2.12</version>
+			  </dependency>
+			 </dependencies>
+			 <configuration>
+			  <groups>au.net.abc.IntegrationTest</groups>
+			 </configuration>
+			 <executions>
+			  <execution>
+			   <goals>
+			    <goal>integration-test</goal>
+			   </goals>
+			   <configuration>
+			    <includes>
+			     <include>**/*.class</include>
+			    </includes>
+			   </configuration>
+			  </execution>
+			 </executions>
+			</plugin>		 -->	
 		</plugins>
 	</build>
 </project>
