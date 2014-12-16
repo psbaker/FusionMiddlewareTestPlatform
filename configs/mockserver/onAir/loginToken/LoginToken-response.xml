@@ -1,8 +1,224 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fmw="http://xmlns.oracle.com/ABCApplication_jws/FMWOnAirLoginService/FMWOnAirLoginService">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <fmw:processResponse xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
-         <fmw:token>VMxaHgHxSBv5wDkvt+xd93qZkTKATAnLDhUdDbo0mFuzfSfT+A/Mh5tR1Q==</fmw:token>
-      </fmw:processResponse>
-   </soapenv:Body>
-</soapenv:Envelope>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ons="urn:stub.onair.sintecmedia.com" xmlns:onl="urn:login.onair.sintecmedia.com">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <onl:loginResponse>
+         <onl:loginReturn>
+            <ons:calendar>2</ons:calendar>
+            <ons:channels>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9676</ons:id>
+                  <ons:name>ABC1</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9678</ons:id>
+                  <ons:name>ABC1 ACT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9679</ons:id>
+                  <ons:name>ABC1 NSW</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9714</ons:id>
+                  <ons:name>ABC1 NSW Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9712</ons:id>
+                  <ons:name>ABC1 NSW Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9680</ons:id>
+                  <ons:name>ABC1 NT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9692</ons:id>
+                  <ons:name>ABC1 NT Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9688</ons:id>
+                  <ons:name>ABC1 NT Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9681</ons:id>
+                  <ons:name>ABC1 QLD</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9706</ons:id>
+                  <ons:name>ABC1 QLD Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9705</ons:id>
+                  <ons:name>ABC1 QLD Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9682</ons:id>
+                  <ons:name>ABC1 SA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9704</ons:id>
+                  <ons:name>ABC1 SA Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9702</ons:id>
+                  <ons:name>ABC1 SA Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9683</ons:id>
+                  <ons:name>ABC1 TAS</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9696</ons:id>
+                  <ons:name>ABC1 TAS Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9694</ons:id>
+                  <ons:name>ABC1 TAS Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9684</ons:id>
+                  <ons:name>ABC1 VIC</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9710</ons:id>
+                  <ons:name>ABC1 VIC Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9708</ons:id>
+                  <ons:name>ABC1 VIC Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9685</ons:id>
+                  <ons:name>ABC1 WA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9700</ons:id>
+                  <ons:name>ABC1 WA Metro</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9698</ons:id>
+                  <ons:name>ABC1 WA Regional</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9686</ons:id>
+                  <ons:name>ABC2</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9687</ons:id>
+                  <ons:name>ABC2 ACT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9689</ons:id>
+                  <ons:name>ABC2 NSW</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9690</ons:id>
+                  <ons:name>ABC2 NT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9691</ons:id>
+                  <ons:name>ABC2 QLD</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9693</ons:id>
+                  <ons:name>ABC2 SA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9695</ons:id>
+                  <ons:name>ABC2 TAS</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9697</ons:id>
+                  <ons:name>ABC2 VIC</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9699</ons:id>
+                  <ons:name>ABC2 WA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9701</ons:id>
+                  <ons:name>ABC3</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9721</ons:id>
+                  <ons:name>ABC News 24</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9729</ons:id>
+                  <ons:name>ABC News 24 ACT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9722</ons:id>
+                  <ons:name>ABC News 24 NSW</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9728</ons:id>
+                  <ons:name>ABC News 24 NT</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9724</ons:id>
+                  <ons:name>ABC News 24 QLD</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9725</ons:id>
+                  <ons:name>ABC News 24 SA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9727</ons:id>
+                  <ons:name>ABC News 24 TAS</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9723</ons:id>
+                  <ons:name>ABC News 24 VIC</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9726</ons:id>
+                  <ons:name>ABC News 24 WA</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9730</ons:id>
+                  <ons:name>ABC TV Online</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9732</ons:id>
+                  <ons:name>Download</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9792</ons:id>
+                  <ons:name>iTunes</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9733</ons:id>
+                  <ons:name>iView</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9749</ons:id>
+                  <ons:name>Mobile</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9731</ons:id>
+                  <ons:name>Streaming</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9790</ons:id>
+                  <ons:name>Web Download</ons:name>
+               </ons:item>
+               <ons:item xsi:type="ons:Channel">
+                  <ons:id>9793</ons:id>
+                  <ons:name>Web Streaming</ons:name>
+               </ons:item>
+            </ons:channels>
+            <ons:companiesList/>
+            <ons:companyId>0</ons:companyId>
+            <ons:currencyId>672</ons:currencyId>
+            <ons:dateFormat>DD/MM/YYYY</ons:dateFormat>
+            <ons:firstDayOfWeek>1</ons:firstDayOfWeek>
+            <ons:firstMonthOfYear>1</ons:firstMonthOfYear>
+            <ons:framesPerSecond>25</ons:framesPerSecond>
+            <ons:languageId>1</ons:languageId>
+            <ons:optionSetId>-1</ons:optionSetId>
+            <ons:timeFormat>HH:MM:SS:FF</ons:timeFormat>
+            <ons:token>VMxaEgHySRD8zjkzs+xf8XHgky+SShqgc2tpcsQ/hFG+ZyTT5AXam5Fa1Q==</ons:token>
+            <ons:durationFormat>HH:MM:SS:FF</ons:durationFormat>
+         </onl:loginReturn>
+      </onl:loginResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

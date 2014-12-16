@@ -1,6 +1,6 @@
 <mockserver-config>
  
-    <!-- OnAir System -->
+    <!-- ONAIR -->
 	<system>
 		<system-id>onAir</system-id>
 		<system-uri>/onAir</system-uri>
@@ -8,11 +8,11 @@
 		<!-- OnAir Login Token -->      
 		<service>
 			<service-id>loginToken</service-id>	
-			<service-uri>/LoginTokenWS</service-uri>
+			<service-uri>/getLoginToken</service-uri>
 			
 			<operation>				
 				<operation-id>LoginToken</operation-id>	
-				<token>fmw:process</token>		
+				<token>login</token>		
 			</operation>				
 		</service>
       
@@ -43,7 +43,8 @@
 			</operation>				
 		</service>
       
-		<service>
+        <!-- OnAir ChannelLookup -->
+		<!-- <service>
 			<service-id>channelLookup</service-id>	
 			<service-uri>/ChannelLookupWS</service-uri>
 			
@@ -51,9 +52,10 @@
 				<operation-id>LookupRequest</operation-id>	
 				<token>LookupReq</token>		
 			</operation>				
-		</service>
+		</service> -->
       
-        <service>
+        <!-- OnAir SeriesID -->
+        <!-- <service>
 			<service-id>seriesIDService</service-id>	
 			<service-uri>/seriesIDService</service-uri>
 			
@@ -61,18 +63,18 @@
                 <operation-id>DbMergeEPGEventAndGetSeriesID</operation-id>
 				<token>P_EPG_EVENTLIST</token>		
 			</operation>				
-		</service>
+		</service> -->
       
 	</system>
   
-   <!-- Wallace System -->
+    <!-- WALLACE -->
     <system>
 		<system-id>Wallace</system-id>
 		<system-uri>/Wallace</system-uri>
 	
 		<service>
 			<service-id>ResourceLibrary</service-id>	
-          <service-uri>/reslib/asp/importav.asp</service-uri>
+            <service-uri>/reslib/asp/importav.asp</service-uri>
 			
 			<operation>				
 				<operation-id>Importav</operation-id>	
@@ -80,7 +82,7 @@
 			</operation>				
 		</service>
      
-     </system>
+    </system>  
    
 		
 </mockserver-config>
