@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>News 24 Sport Ticker</title>
+    <category>Australian Broadcasting Corporation: All content</category>
+    <link>http://www.abc.net.au/news/</link>
+    <language>en-AU</language>
+    <copyright>Copyright 2014, Australian Broadcasting Corporation. All Rights Reserved.</copyright>
+    <pubDate></pubDate>
+    <lastBuildDate></lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <managingEditor>ABC News</managingEditor>
+    <image><title>ABC News</title><url>http://www.abc.net.au/news/image/4571064-1x1-144x144.png</url><link>http://www.abc.net.au/news/</link></image>
+    <item>
+          <title>TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest123456</title>
+          <pubDate>Wed, 19 Feb 2014 11:28:45 +1100</pubDate>
+          </item>    
+    </channel>
+</rss>

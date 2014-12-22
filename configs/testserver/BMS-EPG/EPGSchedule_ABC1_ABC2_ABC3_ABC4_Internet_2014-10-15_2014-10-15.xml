@@ -24,9 +24,9 @@
                <TVOnline>false</TVOnline>
             </Output>
             <InputDateRange>
-               <DateFrom>2014-08-01</DateFrom>
+               <DateFrom>2014-10-15</DateFrom>
                <ScheduledDate>false</ScheduledDate>
-               <DateTo>2014-08-01</DateTo>
+               <DateTo>2014-10-15</DateTo>
             </InputDateRange>
             <InputDateRangeTvOnline>
                <DateFrom>2014-04-01</DateFrom>
@@ -45,7 +45,7 @@
                <Time>00:00:00</Time>
                <Inperpetuity>false</Inperpetuity>
             </ScheduleConfiguration>
-			<SendAmendmentNotification>true</SendAmendmentNotification>
+			<SendAmendmentNotification>false</SendAmendmentNotification>
          </EPGSchedule>
 	    </scheduleEpgReq>
 	  </soapenv:Body>

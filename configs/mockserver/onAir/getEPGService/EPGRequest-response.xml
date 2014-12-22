@@ -1,4 +1,4 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns3="urn:stub.onair.sintecmedia.com" xmlns:ns1="urn:abcaus.onair.sintecmedia.com">
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:abcaus.onair.sintecmedia.com" xmlns:ns3="urn:stub.onair.sintecmedia.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <SOAP-ENV:Header/>
    <SOAP-ENV:Body>
       <ns1:ePGResp>
@@ -17,90 +17,102 @@
                <DaylightEndDate>2015-04-04</DaylightEndDate>
                <FullSchedule>false</FullSchedule>
             </Parameters>
-            <Event>
-               <EventID>75538770</EventID>
+           <Event>
+               <EventID>89660127</EventID>
                <Channel>
-                  <ChannelID>9682</ChannelID>
-                  <ChannelName>ABC1 SA</ChannelName>
-               </Channel>
-               <Channel>
-                  <ChannelID>9702</ChannelID>
-                  <ChannelName>ABC1 SA Regional</ChannelName>
-               </Channel>
-               <Channel>
-                  <ChannelID>9704</ChannelID>
-                  <ChannelName>ABC1 SA Metro</ChannelName>
+                  <ChannelID>9733</ChannelID>
+                  <ChannelName>iView</ChannelName>
                </Channel>
                <EventType>Series</EventType>
-               <StartDate>2014-10-13</StartDate>
-               <StartUTCDate>2014-10-13</StartUTCDate>
-               <Day>Monday</Day>
+               <StartDate>2014-10-15</StartDate>
+               <StartUTCDate>2014-10-14</StartUTCDate>
+               <Day>Wednesday</Day>
                <WeekNumber>42</WeekNumber>
-               <StartTime>19:00:00:00</StartTime>
-               <StartUTCTime>08:30:00:00</StartUTCTime>
-               <ExpireTime>19:00:00:00</ExpireTime>
-               <ExpireUTCTime>08:30:00:00</ExpireUTCTime>
-               <GrossDuration>00:30:00:00</GrossDuration>
+               <StartTime>05:28:00:00</StartTime>
+               <StartUTCTime>19:28:00:00</StartUTCTime>
+               <ExpireTime>05:28:00:00</ExpireTime>
+               <ExpireUTCTime>19:28:00:00</ExpireUTCTime>
+               <GrossDuration>00:21:06:00</GrossDuration>
                <Billed>true</Billed>
-               <BilledStartTime>19:00:00:00</BilledStartTime>
-               <Live>true</Live>
+               <BilledStartTime>05:25:00:00</BilledStartTime>
+               <Live>false</Live>
                <LogicalMediaCaptioned>true</LogicalMediaCaptioned>
-               <LogicalMediaCaptionedDescription>CL</LogicalMediaCaptionedDescription>
+               <LogicalMediaCaptionedDescription>Closed Caps</LogicalMediaCaptionedDescription>
                <PhysicalMediaCaptioned>false</PhysicalMediaCaptioned>
-               <Title>ABC News</Title>
-               <PlaylistTitle>ABC News</PlaylistTitle>
-               <GenreID>500029660</GenreID>
-               <GenreDescription>News</GenreDescription>
-               <AudienceGenreID>226</AudienceGenreID>
-               <AudienceGenreDescription>News / Current Affairs - News</AudienceGenreDescription>
-               <AudienceGenre>News/Current Affairs</AudienceGenre>
-               <AudienceSubGenre>News</AudienceSubGenre>
-               <OnlineGenreID>525030576</OnlineGenreID>
-               <OnlineGenreDescription>News</OnlineGenreDescription>
-               <ProductionCountryID>754</ProductionCountryID>
-               <ProductionCountryDescription>Australia</ProductionCountryDescription>
-               <ProductionYear>2014</ProductionYear>
-               <EpisodeNumber>286</EpisodeNumber>
-               <SeriesNumber>2014</SeriesNumber>
-               <Premiere>true</Premiere>
+               <Title>Camp Lakebottom</Title>
+               <EpisodeTitle>It's A Headless Horse, Man / Voyage To The Bottom Of The Deep</EpisodeTitle>
+               <PlaylistTitle>Camp Lakebottom</PlaylistTitle>
+               <GenreID>500029644</GenreID>
+               <GenreDescription>Childrens C</GenreDescription>
+               <AudienceGenreID>125</AudienceGenreID>
+               <AudienceGenreDescription>Children's Programs - Children's Animated</AudienceGenreDescription>
+               <AudienceGenre>Children's Programs</AudienceGenre>
+               <AudienceSubGenre>Children's Animated</AudienceSubGenre>
+               <ProductionCountryID>812</ProductionCountryID>
+               <ProductionCountryDescription>Canada</ProductionCountryDescription>
+               <ProductionYear>2013</ProductionYear>
+               <EpisodeNumber>63</EpisodeNumber>
+               <SeriesNumber>1</SeriesNumber>
+               <Premiere>false</Premiere>
                <Final>false</Final>
-               <ProductionTypeID>1140002</ProductionTypeID>
-               <ProductionTypeDescription>In-House Production</ProductionTypeDescription>
-               <ProgramHouseNumber>NC1435S</ProgramHouseNumber>
-               <EpisodeHouseNumber>NC1435S286S00</EpisodeHouseNumber>
-               <LogicalMediaHouseNumber>NC1435S286S00MA1</LogicalMediaHouseNumber>
-               <LogicalMediaClassificationID>500029720</LogicalMediaClassificationID>
-               <LogicalMediaClassificationDescription>Exempt</LogicalMediaClassificationDescription>
-               <Format>525031638</Format>
-               <FormatDescription>DV50 - SD Linear</FormatDescription>
-               <PhysicalMediaHouseNumber>NC1435S286S00MA1D1</PhysicalMediaHouseNumber>
+               <ProductionTypeID>1140000</ProductionTypeID>
+               <ProductionTypeDescription>Acquired</ProductionTypeDescription>
+               <ProgramHouseNumber>ZX9335A</ProgramHouseNumber>
+               <EpisodeHouseNumber>ZX9335A063S00</EpisodeHouseNumber>
+               <LogicalMediaHouseNumber>ZX9335A063S00MA1</LogicalMediaHouseNumber>
+               <LogicalMediaClassificationID>500029722</LogicalMediaClassificationID>
+               <LogicalMediaClassificationDescription>G</LogicalMediaClassificationDescription>
+               <Format>525031650</Format>
+               <FormatDescription>M1 - MP401 - iView</FormatDescription>
+               <PhysicalMediaHouseNumber>ZX9335A063S00MA1M1</PhysicalMediaHouseNumber>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
-                  <SynopsisTypeID>1237</SynopsisTypeID>
-                  <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
-                  <SynopsisText>Local, National and International News hosted by Jessica Harmsen (Mon-Fri) and Emma Rebellato (Sat-Sun).</SynopsisText>
-               </Synopsis>
-               <Synopsis>
-                  <SynopsisLevelID>500029912</SynopsisLevelID>
-                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
-                  <SynopsisTypeID>1403</SynopsisTypeID>
-                  <SynopsisTypeDescription>Image Raw Reference</SynopsisTypeDescription>
-                  <SynopsisText>abcnewsgeneric.jpg</SynopsisText>
-               </Synopsis>
-               <Synopsis>
-                  <SynopsisLevelID>500029912</SynopsisLevelID>
-                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
-                  <SynopsisTypeID>1402</SynopsisTypeID>
-                  <SynopsisTypeDescription>Image DX Master</SynopsisTypeDescription>
-                  <SynopsisText>NC1435S.jpg</SynopsisText>
+                  <SynopsisTypeID>1228</SynopsisTypeID>
+                  <SynopsisTypeDescription>Internal Commissioning Synopsis</SynopsisTypeDescription>
+                  <SynopsisText>An animated comedy about 12-year-old daredevil and mastermind McGee, who was headed for an awesome summer at Camp Sunny Smiles when his bus took a wrong turn and landed him at old, run down and ridiculously spooky CAMP LAKEBOTTOM! McGee soon discovers though that Lakebottom is not just your average camp; its the BEST CAMP EVER! That is, if you're into surfing "killer" waves, eating french flies at lunch and having monsters as counselors. It may seem scary, but McGee is having a blast and will be do anything to protect Lakebottom from his nemesis Buttsquat and his snooty camp across the lake, Camp Sunny Smiles.</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
                   <SynopsisTypeID>1240</SynopsisTypeID>
                   <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
-                  <SynopsisText>NC1435S_460.jpg</SynopsisText>
+                  <SynopsisText>ZX9335A_460.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1241</SynopsisTypeID>
+                  <SynopsisTypeDescription>Keywords</SynopsisTypeDescription>
+                  <SynopsisText>abc3 3toons 3comedy 3featured 3quirky c:3polooza 3summer c:3adventure c:3surf c:3overdrive c:3friends c:3polooza c:3spooked c:3grossout 3quirky c:3holiday c:3monsters c:3creatures</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1237</SynopsisTypeID>
+                  <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
+                  <SynopsisText>Meet 12-year-old daredevil and mastermind McGee who was headed for an awesome summer at Camp Sunny Smiles when his bus took a wrong turn and landed him at old, run down and ridiculously spooky CAMP LAKEBOTTOM!</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1402</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image DX Master</SynopsisTypeDescription>
+                  <SynopsisText>ZX9335A.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1403</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Raw Reference</SynopsisTypeDescription>
+                  <SynopsisText>camplakebottom_1.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029916</SynopsisLevelID>
+                  <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
+                  <SynopsisTypeID>1250</SynopsisTypeID>
+                  <SynopsisTypeDescription>Path/Filename</SynopsisTypeDescription>
+                  <SynopsisText>kids/camplakebottom_01_63.mp4</SynopsisText>
                </Synopsis>
                <Highlights>
                   <ComingUp>false</ComingUp>
