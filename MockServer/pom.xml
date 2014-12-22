@@ -71,25 +71,13 @@
     		<groupId>jstl</groupId>
     		<artifactId>jstl</artifactId>
     		<version>1.2</version>
-		</dependency>
-		
-		<!-- <dependency>
-    		<groupId>org.mockftpserver</groupId>
-    		<artifactId>MockFtpServer</artifactId>
-    		<version>2.4</version>
-  		</dependency> -->
+		</dependency>		
   		
   		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 			<version>2.0</version>
-		</dependency>        
-		
-		<!--<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.5.2</version>
-		</dependency>		-->
+		</dependency>  
 		            
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -123,14 +111,6 @@
     		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/mina-core-2.0.4.jar</systemPath>
 		</dependency>
 		
-	<!-- 	<dependency>
-		    <groupId>org.slf4j</groupId>
-    		<artifactId>slf4j-log4j12</artifactId>
-    		<version>1.5.2</version>
-    		<scope>system</scope>
-    		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/slf4j-log4j12-1.5.2.jar</systemPath>
-		</dependency>  -->
-		
 		<dependency>
 		    <groupId>org.log4j</groupId>
     		<artifactId>log4j</artifactId>
@@ -138,8 +118,6 @@
     		<scope>system</scope>
     		<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/log4j-1.2.17.jar</systemPath>
 		</dependency>
-
-    
 
 	</dependencies>
 	<build>
