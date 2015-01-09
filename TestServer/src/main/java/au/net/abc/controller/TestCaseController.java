@@ -335,7 +335,15 @@ public class TestCaseController
 	{
 		String requestXml = testXmlDocument.getElementsByTagName("request").item(0).getTextContent();
 		String endpoint = testXmlDocument.getElementsByTagName("url").item(0).getTextContent();
-		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();	
+		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
+		String validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+		
+		/* Cleanup files to validate before executing test-case */
+		File fileValidate = new File(validateFileStr);		
+		if(fileValidate.exists())  
+		{
+			fileValidate.delete();
+		}
 		
 		HttpClient client = new DefaultHttpClient();
 		
@@ -356,7 +364,9 @@ public class TestCaseController
 		
 		NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		
-		return nl.getLength() > 0 ? "Passed" : "Failed";
+		File outFile = new File(validateFileStr);
+				
+		return (nl.getLength() > 0) && (outFile.exists()) ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String projectId, String testcaseId)
