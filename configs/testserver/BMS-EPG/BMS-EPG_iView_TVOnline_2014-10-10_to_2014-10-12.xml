@@ -16,12 +16,12 @@
 		   <EPGSchedule>
             <Output>
                <ABCIntranetSchedule>false</ABCIntranetSchedule>
-               <ABCInternetGuide>true</ABCInternetGuide>
+               <ABCInternetGuide>false</ABCInternetGuide>
                <FTAEPG>false</FTAEPG>
-               <ExternalOutputs>true</ExternalOutputs>
+               <ExternalOutputs>false</ExternalOutputs>
                <Mobile>false</Mobile>
                <EBROADCAST>false</EBROADCAST>
-               <TVOnline>false</TVOnline>
+               <TVOnline>true</TVOnline>
             </Output>
             <InputDateRange>
                <DateFrom>2014-10-15</DateFrom>
@@ -29,14 +29,14 @@
                <DateTo>2014-10-15</DateTo>
             </InputDateRange>
             <InputDateRangeTvOnline>
-               <DateFrom>2014-04-01</DateFrom>
+               <DateFrom>2014-10-15</DateFrom>
                <PublishDate>false</PublishDate>
-               <DateTo>2014-04-01</DateTo>
+               <DateTo>2014-10-15</DateTo>
                <DateHence>1 week hence</DateHence>
             </InputDateRangeTvOnline>
             <Channels>
                <Channel>
-                  <Name>ABC1</Name>
+                  <Name>iView</Name>
                   <Selected>true</Selected>
                </Channel>              
             </Channels>

@@ -10,15 +10,15 @@
     
     <![CDATA[        
       <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/epg/client/scheduler/1.0">
-	<soapenv:Header/>
-	    <soapenv:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	      <scheduleEpgReq xmlns="http://osb.abc.net.au/epg/client/scheduler/1.0">
-		   <EPGSchedule>
+		<soapenv:Header/>
+		<soapenv:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+		  <scheduleEpgReq xmlns="http://osb.abc.net.au/epg/client/scheduler/1.0">
+			<EPGSchedule>
             <Output>
-               <ABCIntranetSchedule>false</ABCIntranetSchedule>
-               <ABCInternetGuide>true</ABCInternetGuide>
+               <ABCIntranetSchedule>true</ABCIntranetSchedule>
+               <ABCInternetGuide>false</ABCInternetGuide>
                <FTAEPG>false</FTAEPG>
-               <ExternalOutputs>true</ExternalOutputs>
+               <ExternalOutputs>false</ExternalOutputs>
                <Mobile>false</Mobile>
                <EBROADCAST>false</EBROADCAST>
                <TVOnline>false</TVOnline>
@@ -38,6 +38,10 @@
                <Channel>
                   <Name>ABC1</Name>
                   <Selected>true</Selected>
+               </Channel>
+	       <Channel>
+                  <Name>ABC2</Name>
+                  <Selected>true</Selected>
                </Channel>              
             </Channels>
             <ScheduleConfiguration>
@@ -45,7 +49,7 @@
                <Time>00:00:00</Time>
                <Inperpetuity>false</Inperpetuity>
             </ScheduleConfiguration>
-			<SendAmendmentNotification>false</SendAmendmentNotification>
+	   		<SendAmendmentNotification>false</SendAmendmentNotification>
          </EPGSchedule>
 	    </scheduleEpgReq>
 	  </soapenv:Body>

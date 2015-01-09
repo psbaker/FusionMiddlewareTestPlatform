@@ -1,5 +1,9 @@
 <testsuite>
   
-  <testcase>ScheduleEPGRequest_ABC1_Intranet</testcase>  
+  <testcase>BMS-EPG_ABC1ABC2_Intranet_NoAmendNotify_2014-10-01_to_2014-10-02</testcase>  
+  
+  <testcase>BMS-EPG_AllLinearChannels_AllEPGOutputs_2014-10-15_to_2014-10-15</testcase>  
+  
+  <testcase>BMS-EPG_iView_TVOnline_2014-10-10_to_2014-10-12</testcase>  
   
 </testsuite>
