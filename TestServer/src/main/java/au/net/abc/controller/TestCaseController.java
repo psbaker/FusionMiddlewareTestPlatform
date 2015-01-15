@@ -336,13 +336,20 @@ public class TestCaseController
 		String requestXml = testXmlDocument.getElementsByTagName("request").item(0).getTextContent();
 		String endpoint = testXmlDocument.getElementsByTagName("url").item(0).getTextContent();
 		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
-		String validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
 		
-		/* Cleanup files to validate before executing test-case */
-		File fileValidate = new File(validateFileStr);		
-		if(fileValidate.exists())  
-		{
-			fileValidate.delete();
+		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		
+		String validateFileStr = "";
+		if (doValidateFile)
+		{	
+			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			
+			/* Cleanup files to validate before executing test-case */
+			File fileValidate = new File(validateFileStr);		
+			if(fileValidate.exists())  
+			{
+				fileValidate.delete();
+			}
 		}
 		
 		HttpClient client = new DefaultHttpClient();
@@ -364,9 +371,14 @@ public class TestCaseController
 		
 		NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		
-		File outFile = new File(validateFileStr);
+		boolean outFileExists = true;
+		if (doValidateFile)
+		{
+			File outFile = new File(validateFileStr);
+			outFileExists = outFile.exists();
+		}
 				
-		return (nl.getLength() > 0) && (outFile.exists()) ? "Passed" : "Failed";
+		return (nl.getLength() > 0) && outFileExists ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String projectId, String testcaseId)
