@@ -28,6 +28,7 @@ public class MockFtpServerUtils
 		ftpServer.addUserAccount(new UserAccount("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t", "/"));
 		
 		FileSystem fileSystem = new UnixFakeFileSystem();
+		
 		DirectoryEntry directory = new DirectoryEntry("/externalftp/project/visionbytes_news");
 		fileSystem.add(directory);
 		
@@ -36,6 +37,24 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory3 = new DirectoryEntry("/externalftp/project/visionbytes_news/errors");
 		fileSystem.add(directory3);
+		
+		DirectoryEntry directory4 = new DirectoryEntry("/onair/epg/online");
+		fileSystem.add(directory4);
+		
+		DirectoryEntry directory5 = new DirectoryEntry("/onair/epg/fta");
+		fileSystem.add(directory5);
+		
+		DirectoryEntry directory6 = new DirectoryEntry("/onair/epg/internet");
+		fileSystem.add(directory6);
+		
+		DirectoryEntry directory7 = new DirectoryEntry("/onair/epg/mobile");
+		fileSystem.add(directory7);
+		
+		DirectoryEntry directory8 = new DirectoryEntry("/onair/epg/ebroadcast");
+		fileSystem.add(directory8);
+		
+		DirectoryEntry directory9 = new DirectoryEntry("/onair/epg/external");
+		fileSystem.add(directory9);
 		  
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
