@@ -352,6 +352,38 @@ public class TestCaseController
 			}
 		}
 		
+		boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
+		
+		String validateFTPStr = "";
+		if (doValidateFTP)
+		{	
+			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			
+			/* Cleanup files to validate before executing test-case */
+			FTPClient ftpClient = new FTPClient();
+			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+		    int reply;
+		    ftpClient.connect("localhost", 9981);
+		    reply = ftpClient.getReplyCode();
+	        if (!FTPReply.isPositiveCompletion(reply)) {
+	        	ftpClient.disconnect();
+	            throw new Exception("Exception in connecting to FTP Server");
+	        }
+	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	        ftpClient.enterLocalPassiveMode();       
+			
+	        //remove files from ftp server
+	        ftpClient.deleteFile(validateFTPStr);
+	        
+	        //disconnect from ftp server
+	        if(ftpClient.isConnected()) 
+	        {
+	        	ftpClient.logout();
+	        	ftpClient.disconnect();
+	        }
+		} 
+		
 		HttpClient client = new DefaultHttpClient();
 		
 		HttpPost httpPost = new HttpPost(endpoint);
@@ -377,8 +409,42 @@ public class TestCaseController
 			File outFile = new File(validateFileStr);
 			outFileExists = outFile.exists();
 		}
+		
+		boolean ftpFileUploaded = true;
+		if(doValidateFTP)
+		{
+			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			
+			FTPClient ftpClient = new FTPClient();
+			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+		    int reply;
+		    ftpClient.connect("localhost", 9981);
+		    reply = ftpClient.getReplyCode();
+	        if (!FTPReply.isPositiveCompletion(reply)) {
+	        	ftpClient.disconnect();
+	            throw new Exception("Exception in connecting to FTP Server");
+	        }
+	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	        ftpClient.enterLocalPassiveMode();       
+			
+	        //retrieve file from ftp server
+	        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
+	        int replyCode = ftpClient.getReplyCode();
+	        if(fileStream == null || replyCode == 550)
+	        {
+	        	ftpFileUploaded = false;
+	        }
+	        
+	        //disconnect from ftp server
+	        if(ftpClient.isConnected()) 
+	        {
+	        	ftpClient.logout();
+	        	ftpClient.disconnect();
+	        }
+		}
 				
-		return (nl.getLength() > 0) && outFileExists ? "Passed" : "Failed";
+		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String projectId, String testcaseId)
@@ -402,5 +468,6 @@ public class TestCaseController
 		}
 		
 		return result;
-	}
+	}	
+	
 }
