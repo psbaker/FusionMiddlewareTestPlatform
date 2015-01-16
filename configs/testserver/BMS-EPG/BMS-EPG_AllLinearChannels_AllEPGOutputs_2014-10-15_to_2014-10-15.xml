@@ -8,6 +8,8 @@
   
   <validate-file>/home/joxj6p/Oracle/Middleware/user_projects/domains/osb_domain/TVOnAirInterfaceData/OnAir/EPG/InternetGuide/ABC4.xml</validate-file>
   
+  <validate-ftp-upload>/onair/epg/internet/ABC3.xml</validate-ftp-upload>
+    
   <request>
     
     <![CDATA[        
