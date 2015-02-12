@@ -24,6 +24,8 @@ class Handlers {
     final Command.Type type = command.getType();
 
     switch (type) {
+      case NOOP:
+    	return new NoOp(parameter);
       case HELO:
       case EHLO:
         return new Helo(parameter);
@@ -64,6 +66,19 @@ class Handlers {
     }
   }
 
+  /**
+   * Handler for NOOP SMTP command
+   */
+  static class NoOp extends GenericRequestHandler {
+    NoOp(String parameter) {
+      super(parameter);
+    }
+
+    public void handle(Conversation conversation) throws IOException {
+      conversation.sendLine("250 Ok");
+    }
+  }
+  
   /**
    * Handler for HELO SMTP command
    */

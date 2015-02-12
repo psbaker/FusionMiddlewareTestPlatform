@@ -30,6 +30,11 @@
 				<token>2014-10-14</token>
               	<http-code>500</http-code>
 			</operation>				
+            <operation>				
+				<operation-id>EPGInvalidRequest</operation-id>	
+				<token>2014-10-13</token>
+              	<http-code>500</http-code>
+			</operation>
 		</service>
       
       	<!-- OnAir TransWeb -->

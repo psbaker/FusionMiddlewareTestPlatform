@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="<c:url value='/js/codemirror/xml.js'/>"></script>
 		
 		<style type="text/css">
-      		.CodeMirror {border: 1px solid black; font-size:13px; width:750; height:750}
+      		.CodeMirror {border: 1px solid black; font-size:13px; width:100%; height:750}
     	</style>	
 		
 	</head>

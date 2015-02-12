@@ -384,6 +384,21 @@ public class TestCaseController
 	        }
 		} 
 		
+		boolean doValidateSMTP = testXmlDocument.getElementsByTagName("verify-email").getLength() > 0;
+		
+		String validateSMTPStr = "";
+		if (doValidateSMTP)
+		{
+			validateSMTPStr = testXmlDocument.getElementsByTagName("verify-email").item(0).getTextContent();
+			
+			/* Cleanup smtp files to validate before executing test-case */
+			File smtpValidate = new File(validateSMTPStr);		
+			if(smtpValidate.exists())  
+			{
+				smtpValidate.delete();
+			}
+		}
+		
 		HttpClient client = new DefaultHttpClient();
 		
 		HttpPost httpPost = new HttpPost(endpoint);
@@ -443,8 +458,19 @@ public class TestCaseController
 	        	ftpClient.disconnect();
 	        }
 		}
+		
+		boolean emailDelivered = true;
+		if(doValidateSMTP)
+		{
+			File outFile = new File(validateSMTPStr);
+			emailDelivered = outFile.exists();
+		}
+		
+		System.out.println("OutFileExists:"+outFileExists);
+		System.out.println("ftpFileUploaded:"+ftpFileUploaded);
+		System.out.println("emailDelivered:"+emailDelivered);
 				
-		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded ? "Passed" : "Failed";
+		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String projectId, String testcaseId)

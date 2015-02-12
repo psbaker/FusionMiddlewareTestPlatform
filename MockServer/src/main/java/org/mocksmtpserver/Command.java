@@ -61,6 +61,8 @@ class Command {
    * Supported SMTP commands
    */
   enum Type {
+    NOOP,
+    
     HELO,
 
     EHLO,

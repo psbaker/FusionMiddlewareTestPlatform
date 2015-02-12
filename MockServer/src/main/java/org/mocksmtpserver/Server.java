@@ -26,7 +26,7 @@ public class Server {
 
   private int port = DEFAULT_PORT;
 
-  private boolean threaded = false;
+  private boolean threaded = true;
 
   /**
    * Main server socket thread that will wait for connections and submit client connections to shared thread pool
