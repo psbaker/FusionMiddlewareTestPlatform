@@ -4,13 +4,9 @@
   
   <url>http://127.0.0.1:7001/EPG_SB/Proxy_Services/EPG</url>
   
-  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
-  
-  <!-- <validate-file>/home/joxj6p/Oracle/Middleware/user_projects/domains/osb_domain2/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC1.xml</validate-file> -->
-  
-  <!-- <validate-ftp-upload>/onair/epg/internet/ABC1.xml</validate-ftp-upload> -->
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Code[text() = '200']</validate-response>
     
-  <verify-email>/home/bakerp2y/repositories/fusionMiddlewareTestPlatform/fusionMiddlewareTestPlatform/apache-tomcat-7.0.42/logs/smtp/jox.jeanluc@abc.net.au.msg</verify-email>
+  <verify-email>/home/joxj6p/repositories/fusionMiddlewareTestPlatform/apache-tomcat-7.0.42/logs/smtp/jox.jeanluc@abc.net.au.msg</verify-email>
   
   <request>
     
