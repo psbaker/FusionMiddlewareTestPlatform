@@ -402,6 +402,8 @@ public class TestCaseController
 		HttpClient client = new DefaultHttpClient();
 		
 		HttpPost httpPost = new HttpPost(endpoint);
+		//fixing bugs because Spring framework WS doesnt support text/plain
+		httpPost.addHeader("Content-Type", "text/xml");
 		
 		StringEntity sre = new StringEntity(requestXml);
 		httpPost.setEntity(sre);
