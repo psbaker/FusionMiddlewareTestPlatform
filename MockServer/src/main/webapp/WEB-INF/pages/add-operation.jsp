@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="mytags" tagdir="/WEB-INF/tags" %>
 
 <html>
 
@@ -21,7 +22,7 @@
 	
 	<body>
 	
-		<h1 style="display:inline">Mock Server</h1><h2 style="display:inline"> - ABC Fusion Middleware</h2>
+		<mytags:navbar/>
 	
 		<p>Add Operation</p>
 		

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="mytags" tagdir="/WEB-INF/tags" %>
            
 <html>
 	
@@ -10,9 +11,7 @@
 	
 	<body>
 	
-		<h1 style="display:inline">Mock Server</h1><h2 style="display:inline"> - ABC Fusion Middleware</h2>
-		
-		<p><a href="mockserverconfig-form">System Configuration</a></p>
+		<mytags:navbar/>
 		
 		<p><a href="addsystem-form">Add System</a></p>
 				
