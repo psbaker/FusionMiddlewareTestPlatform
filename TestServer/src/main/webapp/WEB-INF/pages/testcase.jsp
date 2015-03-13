@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="mytags" tagdir="/WEB-INF/tags" %>
 
 <html>
 	
@@ -22,28 +23,28 @@
 
 	<body>
 	
-		<h1 style="display:inline">Test Server</h1><h2 style="display:inline"> - ABC Fusion Middleware</h2> 
+		<mytags:navbar/> 
 	
-			<h2>${testcaseId}</h2>
-			
-			<form:form method="post" commandName="testcase" action="process-testcase">
-			
-				<table>
-					<tr>
-						<td><form:textarea path="testcaseId" style="display:none"></form:textarea></td>
-					</tr>							
-					<tr>
-						<td><form:textarea path="projectId" style="display:none"></form:textarea></td>
-					</tr>
-					<tr>					
-						<td><form:textarea path="testXml" id="code" name="code"></form:textarea></td>
-					</tr>				
-					<tr>
-						<td><input type="submit" name="action" value="Save"/><input type="submit" name="action" value="Execute"/></td>
-					</tr>
-				</table>			
-			
-			</form:form>
+		<h2>${testcaseId}</h2>
+		
+		<form:form method="post" commandName="testcase" action="process-testcase">
+		
+			<table>
+				<tr>
+					<td><form:textarea path="testcaseId" style="display:none"></form:textarea></td>
+				</tr>							
+				<tr>
+					<td><form:textarea path="projectId" style="display:none"></form:textarea></td>
+				</tr>
+				<tr>					
+					<td><form:textarea path="testXml" id="code" name="code"></form:textarea></td>
+				</tr>				
+				<tr>
+					<td><input type="submit" name="action" value="Save"/><input type="submit" name="action" value="Execute"/></td>
+				</tr>
+			</table>			
+		
+		</form:form>
 
 	</body>
 	

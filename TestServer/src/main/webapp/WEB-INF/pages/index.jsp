@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="mytags" tagdir="/WEB-INF/tags" %>
            
 <html>
 	
@@ -10,11 +11,11 @@
 	
 	<body>
 	
-		<h1 style="display:inline">Test Server</h1><h2 style="display:inline"> - ABC Fusion Middleware</h2>
+		<mytags:navbar/>
 		
 		<p><a href="addtestsuite-form"/>Add Testsuite</a></p> 
 		
-		<p><a href="addscheduledjob-form"/>Add Scheduled Job</a></p>
+<!-- 		<p><a href="addscheduledjob-form"/>Add Scheduled Job</a></p> -->
 		
 		<h4>Testsuites</h4>
 
@@ -28,7 +29,7 @@
 
 			</c:forEach> 	
 		
-		<h4>Scheduled Jobs</h4>
+		<!--  <h4>Scheduled Jobs</h4>
 		
 		<c:forEach items="${model.scheduledJobsList}" var="scheduledJobId" varStatus="i" begin="0" >
 	
@@ -38,7 +39,7 @@
 
 				<p><a href="<c:out value="${scheduledJobURL}"/>"> <c:out value="${scheduledJobId}"/> </a></p>
 
-			</c:forEach>	
+			</c:forEach> -->	
 		
 	</body>
 	
