@@ -23,9 +23,6 @@
 					<td><form:input path="id" size="75"></form:input></td>
 				</tr>
 				<tr>
-					<td><form:checkbox path="scheduledJob"></form:checkbox></td>
-				</tr>
-				<tr>
 					<td><input type="submit" value="Save"/></td>
 				</tr>
 			</table>
