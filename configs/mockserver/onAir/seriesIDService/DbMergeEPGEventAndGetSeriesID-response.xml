@@ -1,8 +1,0 @@
-<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
-   <env:Body>
-      <ns:OutputParameters xmlns:ns="http://osb.abc.net.au/seriesevent/dataStorage/processEPG/1.0">
-         <ns:P_SERIESIDSTR>FA1005V=10496,ZX0702A001S00=10088,ZY8495A=5028,ZX0589A=6363,ZY8942A=5335,ZY9900A=10910,ZX6461A=11538,FR1199H=12142,ZX0993A=11780,NC1317V=12665,NC1372H=12667,NU1352H=12763,NC1371H=12764,SP1201Q=12717,DR1108V=12720,DO1134Q001S00=12812,NC1347V=12817,NC1347H=12818,ZX9173A=12843,LR1298H=12847,LR1293H=12848,NN1325H=12860</ns:P_SERIESIDSTR>
-         <ns:P_ERRCODE>S</ns:P_ERRCODE>
-      </ns:OutputParameters>
-   </env:Body>
-</env:Envelope>
