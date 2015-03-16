@@ -6,7 +6,7 @@
   
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Code[text() = '200']</validate-response>
     
-  <verify-email>/home/joxj6p/repositories/fusionMiddlewareTestPlatform/apache-tomcat-7.0.42/logs/smtp/jox.jeanluc@abc.net.au.msg</verify-email>
+  <verify-email>/home/joxj6p/repositories/fusionMiddlewareTestPlatform/apache-tomcat-7.0.42/logs/smtp/ESBAdministrator@abc.net.au.msg</verify-email>
   
   <request>
     
