@@ -6,4 +6,6 @@
   
   <testcase>BMS-EPG_iView_TVOnline_2014-10-10_to_2014-10-12</testcase>  
   
+  <testcase>BMS-EPG_OnAirError</testcase>  
+  
 </testsuite>
