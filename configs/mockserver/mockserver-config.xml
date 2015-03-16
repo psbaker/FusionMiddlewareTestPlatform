@@ -48,28 +48,6 @@
 			</operation>				
 		</service>
       
-        <!-- OnAir ChannelLookup -->
-		<!-- <service>
-			<service-id>channelLookup</service-id>	
-			<service-uri>/ChannelLookupWS</service-uri>
-			
-			<operation>				
-				<operation-id>LookupRequest</operation-id>	
-				<token>LookupReq</token>		
-			</operation>				
-		</service> -->
-      
-        <!-- OnAir SeriesID -->
-        <!-- <service>
-			<service-id>seriesIDService</service-id>	
-			<service-uri>/seriesIDService</service-uri>
-			
-			<operation>				
-                <operation-id>DbMergeEPGEventAndGetSeriesID</operation-id>
-				<token>P_EPG_EVENTLIST</token>		
-			</operation>				
-		</service> -->
-      
 	</system>
   
     <!-- WALLACE -->
