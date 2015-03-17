@@ -24,7 +24,7 @@
                <TVOnline>false</TVOnline>
             </Output>
             <InputDateRange>
-               <DateFrom>2014-10-15</DateFrom>
+               <DateFrom>2014-10-14</DateFrom>
                <ScheduledDate>false</ScheduledDate>
                <DateTo>2014-10-15</DateTo>
             </InputDateRange>
