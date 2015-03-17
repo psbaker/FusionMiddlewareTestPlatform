@@ -20,14 +20,14 @@ import au.net.abc.utils.TestServerUtils;
 public class ProjectController
 {	
 	@RequestMapping(value = "/project", method = RequestMethod.GET)
-	public ModelAndView displayProject(@RequestParam("projectId") String projectId)
+	public ModelAndView displayProject(@RequestParam("domain") String domain, @RequestParam("projectId") String projectId)
 	{	
 		File file = null;
 		String[] requestFiles = new String[0];
 		
 		try 
 		{
-			file = new File(TestServerUtils.getConfigDir() + "/" + projectId);
+			file = new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId);
 			requestFiles = file.list(new FilenameFilter() {
 				  @Override
 				  public boolean accept(File dir, String name) {
@@ -45,6 +45,7 @@ public class ProjectController
 		
 		Map<String, Object> model = new HashMap<String, Object>();
         model.put("testcases", requestFiles);
+        model.put("domain", domain);
         model.put("projectId", projectId);
 	
 		return new ModelAndView("project", "model", model);	
@@ -61,8 +62,9 @@ public class ProjectController
     {
 		try 
 		{
+			System.out.println("New Testsuite Domain:" + testsuite.getDomain());
 			System.out.println("New Testsuite Id:" + testsuite.getId());
-			File dir = new File(TestServerUtils.getConfigDir() + "/" + testsuite.getId());
+			File dir = new File(TestServerUtils.getConfigDir() + "/" + testsuite.getDomain() + "/" + testsuite.getId());
 			boolean success = dir.mkdirs();
 			System.out.println("Success: " + success);
 		}

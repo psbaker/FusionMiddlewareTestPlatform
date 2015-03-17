@@ -46,11 +46,12 @@ import au.net.abc.utils.TestServerUtils;
 public class TestCaseController
 {
 	@RequestMapping(value="/addtestcase-form")
-    public ModelAndView addTestcase(@RequestParam("projectId") String projectId) 
+    public ModelAndView addTestcase(@RequestParam("domain") String domain, @RequestParam("projectId") String projectId) 
     {   
 		Testcase testcase = new Testcase();
 		
 		testcase.setProjectId(projectId);
+		testcase.setDomain(domain);
 		
 		return new ModelAndView("add-testcase", "testcase-entity", testcase);
     }
@@ -60,8 +61,8 @@ public class TestCaseController
     {
 		try 
 		{
-			System.out.println("Adding testcase: " + TestServerUtils.getConfigDir() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
-			File file = new File(TestServerUtils.getConfigDir() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
+			System.out.println("Adding testcase: " + TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
+			File file = new File(TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
 			FileWriter writer = new FileWriter(file, false);
 			writer.write(testcase.getTestXml());
 			writer.close();
@@ -71,18 +72,19 @@ public class TestCaseController
 			e.printStackTrace();
 		}	
                 
-        return "redirect:project?projectId="+testcase.getProjectId();
+        return "redirect:project?domain="+testcase.getDomain()+"&projectId="+testcase.getProjectId();
     }
 	
 	@RequestMapping(value = "/testcase", method = RequestMethod.GET)
-	public String testcase(@RequestParam("projectId") String projectId, @RequestParam("testcaseId") String testcaseId, Model m)
+	public String testcase(@RequestParam("domain") String domain, @RequestParam("projectId") String projectId, @RequestParam("testcaseId") String testcaseId, Model m)
 	{
-		String testXml = getTestXml(projectId, testcaseId);		
+		String testXml = getTestXml(domain, projectId, testcaseId);		
 				
         Testcase testcase = new Testcase();
         testcase.setTestXml(testXml);
         testcase.setProjectId(projectId);
         testcase.setTestcaseId(testcaseId);
+        testcase.setDomain(domain);
         
         m.addAttribute("testcase", testcase);
         m.addAttribute("testcaseId", testcaseId);
@@ -91,15 +93,16 @@ public class TestCaseController
 	}
 	
 	@RequestMapping(value = "/run-testcase", method = RequestMethod.GET)
-	public @ResponseBody void runTestcase(@RequestParam String projectId, @RequestParam String testcaseId, HttpServletRequest request, HttpServletResponse response)
+	public @ResponseBody void runTestcase(@RequestParam String domain, @RequestParam String projectId, @RequestParam String testcaseId, HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{			
 			System.out.println("Run Testcase Called. ");
+			System.out.println("Domain: " + domain);
 			System.out.println("ProjectId: " + projectId);
 			System.out.println("TestcaseId: " + testcaseId);
 			
-			String testResult = executeTest(projectId, testcaseId);
+			String testResult = executeTest(domain, projectId, testcaseId);
 			
 			System.out.println("TestResult: " + testResult);
 			
@@ -122,15 +125,15 @@ public class TestCaseController
 		if(action.equals("Save"))
 		{
 			System.out.println("Saving Testcase: " + testcase.getTestcaseId());
-			String location = TestServerUtils.getConfigDir() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId();
+			String location = TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId();
 			String xml = testcase.getTestXml();
 			saveTest(location, xml);
-		    result = "redirect:testcase?projectId="+testcase.getProjectId()+"&testcaseId="+testcase.getTestcaseId();    
+		    result = "redirect:testcase?domain="+testcase.getDomain()+"&projectId="+testcase.getProjectId()+"&testcaseId="+testcase.getTestcaseId();    
 		}
 		else if(action.equals("Execute"))
 		{
 			System.out.println("Executing Testcase: " + testcase.getTestcaseId());			
-			String testResult = executeTest(testcase.getProjectId(), testcase.getTestcaseId());
+			String testResult = executeTest(testcase.getDomain(), testcase.getProjectId(), testcase.getTestcaseId());
 			m.addAttribute("result", testResult);
 			result = "testcase-result";
 		}
@@ -152,12 +155,12 @@ public class TestCaseController
 		}
 	}
 	
-	private String executeTest(String projectId, String testcaseId)
+	private String executeTest(String domain, String projectId, String testcaseId)
 	{
 		String result = "Failed";
 		try 
 		{	
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + projectId + "/" + testcaseId));
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId));			
 			
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -169,7 +172,7 @@ public class TestCaseController
 			
 			if(isTestSuite)
 			{
-				result = executeTestSuite(testXmlDocument, projectId);				
+				result = executeTestSuite(testXmlDocument, domain, projectId);				
 			}	
 			else 
 			{			
@@ -183,7 +186,7 @@ public class TestCaseController
 		return result;
 	}
 	
-	private String executeTestSuite(Document xmlDoc, String projectId) throws Exception
+	private String executeTestSuite(Document xmlDoc, String domain, String projectId) throws Exception
 	{
 		String result = "Failed";
 		NodeList testcaseNodes = xmlDoc.getElementsByTagName("testcase");
@@ -192,9 +195,9 @@ public class TestCaseController
 		{
 			String testCaseId = testcaseNodes.item(j).getTextContent();
 			
-			System.out.println("Execute Test Case: " + projectId + " " + testCaseId);				
+			System.out.println("Execute Test Case: " + domain + " " + projectId + " " + testCaseId);				
 			
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + projectId + "/" + testCaseId + ".xml"));
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testCaseId + ".xml"));
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document testXmlDocument = documentBuilder.parse(inputStream);
@@ -475,13 +478,13 @@ public class TestCaseController
 		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
 	}
 	
-	private String getTestXml(String projectId, String testcaseId)
+	private String getTestXml(String domain, String projectId, String testcaseId)
 	{
 		String result = "";
 		
 		try
 		{
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + projectId + "/" + testcaseId));
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId));
 			
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();

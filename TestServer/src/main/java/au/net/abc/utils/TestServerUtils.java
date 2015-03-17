@@ -12,6 +12,21 @@ import org.w3c.dom.Document;
 
 public class TestServerUtils
 {	
+	public static String getBmsConfigDir()
+	{		
+		return getConfigDir() + "/bms";
+	}
+	
+	public static String getWcmsConfigDir()
+	{		
+		return getConfigDir() + "/wcms";
+	}
+	
+	public static String getGenericConfigDir()
+	{		
+		return getConfigDir() + "/generic";
+	}
+	
 	public static String getConfigDir()
 	{		
 		return System.getProperty("user.dir") + "/../../configs/testserver";

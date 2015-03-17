@@ -36,6 +36,9 @@
 				<tr>
 					<td><form:textarea path="projectId" style="display:none"></form:textarea></td>
 				</tr>
+				<tr>
+					<td><form:textarea path="domain" style="display:none"></form:textarea></td>
+				</tr>
 				<tr>					
 					<td><form:textarea path="testXml" id="code" name="code"></form:textarea></td>
 				</tr>				

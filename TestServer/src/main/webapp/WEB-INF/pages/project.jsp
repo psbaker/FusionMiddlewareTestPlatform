@@ -42,7 +42,7 @@
 	
 		<h2>${model.projectId}</h2>
 		
-		<p><a href="addtestcase-form?projectId=${model.projectId}"/>Add Testcase</a></p> 
+		<p><a href="addtestcase-form?domain=${model.domain}&projectId=${model.projectId}"/>Add TestCase</a></p> 
 		
 		<table>
 			<tr>
@@ -52,6 +52,7 @@
 			<c:forEach items="${model.testcases}" var="testcaseId" varStatus="i" begin="0" >
 
 				<c:url var="thisURL" value="testcase">
+					<c:param name="domain" value="${model.domain}"/>
 					<c:param name="projectId" value="${model.projectId}"/>
 					<c:param name="testcaseId" value="${testcaseId}"/>
 				</c:url>

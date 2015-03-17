@@ -33,11 +33,14 @@
 					<td><form:textarea path="projectId" style="display:none"></form:textarea></td>
 				</tr>	
 				<tr>
+					<td><form:textarea path="domain" style="display:none"></form:textarea></td>
+				</tr>
+				<tr>
 					<td>Name:</td>
 					<td style="width:750"><form:input path="testcaseId" style="width:100%"></form:input></td>
 				</tr>
 				<tr>
-					<td valign="top">Testcase:</td>
+					<td valign="top">TestCase:</td>
 					<td style="width:750"><form:textarea id="code" path="testXml"></form:textarea></td>
 				</tr>
 				<tr>

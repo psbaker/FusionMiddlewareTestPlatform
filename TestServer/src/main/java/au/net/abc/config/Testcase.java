@@ -7,7 +7,18 @@ public class Testcase extends ModelMap
     String testXml;
     String testcaseId;
     String projectId;
+    String domain;
     
+	public String getDomain() 
+	{
+		return domain;
+	}
+	
+	public void setDomain(String domain) 
+	{
+		this.domain = domain;
+	}
+	
 	public String getTestXml()
 	{
 		return testXml;

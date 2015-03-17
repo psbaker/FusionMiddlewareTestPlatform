@@ -24,8 +24,9 @@ public class BaseController
 	{
 		Map<String, Object> model = new HashMap<String, Object>();
 		
-        model.put("projectList", getSubDirectories(TestServerUtils.getConfigDir()));
-        model.put("scheduledJobsList", getSubDirectories(TestServerUtils.getConfigDir()+"/Scheduled Jobs"));        
+        model.put("bmsProjectList", getSubDirectories(TestServerUtils.getBmsConfigDir()));        
+        model.put("wcmsProjectList", getSubDirectories(TestServerUtils.getWcmsConfigDir()));
+        model.put("genericProjectList", getSubDirectories(TestServerUtils.getGenericConfigDir()));
 	
 		return new ModelAndView("index", "model", model);
 	}	
