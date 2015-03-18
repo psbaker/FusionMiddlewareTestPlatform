@@ -55,6 +55,12 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory9 = new DirectoryEntry("/onair/epg/external");
 		fileSystem.add(directory9);
+		
+		DirectoryEntry directory10 = new DirectoryEntry("/Out/AsRun/ABC");
+		fileSystem.add(directory10);
+		
+		DirectoryEntry directory11 = new DirectoryEntry("/Out/AsRunDR/ABC");
+		fileSystem.add(directory11);
 		  
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");

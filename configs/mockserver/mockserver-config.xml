@@ -48,6 +48,25 @@
 			</operation>				
 		</service>
       
+      <!-- OnAir BxfPlayist -->
+		<service>
+			<service-id>getBxfPlaylistService</service-id>	
+			<service-uri>/getBxfPlaylistService</service-uri>
+			
+			<operation>				
+				<operation-id>BxfPlaylistRequest</operation-id>	
+				<token>ABC1</token>		
+			</operation>				
+          	<operation>				
+				<operation-id>BxfPlaylistRequestNoEvents</operation-id>	
+				<token>ABC2</token>		
+			</operation>
+          	<operation>				
+				<operation-id>BxfPlaylistInvalidRequest</operation-id>	
+				<token>ABC3</token>		
+			</operation>
+		</service>
+      
 	</system>
   
     <!-- WALLACE -->

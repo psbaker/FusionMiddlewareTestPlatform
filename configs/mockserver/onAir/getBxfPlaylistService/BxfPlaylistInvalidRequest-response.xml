@@ -1,0 +1,10 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://smpte-ra.org/schemas/2021/2008/BXF" xmlns:ons="urn:stub.onair.sintecmedia.com" xmlns:ns3="http://www.atsc.org/XMLSchemas/pmcp/2007/3.1" xmlns:ns1="urn:abcaus.onair.sintecmedia.com">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Server</faultcode>
+         <faultstring>The channel parameter x was not found in db.</faultstring>
+         <detail>The channel parameter x was not found in db.</detail>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

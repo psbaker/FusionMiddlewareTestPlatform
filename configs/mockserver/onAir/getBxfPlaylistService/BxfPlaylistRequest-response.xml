@@ -1,0 +1,106 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://smpte-ra.org/schemas/2021/2008/BXF" xmlns:ons="urn:stub.onair.sintecmedia.com" xmlns:ns3="http://www.atsc.org/XMLSchemas/pmcp/2007/3.1" xmlns:ns1="urn:abcaus.onair.sintecmedia.com">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <ns1:BxfOutput>
+         <BxfMessage action="add" userName="ABC" originType="Automation" origin="Automation System" messageType="Information" dateTime="2014-12-17T17:19:08Z" id="urn:uuid:a2f37fce-ca06-44f7-bec0-c074077356ab" xmlns="http://smpte-ra.org/schemas/2021/2008/BXF">
+            <BxfData>
+               <Schedule scheduleEnd="2014-11-27T05:59:35Z" scheduleStart="2014-11-26T06:00:30Z" scheduleId="urn:uuid:00000000-0000-0000-0000-000000000000" type="Primary">
+                  <Channel xsi:type="ns2:Channel">
+                     <ns3:Name lang="eng">ABC2_NSW</ns3:Name>
+                     <ns3:Description lang="eng">ABC2 NSW</ns3:Description>
+                  </Channel>
+                  <ScheduledEvent>
+                     <ScheduleElements>
+                        <EventData eventType="Primary">
+                           <EventId>
+                              <EventId>urn:uuid:00000000-0000-0000-0000-000000000001</EventId>
+                              <BillingReferenceCode>urn:uuid:00000000-0000-0000-0000-000093948038</BillingReferenceCode>
+                           </EventId>
+                           <EventTitle>Play School (246) 907</EventTitle>
+                           <InsertAfterEventId>urn:uuid:00000000-0000-0000-0000-000000000000</InsertAfterEventId>
+                           <PrimaryEvent>
+                              <ProgramEvent>
+                                 <SegmentNumber>1</SegmentNumber>
+                                 <ProgramName>Play School (246) 907</ProgramName>
+                                 <Constraints>
+                                    <Rules ruleId="urn:uuid:00000000-0000-0000-0000-000500008392">
+                                       <RuleName/>
+                                       <Classification>G</Classification>
+                                    </Rules>
+                                 </Constraints>
+                              </ProgramEvent>
+                           </PrimaryEvent>
+                           <StartDateTime nominalFlag="true">
+                              <SmpteDateTime xsi:type="ns2:BxfSmpteDateTime" broadcastDate="2014-11-26">
+                                 <SmpteTimeCode>06:00:30:00</SmpteTimeCode>
+                              </SmpteDateTime>
+                           </StartDateTime>
+                           <LengthOption>
+                              <Duration>
+                                 <SmpteDuration>
+                                    <SmpteTimeCode>00:25:40:00</SmpteTimeCode>
+                                 </SmpteDuration>
+                              </Duration>
+                           </LengthOption>
+                           <StartMode>Follow</StartMode>
+                           <EndMode>Duration</EndMode>
+                           <EventNotes>
+                              <EventNote/>
+                           </EventNotes>
+                        </EventData>
+                        <Content>
+                           <ContentId>
+                              <HouseNumber xsi:type="ns2:BxfHouseNumber">CH0712H031S00MA1</HouseNumber>
+                              <AlternateId xsi:type="ns2:BxfAlternateId" idType="HouseNumber">CH0712H031S00MA1</AlternateId>
+                           </ContentId>
+                           <Name>Play School (246) 907</Name>
+                           <Genre>Childrens P</Genre>
+                           <Media xsi:type="ns2:Media">
+                              <BaseBand>
+                                 <Video>
+                                    <CaptionsInVANC>true</CaptionsInVANC>
+                                 </Video>
+                              </BaseBand>
+                              <MediaLocation sourceType="Primary">
+                                 <Location>
+                                    <RouterSource>
+                                       <Name/>
+                                    </RouterSource>
+                                 </Location>
+                                 <SOM>
+                                    <SmpteTimeCode>00:00:00:00</SmpteTimeCode>
+                                 </SOM>
+                                 <Duration>
+                                    <SmpteDuration>
+                                       <SmpteTimeCode>00:25:40:00</SmpteTimeCode>
+                                    </SmpteDuration>
+                                 </Duration>
+                              </MediaLocation>
+                           </Media>
+                           <Media xsi:type="ns2:Media">
+                              <BaseBand/>
+                              <MediaLocation sourceType="Primary">
+                                 <Location>
+                                    <PhysicalAsset assetName="BoxNumber">
+                                       <MediaReferenceName>CH0712H031S00MA1D1</MediaReferenceName>
+                                    </PhysicalAsset>
+                                 </Location>
+                                 <SOM>
+                                    <SmpteTimeCode>00:00:00:00</SmpteTimeCode>
+                                 </SOM>
+                                 <Duration>
+                                    <SmpteDuration>
+                                       <SmpteTimeCode>00:25:40:00</SmpteTimeCode>
+                                    </SmpteDuration>
+                                 </Duration>
+                              </MediaLocation>
+                           </Media>
+                        </Content>
+                     </ScheduleElements>
+                  </ScheduledEvent>
+               </Schedule>
+            </BxfData>
+         </BxfMessage>
+      </ns1:BxfOutput>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
