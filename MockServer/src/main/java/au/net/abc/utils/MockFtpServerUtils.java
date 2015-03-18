@@ -61,6 +61,9 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory11 = new DirectoryEntry("/Out/AsRunDR/ABC");
 		fileSystem.add(directory11);
+		
+		DirectoryEntry directory12 = new DirectoryEntry("/Ingest");
+		fileSystem.add(directory12);
 		  
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
