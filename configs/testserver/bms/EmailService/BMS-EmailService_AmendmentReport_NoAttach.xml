@@ -1,0 +1,36 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://127.0.0.1:7001/EmailService</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='SendEmailResponse']/Result[text() = 'SUCCESS']</validate-response>
+    
+  <verify-email>/home/joxj6p/repositories/fusionMiddlewareTestPlatform/apache-tomcat-7.0.42/logs/smtp/auto@regression.test.com.msg</verify-email>
+  
+  <request>
+    
+    <![CDATA[        
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://service.abc.net.au/email/data/1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:SendEmailRequest>
+         <ns:Header>
+            <ns:TransactionID>123456789</ns:TransactionID>
+         </ns:Header>
+         <ns:ToAddresses>
+            <ns:ToAddress>auto@regression.test.com</ns:ToAddress>
+         </ns:ToAddresses>
+         <ns:FromAddress>esb@regression.test.com</ns:FromAddress>
+         <ns:Subject>Auto Regression Test</ns:Subject>
+         <ns:Template>
+            <ns:TemplateName>amendment.report</ns:TemplateName>
+         </ns:Template>
+      </ns:SendEmailRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
+    ]]>
+    
+  </request>
+  
+</testcase>
