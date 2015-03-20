@@ -353,11 +353,28 @@ public class TestCaseController
 		{	
 			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
 			
-			/* Cleanup files to validate before executing test-case */
-			File fileValidate = new File(validateFileStr);		
-			if(fileValidate.exists())  
+			if(validateFileStr.contains("*"))
 			{
-				fileValidate.delete();
+				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+				
+				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+				
+				for(File f: dir.listFiles())
+				{
+					if(f.getName().startsWith(fileName))
+					{
+						f.delete();
+					}
+				}
+			}
+			else
+			{
+				/* Cleanup files to validate before executing test-case */
+				File fileValidate = new File(validateFileStr);		
+				if(fileValidate.exists())  
+				{
+					fileValidate.delete();
+				}
 			}
 		}
 		
@@ -432,8 +449,29 @@ public class TestCaseController
 		boolean outFileExists = true;
 		if (doValidateFile)
 		{
-			File outFile = new File(validateFileStr);
-			outFileExists = outFile.exists();
+			outFileExists = false;
+			
+			if(validateFileStr.contains("*"))
+			{				
+				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+				
+				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+				
+				for(File f: dir.listFiles())
+				{
+					if(f.getName().startsWith(fileName))
+					{
+						outFileExists = true;
+						break;
+					}
+				}
+				
+			}
+			else
+			{
+				File outFile = new File(validateFileStr);
+				outFileExists = outFile.exists();	
+			}
 		}
 		
 		boolean ftpFileUploaded = true;
