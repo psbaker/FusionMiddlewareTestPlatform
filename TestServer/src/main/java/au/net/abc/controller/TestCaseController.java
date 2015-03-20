@@ -202,7 +202,13 @@ public class TestCaseController
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document testXmlDocument = documentBuilder.parse(inputStream);
 			
-			result = executeTestCase(testXmlDocument);				
+			result = executeTestCase(testXmlDocument);
+			
+			if("Failed".equals(result))
+			{
+				return result;
+				
+			}
 		}
 		return result;		
 	}
