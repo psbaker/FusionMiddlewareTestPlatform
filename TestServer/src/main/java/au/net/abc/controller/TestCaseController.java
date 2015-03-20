@@ -262,7 +262,7 @@ public class TestCaseController
         	ftpClient.disconnect();
             throw new Exception("Exception in connecting to FTP Server");
         }
-        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+        ftpClient.login("user1", "password");
         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
         ftpClient.enterLocalPassiveMode();       
 		
@@ -378,7 +378,7 @@ public class TestCaseController
 	        	ftpClient.disconnect();
 	            throw new Exception("Exception in connecting to FTP Server");
 	        }
-	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.login("user1", "password");
 	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 	        ftpClient.enterLocalPassiveMode();       
 			
@@ -450,7 +450,7 @@ public class TestCaseController
 	        	ftpClient.disconnect();
 	            throw new Exception("Exception in connecting to FTP Server");
 	        }
-	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.login("user1", "password");
 	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 	        ftpClient.enterLocalPassiveMode();       
 			

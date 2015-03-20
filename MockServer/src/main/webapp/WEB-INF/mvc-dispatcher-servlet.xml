@@ -36,8 +36,8 @@
         <property name="userAccounts">
             <list>
                 <bean class="org.mockftpserver.fake.UserAccount">
-                    <property name="username" value="ONLINE\esbftpwcmstest"/>
-                    <property name="password" value="358FtPwcmsTe5t"/>
+                    <property name="username" value="user1"/>
+                    <property name="password" value="password"/>
                     <property name="homeDirectory" value="/"/>
                 </bean>
             </list>

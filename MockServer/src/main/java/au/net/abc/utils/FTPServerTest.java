@@ -30,7 +30,7 @@ public class FTPServerTest
 		System.out.println("Starting FTP Server...");
 		  
 		ftpServer.setServerControlPort(9981);
-		ftpServer.addUserAccount(new UserAccount("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t", "/"));
+		ftpServer.addUserAccount(new UserAccount("user1", "password", "/"));
 		
 		FileSystem fileSystem = new UnixFakeFileSystem();
 		DirectoryEntry directory = new DirectoryEntry("/externalftp/project/visionbytes_news");

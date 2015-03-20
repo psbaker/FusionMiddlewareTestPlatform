@@ -27,7 +27,7 @@ public class FtpClientTest
 	        	ftpClient.disconnect();
 	            throw new Exception("Exception in connecting to FTP Server");
 	        }
-	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.login("user1", "password");
 	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 	        ftpClient.enterLocalPassiveMode();       
 			
@@ -85,7 +85,7 @@ public class FtpClientTest
 		try
 		{
 			ftpClient.connect("localhost", 9981);
-	        ftpClient.login("ONLINE\\esbftpwcmstest", "358FtPwcmsTe5t");
+	        ftpClient.login("user1", "password");
 	        
 	        
 	        /*ftpClient.connect("pubftp.abc.net.au", 21);
