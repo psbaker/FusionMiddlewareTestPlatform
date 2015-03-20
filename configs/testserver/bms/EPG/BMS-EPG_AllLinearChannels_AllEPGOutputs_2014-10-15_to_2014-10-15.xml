@@ -6,7 +6,7 @@
   
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
   
-  <validate-file>/home/joxj6p/Oracle/Middleware/user_projects/domains/osb_domain/TVOnAirInterfaceData/OnAir/EPG/InternetGuide/ABC4.xml</validate-file>
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC4.xml</validate-file>
   
   <validate-ftp-upload>/onair/epg/internet/ABC3.xml</validate-ftp-upload>
     

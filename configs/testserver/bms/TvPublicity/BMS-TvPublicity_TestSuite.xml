@@ -1,3 +1,9 @@
 <testsuite>
   
+  <testcase>BMS-TvPublicity_AllChannels_2014-10-15_to_2014-10-15</testcase>
+  
+  <testcase>BMS-TvPublicity_EPGError</testcase>
+  
+  <testcase>BMS-TvPublicity_EPGNoEvent</testcase>
+  
 </testsuite>

@@ -65,49 +65,109 @@
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
                   <SynopsisTypeID>1228</SynopsisTypeID>
                   <SynopsisTypeDescription>Internal Commissioning Synopsis</SynopsisTypeDescription>
-                  <SynopsisText>An animated comedy about 12-year-old daredevil and mastermind McGee, who was headed for an awesome summer at Camp Sunny Smiles when his bus took a wrong turn and landed him at old, run down and ridiculously spooky CAMP LAKEBOTTOM! McGee soon discovers though that Lakebottom is not just your average camp; its the BEST CAMP EVER! That is, if you're into surfing "killer" waves, eating french flies at lunch and having monsters as counselors. It may seem scary, but McGee is having a blast and will be do anything to protect Lakebottom from his nemesis Buttsquat and his snooty camp across the lake, Camp Sunny Smiles.</SynopsisText>
+                  <SynopsisText>Respected Aussie actor William McInnes is taking a break; its a kind of Sea Change to indulge in a secret passion. Wills Big Twitch follows his personal quest to add to his life list of Australian birds. He wants to get hands on and experience amazing bird behaviour, get to know the passionate and quirky people behind the species.</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
-                  <SynopsisTypeID>1240</SynopsisTypeID>
-                  <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
-                  <SynopsisText>ZX9335A_460.jpg</SynopsisText>
+                  <SynopsisTypeID>1229</SynopsisTypeID>
+                  <SynopsisTypeDescription>Internal Marketing Synopsis</SynopsisTypeDescription>
+                  <SynopsisText>Wills Big Twitch follows William McInnes as he experiences amazing bird behaviour and gets to know the passionate and quirky people behind the species.</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
-                  <SynopsisTypeID>1241</SynopsisTypeID>
-                  <SynopsisTypeDescription>Keywords</SynopsisTypeDescription>
-                  <SynopsisText>abc3 3toons 3comedy 3featured 3quirky c:3polooza 3summer c:3adventure c:3surf c:3overdrive c:3friends c:3polooza c:3spooked c:3grossout 3quirky c:3holiday c:3monsters c:3creatures</SynopsisText>
+                  <SynopsisTypeID>1230</SynopsisTypeID>
+                  <SynopsisTypeDescription>Additional Project Information</SynopsisTypeDescription>
+                  <SynopsisText>The Multiplatform department believes this series has some great potential online.  Birdwatchers will not only have the ability to catch up on past episodes from the series on the ABC produced website, but be presented with several additional activities/presentations that will provide more information and background to Williams travels during the broadcast. The birdwatching community is passionate and keen to share their own experience, so we will give the audience the ability to submit their own photos/video/stories during the run of the series and present those submissions through the website. Also available will be a Google Map of birdwatching hotspots that we will add to during the broadcast as users submit their stories and photos. These two propositions alone will give the audience additional incentive (outside of episode catch-up) to return to the site each week.
+
+WESBITE to include:
+"	Streaming of episodes
+"	Web Extra video
+"	Downloadable wallpapers/photos
+"	HTML multimedia presentation of strange bird facts
+"	Links to bird watching sites
+"	Messageboard integration
+"	Social sharing widgets
+"	Flickr Account integration for UGC during run of show
+"	Google Map embed of bird watching hotspots</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
                   <SynopsisTypeID>1237</SynopsisTypeID>
                   <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
-                  <SynopsisText>Meet 12-year-old daredevil and mastermind McGee who was headed for an awesome summer at Camp Sunny Smiles when his bus took a wrong turn and landed him at old, run down and ridiculously spooky CAMP LAKEBOTTOM!</SynopsisText>
+                  <SynopsisText>William McInnes gets up close and personal with some of Australia's diverse birdlife. With his offbeat sense of humour and a weird bag of tricks, William observes Australia's birdlife and the people who work alongside them.</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1240</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
+                  <SynopsisText>FA1200W_460.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029912</SynopsisLevelID>
+                  <SynopsisLevelDescription>Series</SynopsisLevelDescription>
+                  <SynopsisTypeID>1241</SynopsisTypeID>
+                  <SynopsisTypeDescription>Keywords</SynopsisTypeDescription>
+                  <SynopsisText>abc1 docs nature c:nature-wildlife c:docs-on-2 animals</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
                   <SynopsisTypeID>1402</SynopsisTypeID>
                   <SynopsisTypeDescription>Image DX Master</SynopsisTypeDescription>
-                  <SynopsisText>ZX9335A.jpg</SynopsisText>
+                  <SynopsisText>FA1200W.jpg</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029912</SynopsisLevelID>
                   <SynopsisLevelDescription>Series</SynopsisLevelDescription>
                   <SynopsisTypeID>1403</SynopsisTypeID>
                   <SynopsisTypeDescription>Image Raw Reference</SynopsisTypeDescription>
-                  <SynopsisText>camplakebottom_1.jpg</SynopsisText>
+                  <SynopsisText>hellobirdy_1.jpg</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029916</SynopsisLevelID>
+                  <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
+                  <SynopsisTypeID>1254</SynopsisTypeID>
+                  <SynopsisTypeDescription>Online Episode Title</SynopsisTypeDescription>
+                  <SynopsisText>Travellers (Final)</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029916</SynopsisLevelID>
+                  <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
+                  <SynopsisTypeID>1237</SynopsisTypeID>
+                  <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
+                  <SynopsisText>William's journey starts in outback New South Wales. Richard Kingsford, also known as Dr Duck squeezes the larger-than-life actor into his small plane and shows him how to count water birds from up high.</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029916</SynopsisLevelID>
+                  <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
+                  <SynopsisTypeID>1240</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
+                  <SynopsisText>1411_1_hell_460.jpg</SynopsisText>
                </Synopsis>
                <Synopsis>
                   <SynopsisLevelID>500029916</SynopsisLevelID>
                   <SynopsisLevelDescription>Episode</SynopsisLevelDescription>
                   <SynopsisTypeID>1250</SynopsisTypeID>
                   <SynopsisTypeDescription>Path/Filename</SynopsisTypeDescription>
-                  <SynopsisText>kids/camplakebottom_01_63.mp4</SynopsisText>
+                  <SynopsisText>hellobirdy_01_06.mp4</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029920</SynopsisLevelID>
+                  <SynopsisLevelDescription>Event</SynopsisLevelDescription>
+                  <SynopsisTypeID>1237</SynopsisTypeID>
+                  <SynopsisTypeDescription>EPG</SynopsisTypeDescription>
+                  <SynopsisText>William's journey starts in outback New South Wales. Richard Kingsford, also known as Dr Duck squeezes the larger-than-life actor into his small plane and shows him how to count water birds from up high.</SynopsisText>
+               </Synopsis>
+               <Synopsis>
+                  <SynopsisLevelID>500029920</SynopsisLevelID>
+                  <SynopsisLevelDescription>Event</SynopsisLevelDescription>
+                  <SynopsisTypeID>1240</SynopsisTypeID>
+                  <SynopsisTypeDescription>Image Link</SynopsisTypeDescription>
+                  <SynopsisText>1411_1_hell_460.jpg</SynopsisText>
                </Synopsis>
                <Highlights>
                   <ComingUp>false</ComingUp>

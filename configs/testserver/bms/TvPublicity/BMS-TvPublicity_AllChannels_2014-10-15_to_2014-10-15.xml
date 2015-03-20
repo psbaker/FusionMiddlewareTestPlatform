@@ -1,0 +1,47 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://127.0.0.1:7001/TvPublicity/Proxy_Services/TvPublicity</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='TvGuideResp']/Code[text() = '100']</validate-response>
+  
+  <request>
+    
+    <![CDATA[        
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/epg/client/scheduler/1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:TvGuideReq>
+         <ns:TvGuide>
+            <ns:InputDateRange>
+               <ns:DateFrom>2014-10-15</ns:DateFrom>
+               <ns:DateTo>2014-10-15</ns:DateTo>
+            </ns:InputDateRange>
+            <ns:Channels>
+               <ns:Channel>
+                  <ns:Name>ABC1</ns:Name>
+                  <ns:Selected>true</ns:Selected>
+               </ns:Channel>
+               <ns:Channel>
+                  <ns:Name>ABC2</ns:Name>
+                  <ns:Selected>true</ns:Selected>
+               </ns:Channel>
+               <ns:Channel>
+                  <ns:Name>ABC3</ns:Name>
+                  <ns:Selected>true</ns:Selected>
+               </ns:Channel>
+               <ns:Channel>
+                  <ns:Name>ABC4</ns:Name>
+                  <ns:Selected>true</ns:Selected>
+               </ns:Channel>
+            </ns:Channels>
+         </ns:TvGuide>
+      </ns:TvGuideReq>
+   </soapenv:Body>
+</soapenv:Envelope>
+    ]]>
+    
+  </request>
+
+</testcase>
