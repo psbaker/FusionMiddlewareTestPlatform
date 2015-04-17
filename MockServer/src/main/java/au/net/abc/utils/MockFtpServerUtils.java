@@ -64,6 +64,12 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory12 = new DirectoryEntry("/Ingest");
 		fileSystem.add(directory12);
+		
+		DirectoryEntry directory13 = new DirectoryEntry("/www/iview/api/onair");
+		fileSystem.add(directory13);
+		
+		DirectoryEntry directory14 = new DirectoryEntry("/www/xmlcontent/tv/guide/OnAirIviewInput");
+		fileSystem.add(directory14);
 		  
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
