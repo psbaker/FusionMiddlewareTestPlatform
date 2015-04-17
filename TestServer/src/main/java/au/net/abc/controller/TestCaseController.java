@@ -410,7 +410,7 @@ public class TestCaseController
 				{
 					if(f.getName().startsWith(fileName))
 					{
-						ftpClient.deleteFile(f.getName());			
+						ftpClient.deleteFile(dir+"/"+f.getName());			
 					}
 				}
 			}
@@ -494,8 +494,8 @@ public class TestCaseController
 		
 		boolean ftpFileUploaded = true;
 		if(doValidateFTP)
-		{
-			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+		{	
+			ftpFileUploaded = false;
 			
 			FTPClient ftpClient = new FTPClient();
 			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
@@ -508,14 +508,33 @@ public class TestCaseController
 	        }
 	        ftpClient.login("user1", "password");
 	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient.enterLocalPassiveMode();       
-			
-	        //retrieve file from ftp server
-	        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
-	        int replyCode = ftpClient.getReplyCode();
-	        if(fileStream == null || replyCode == 550)
+	        ftpClient.enterLocalPassiveMode();
+	        
+	        validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+	        
+	        if(validateFileStr.contains("*"))
 	        {
-	        	ftpFileUploaded = false;
+	        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf("/"));
+				
+				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf("/")+1, validateFTPStr.lastIndexOf("*"));
+				
+				for(FTPFile f: ftpClient.listFiles(dir))
+				{
+					if(f.getName().startsWith(fileName))
+					{
+						ftpFileUploaded = true;			
+					}
+				}
+	        }
+	        else
+	        {
+		        //retrieve file from ftp server
+		        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
+		        int replyCode = ftpClient.getReplyCode();
+		        if(fileStream != null && replyCode != 550)
+		        {
+		        	ftpFileUploaded = true;
+		        }
 	        }
 	        
 	        //disconnect from ftp server
