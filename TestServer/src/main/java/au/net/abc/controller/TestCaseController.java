@@ -21,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -383,8 +384,6 @@ public class TestCaseController
 		String validateFTPStr = "";
 		if (doValidateFTP)
 		{	
-			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
-			
 			/* Cleanup files to validate before executing test-case */
 			FTPClient ftpClient = new FTPClient();
 			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
@@ -397,10 +396,29 @@ public class TestCaseController
 	        }
 	        ftpClient.login("user1", "password");
 	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient.enterLocalPassiveMode();       
+	        ftpClient.enterLocalPassiveMode();
+	        
+			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
 			
-	        //remove files from ftp server
-	        ftpClient.deleteFile(validateFTPStr);
+			if(validateFTPStr.contains("*"))
+			{
+				String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf("/"));
+				
+				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf("/")+1, validateFTPStr.lastIndexOf("*"));
+				
+				for(FTPFile f: ftpClient.listFiles(dir))
+				{
+					if(f.getName().startsWith(fileName))
+					{
+						ftpClient.deleteFile(f.getName());			
+					}
+				}
+			}
+			else
+			{
+		        //remove files from ftp server
+		        ftpClient.deleteFile(validateFTPStr);				
+			}
 	        
 	        //disconnect from ftp server
 	        if(ftpClient.isConnected()) 
