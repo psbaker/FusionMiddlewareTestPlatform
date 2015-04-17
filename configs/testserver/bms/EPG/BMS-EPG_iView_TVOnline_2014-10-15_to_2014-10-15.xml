@@ -6,6 +6,8 @@
   
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
   
+  <validate-ftp-upload>/onair/epg/online/iView_catch.xml</validate-ftp-upload>
+  
   <request>
     
     <![CDATA[        

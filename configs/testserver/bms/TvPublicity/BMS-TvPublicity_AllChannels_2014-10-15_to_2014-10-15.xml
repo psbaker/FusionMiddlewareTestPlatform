@@ -6,6 +6,8 @@
   
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='TvGuideResp']/Code[text() = '100']</validate-response>
   
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/TVPublicity/TVGuide/GuideDocument/ABC1/ABC1_Program Guide Week 42*</validate-file>
+  
   <request>
     
     <![CDATA[        
