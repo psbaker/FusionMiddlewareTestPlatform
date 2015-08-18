@@ -1,0 +1,23 @@
+<SOAP-ENV:Envelope xmlns:ns1="urn:abcaus.onair.sintecmedia.com" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns2="urn:stub.onair.sintecmedia.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+  <ns1:createSupplierResp>
+  <Success>true</Success>
+  <SupplierResponse>
+    <ABCSupplierID>D874</ABCSupplierID>
+    <SupplierNumber>7698</SupplierNumber>
+    <SupplierName>Cake Entertainment</SupplierName>
+  </SupplierResponse>
+  <Warnings>
+    <ns2:message_>
+      <ns2:code>Client.ABCSupplierIdExists</ns2:code>
+      <ns2:description>ABC Supplier ID &lt;D874&gt; already exists in OnAir and its ID is &lt;7698&gt;.</ns2:description>
+    </ns2:message_>
+    <ns2:message_>
+      <ns2:code>Client.SupplierNameExists</ns2:code>
+      <ns2:description>Supplier name &lt;Cake Entertainment&gt; already exists in OnAir and its Supplier ID is &lt;7698&gt;.</ns2:description>
+    </ns2:message_>
+  </Warnings>
+</ns1:createSupplierResp>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

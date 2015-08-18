@@ -43,6 +43,22 @@
     <NumberOfEpisodes>26</NumberOfEpisodes>
     <LogicalMediaClassificationID>500029722</LogicalMediaClassificationID>
     <LogicalMediaClassificationDescription>G</LogicalMediaClassificationDescription>
+    <Warning1>
+      <LogicalMediaWarning>ABC3 VA - Good Game - PG Games</LogicalMediaWarning>
+      <LogoWarningMedia>
+        <HouseNumberLogo>MA1143H069C02GN1D1</HouseNumberLogo>
+        <ChannelIDLogo>ABC2 / 02</ChannelIDLogo>
+      </LogoWarningMedia>
+      <LogoWarningMedia>
+        <HouseNumberLogo>MA1143H078C01GN1D1</HouseNumberLogo>
+        <ChannelIDLogo>ABC1 / 01</ChannelIDLogo>
+      </LogoWarningMedia>
+      <Notes>
+        <NoteTypeID>525031946</NoteTypeID>
+        <NoteTypeDescription>Classification Reason</NoteTypeDescription>
+        <Note>This program may contain reviews of games that have PG material.</Note>
+      </Notes>
+    </Warning1>
     <Synopsis>
       <SynopsisLevelID>500029916</SynopsisLevelID>
       <SynopsisLevelDescription>Episode</SynopsisLevelDescription>

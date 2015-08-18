@@ -1,0 +1,10 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns1="urn:abcaus.onair.sintecmedia.com" xmlns:ns2="urn:stub.onair.sintecmedia.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header/>
+  <SOAP-ENV:Body>
+  <Success>true</Success>
+  <createSchedulingContractResp>
+    <SchedulingContractID>51839</SchedulingContractID>
+    <SchedulingContractTitle>Total Drama Presents: Ridonculous Race:26637</SchedulingContractTitle>
+  </createSchedulingContractResp>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

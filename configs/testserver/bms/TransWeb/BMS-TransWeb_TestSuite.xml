@@ -1,0 +1,9 @@
+<testsuite>
+  
+  <testcase>BMS-TransWeb_AllOutputs_2014-10-14_to_2014-10-15</testcase> 
+  
+  <testcase>BMS-TransWeb_TransWebNoEvent</testcase>  
+  
+  <testcase>BMS-TransWeb_TransWebError</testcase>  
+  
+</testsuite>

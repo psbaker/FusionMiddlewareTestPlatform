@@ -5,7 +5,7 @@
 		<system-id>onAir</system-id>
 		<system-uri>/onAir</system-uri>
 	
-		<!-- OnAir Login Token -->      
+		<!-- Login Token -->      
 		<service>
 			<service-id>loginToken</service-id>	
 			<service-uri>/getLoginToken</service-uri>
@@ -16,7 +16,7 @@
 			</operation>				
 		</service>
       
-      	<!-- OnAir EPG Download -->
+      	<!-- EPG -->
         <service>
 			<service-id>getEPGService</service-id>	
 			<service-uri>/getEPGService</service-uri>
@@ -37,18 +37,28 @@
 			</operation>
 		</service>
       
-      	<!-- OnAir TransWeb -->
+      	<!-- TransWeb -->
 		<service>
 			<service-id>getTransWebService</service-id>	
 			<service-uri>/getTransWebService</service-uri>
 			
 			<operation>				
 				<operation-id>TransWebRequest</operation-id>	
-				<token>transwebReq</token>		
+				<token>2014-10-15</token>              	
+			</operation>				
+          	<operation>				
+				<operation-id>TransWebRequestNoEvents</operation-id>	
+				<token>2014-10-14</token>		
+              	<http-code>500</http-code>
+			</operation>				
+          	<operation>				
+				<operation-id>TransWebInvalidRequest</operation-id>	
+				<token>2014-10-13</token>
+           		<http-code>500</http-code>
 			</operation>				
 		</service>
       
-      <!-- OnAir BxfPlayist -->
+      <!-- BxfPlayist -->
 		<service>
 			<service-id>getBxfPlaylistService</service-id>	
 			<service-uri>/getBxfPlaylistService</service-uri>
@@ -64,6 +74,33 @@
           	<operation>				
 				<operation-id>BxfPlaylistInvalidRequest</operation-id>	
 				<token>ABC3</token>		
+			</operation>
+		</service>
+      
+      <!-- CreateOnAirProgramService -->
+		<service>
+			<service-id>createOnAirProgramService</service-id>	
+			<service-uri>/createOnAirProgramService</service-uri>
+			
+			<operation>				
+				<operation-id>CreateEpisodeRequest</operation-id>	
+				<token>createEpisodeReq</token>		
+			</operation>				          	
+          	<operation>				
+				<operation-id>CreateFeatureRequest</operation-id>	
+				<token>createFeatureReq</token>		
+			</operation>
+          <operation>				
+				<operation-id>CreateSchedulingContractRequest</operation-id>	
+				<token>createSchedulingContractReq</token>		
+			</operation>
+          <operation>				
+				<operation-id>CreateSeriesRequest</operation-id>	
+				<token>createSeriesReq</token>		
+			</operation>
+          <operation>				
+				<operation-id>CreateSupplierRequest</operation-id>	
+				<token>createSupplierReq</token>		
 			</operation>
 		</service>
       

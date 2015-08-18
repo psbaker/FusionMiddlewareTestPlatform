@@ -1,0 +1,46 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://127.0.0.1:7001/TransWeb_SB/Proxy_Servies/TransWeb</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleTransWebResp']/Code[text() = '400']</validate-response>
+      
+  <request>
+    
+    <![CDATA[        
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/transweb/client/scheduler/1.0">
+         <soapenv:Header/>
+         <soapenv:Body>
+            <ns:scheduleTransWebReq>
+               <ns:TransWebSchedule>
+                  <ns:Output>
+                     <ns:Transcode>true</ns:Transcode>
+                     <ns:WebPublishing>true</ns:WebPublishing>
+                  </ns:Output>
+                  <ns:InputDateRange>
+                     <ns:DateFrom>2014-10-14</ns:DateFrom>
+                     <ns:DateTo>2014-10-14</ns:DateTo>
+                     <ns:TimeFrom>00:00:00</ns:TimeFrom>
+                     <ns:TimeTo>47:59:59</ns:TimeTo>
+                  </ns:InputDateRange>
+                  <ns:Channels>
+                     <ns:Channel>
+                        <ns:Name>iView</ns:Name>
+                        <ns:Selected>true</ns:Selected>
+                     </ns:Channel>
+                  </ns:Channels>
+                  <ns:ScheduleConfiguration>
+                     <ns:Frequency>Immediate</ns:Frequency>
+                     <ns:Time>00:00:00</ns:Time>
+                     <ns:Inperpetuity>false</ns:Inperpetuity>
+                  </ns:ScheduleConfiguration>
+               </ns:TransWebSchedule>
+            </ns:scheduleTransWebReq>
+         </soapenv:Body>
+      </soapenv:Envelope>
+      ]]>
+    
+  </request>
+  
+</testcase>
