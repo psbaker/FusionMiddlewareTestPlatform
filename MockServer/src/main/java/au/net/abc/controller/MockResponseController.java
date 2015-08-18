@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,8 +28,19 @@ import au.net.abc.utils.MockServerUtils;
 @Controller
 public class MockResponseController
 {	
+	@RequestMapping(value = "/systems/rest/**", method = RequestMethod.GET)
+	public @ResponseBody void doMockResponse(HttpServletRequest request, HttpServletResponse response)
+	{		
+		doMockResponse("", request, response, true);
+	}
+	
 	@RequestMapping(value = "/systems/**", method = RequestMethod.POST)
 	public @ResponseBody void doMockResponse(@RequestBody String requestPayload, HttpServletRequest request, HttpServletResponse response)
+	{
+		doMockResponse(requestPayload, request, response, false);
+	}	
+	
+	public @ResponseBody void doMockResponse(String requestPayload, HttpServletRequest request, HttpServletResponse response, boolean isRestRequest)
 	{
 		try 
 		{			
@@ -40,23 +52,43 @@ public class MockResponseController
 		
 			InputStream inputStream = new FileInputStream(new File(MockServerUtils.getXmlConfigPath()));
 		
-			requestUri = requestUri.substring("/MockServerWebApp/systems".length());
-			
+			if(isRestRequest) 
+			{
+				requestUri = requestUri.substring("/MockServerWebApp/systems/rest".length());
+			}
+			else
+			{
+				requestUri = requestUri.substring("/MockServerWebApp/systems".length());	
+			}
+						
 			MockResponse mockResponse = getMockResponse(requestUri, requestPayload, inputStream);
 			String mockResponsePayload = mockResponse.getPayload();
 			String mockReponseHttpCode = mockResponse.getHttpCode();
 		
-			InputStream inputStream2 = new FileInputStream(new File(mockResponsePayload));
-			
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			Document document = documentBuilder.parse(inputStream2);		
-		
-			response.setContentType("text/xml");
 			response.setStatus(Integer.valueOf(mockReponseHttpCode));
-			String xml = MockServerUtils.getStringFromDocument(document);
-			PrintWriter out = response.getWriter();
-			out.write(xml);
+			
+			if(isRestRequest)
+			{
+				String result = new Scanner(new File(mockResponsePayload)).useDelimiter("\\A").next();
+				
+				response.setContentType("application/json");
+				
+				PrintWriter out = response.getWriter();
+				out.write(result);
+			}
+			else 
+			{
+				InputStream inputStream2 = new FileInputStream(new File(mockResponsePayload));
+				DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+				Document document = documentBuilder.parse(inputStream2);
+				String result = MockServerUtils.getStringFromDocument(document);
+			
+				response.setContentType("text/xml");
+				
+				PrintWriter out = response.getWriter();
+				out.write(result);
+			}
 		}
 		catch(Exception e ) 
 		{
@@ -116,7 +148,7 @@ public class MockResponseController
 								
 								System.out.println("Request URI: " + requestUri);								
 								
-								if (requestUri.endsWith(serviceUri))
+								if (requestUri.startsWith(systemUri + serviceUri))
 								{
 									System.out.println("Found Service Match: " + serviceId);
 									
@@ -132,23 +164,35 @@ public class MockResponseController
 											
 											String operationId = operationElement.getElementsByTagName("operation-id").item(0).getTextContent();
 											String token = operationElement.getElementsByTagName("token").item(0).getTextContent();
-																						
+											
 											NodeList nodeList = operationElement.getElementsByTagName("http-code");
 											if(nodeList.getLength() > 0) {
 												httpCode = nodeList.item(0).getTextContent();
-											}											
+											}
 											
-											Pattern p = Pattern.compile(token, Pattern.CASE_INSENSITIVE+Pattern.LITERAL);
-											Matcher m = p.matcher(requestPayload);
-											
-											if(m.find())
+											if("REST".equals(token)) 
 											{
-												System.out.println("Found Operation Match: " + operationId);
+												if(requestUri.endsWith(operationId)) 
+												{
+													responsePayload = MockServerUtils.getConfigDir() + "/" + systemId + "/" + serviceId + "/" + operationId + "-response.xml";
+													
+													break;
+												}
+											}
+											else 
+											{
+												Pattern p = Pattern.compile(token, Pattern.CASE_INSENSITIVE+Pattern.LITERAL);
+												Matcher m = p.matcher(requestPayload);
 												
-												responsePayload = MockServerUtils.getConfigDir() + "/" + systemId + "/" + serviceId + "/" + operationId + "-response.xml";
-												
-												break;
-											}											
+												if(m.find())
+												{
+													System.out.println("Found Operation Match: " + operationId);
+													
+													responsePayload = MockServerUtils.getConfigDir() + "/" + systemId + "/" + serviceId + "/" + operationId + "-response.xml";
+													
+													break;
+												}
+											}
 										}										
 									}											
 								}

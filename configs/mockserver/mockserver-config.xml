@@ -122,6 +122,44 @@
 		</service>
      
     </system>  
+    
+    <!-- PAPI -->
+    <system>
+		<system-id>papi</system-id>
+		<system-uri>/papi</system-uri>
+	
+		<service>
+			<service-id>api</service-id>	
+            <service-uri>/api</service-uri>
+			
+			<operation>				
+				<operation-id>programs.json</operation-id>	
+				<token>REST</token>		
+			</operation>				
+            
+          	<operation>				
+				<operation-id>seriess.json</operation-id>	
+				<token>REST</token>		
+			</operation>				
+          
+            <operation>				
+				<operation-id>episodes.json</operation-id>	
+				<token>REST</token>		
+			</operation>
+          
+            <operation>				
+				<operation-id>publications.json</operation-id>	
+				<token>REST</token>		
+			</operation>
+          
+            <operation>				
+				<operation-id>persons.json</operation-id>	
+				<token>REST</token>		
+			</operation>
+          
+		</service>
+     
+    </system>  
    
 		
 </mockserver-config>
