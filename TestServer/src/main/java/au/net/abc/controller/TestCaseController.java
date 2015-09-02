@@ -300,31 +300,47 @@ public class TestCaseController
 	{
 		String result = "Failed";
 				
-		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
 		String validate = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
 		
-		Map<String, String> fileInNodes = new HashMap<String, String>();
+		Map<String, Node> fileInNodes = new HashMap<String, Node>();
+		Map<String, String> dropNodes = new HashMap<String, String>();
+				
+		// put each drop location into a map, using 'id' as the key
+		int dropCount = testXmlDocument.getElementsByTagName("drop").getLength();		
+		for(int i=0; i <dropCount; i++)
+		{
+			Node dropNode = testXmlDocument.getElementsByTagName("drop").item(i);
 		
+			String dropDir = dropNode.getTextContent();
+			String dropId = dropNode.getAttributes().getNamedItem("id").getNodeValue();
+			
+			dropNodes.put(dropId, dropDir);
+		}
+		
+		// put files to copy into map, 'order' is the key
 		int fileInCount = testXmlDocument.getElementsByTagName("file").getLength();
-		
-		//put files to copy into map, 'order' is the key
 		for(int i=0; i <fileInCount; i++)
 		{
 			Node fileInNode = testXmlDocument.getElementsByTagName("file").item(i);
 		
-			String fileIn = fileInNode.getTextContent();
 			String order = fileInNode.getAttributes().getNamedItem("order").getNodeValue();
 			
-			fileInNodes.put(order, fileIn);
+			fileInNodes.put(order, fileInNode);
 		}
 		
 		//copy files according to order
 		for(int i=1; i <=fileInCount; i++)
 		{
-			String fileIn = fileInNodes.get(String.valueOf(i));
-					
+			Node fileInNode = fileInNodes.get(String.valueOf(i)); 
+			String fileIn = fileInNode.getTextContent();
+								
 			File srcFile = new File(fileIn);
-			File destFile = new File(drop);
+			
+			/* find matching 'drop' */
+			String dropId = fileInNode.getAttributes().getNamedItem("drop").getNodeValue();
+			String dropDir = dropNodes.get(dropId);
+			
+			File destFile = new File(dropDir);
 			
 			FileUtils.copyFileToDirectory(srcFile, destFile);			
 		}
@@ -348,6 +364,8 @@ public class TestCaseController
 		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
 		
 		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
 		
 		String validateFileStr = "";
 		if (doValidateFile)
@@ -453,6 +471,13 @@ public class TestCaseController
 		httpPost.setEntity(sre);
 		
 		HttpResponse response = client.execute(httpPost);
+		
+		if(doValidateSleep)
+		{
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName("validate-sleep").item(0).getTextContent();
+			
+			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
+		}
 		
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
