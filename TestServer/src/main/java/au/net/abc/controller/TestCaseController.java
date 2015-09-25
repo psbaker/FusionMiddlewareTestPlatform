@@ -537,7 +537,7 @@ public class TestCaseController
 	        
 	        validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
 	        
-	        if(validateFileStr.contains("*"))
+	        if(validateFTPStr.contains("*"))
 	        {
 	        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf("/"));
 				
