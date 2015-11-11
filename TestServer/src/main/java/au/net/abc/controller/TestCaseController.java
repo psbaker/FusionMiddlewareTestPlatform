@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -248,29 +251,17 @@ public class TestCaseController
 		{	
 			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
 			
-			if(validateFileStr.contains("*"))
-			{
-				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-				
-				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
-				
-				for(File f: dir.listFiles())
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						f.delete();
-					}
-				}
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			
+			for (File file : files) {
+				FileUtils.forceDelete(file);
 			}
-			else
-			{
-				/* Cleanup files to validate before executing test-case */
-				File fileValidate = new File(validateFileStr);		
-				if(fileValidate.exists())  
-				{
-					fileValidate.delete();
-				}
-			}
+			
 		}
 		
 		Map<String, String> fileInNodes = new HashMap<String, String>();
@@ -324,9 +315,14 @@ public class TestCaseController
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
-		File outFile = new File(validate);
+        
+		File dir = new File(validate.substring(0, validate.lastIndexOf("/")));
+		String fileName = validate.substring(validate.lastIndexOf("/")+1);
 		
-		if(outFile.exists())
+		@SuppressWarnings("unchecked")
+		Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			
+		if(files != null && files.size() > 0)
 		{
 			result = "Passed";
 		}	
