@@ -238,7 +238,41 @@ public class TestCaseController
 		
 		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
 		String validate = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
-
+		
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
+		
+		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		
+		String validateFileStr = "";
+		if (doValidateFile)
+		{	
+			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			
+			if(validateFileStr.contains("*"))
+			{
+				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+				
+				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+				
+				for(File f: dir.listFiles())
+				{
+					if(f.getName().startsWith(fileName))
+					{
+						f.delete();
+					}
+				}
+			}
+			else
+			{
+				/* Cleanup files to validate before executing test-case */
+				File fileValidate = new File(validateFileStr);		
+				if(fileValidate.exists())  
+				{
+					fileValidate.delete();
+				}
+			}
+		}
+		
 		Map<String, String> fileInNodes = new HashMap<String, String>();
 		
 		int fileInCount = testXmlDocument.getElementsByTagName("file").getLength();
@@ -283,8 +317,12 @@ public class TestCaseController
         	ftpClient.logout();
         	ftpClient.disconnect();
         }
-
-		Thread.sleep(20000);
+        
+        if(doValidateSleep)
+		{
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName("validate-sleep").item(0).getTextContent();
+			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
+		}
 		
 		File outFile = new File(validate);
 		
