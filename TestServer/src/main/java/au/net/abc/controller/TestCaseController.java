@@ -240,16 +240,17 @@ public class TestCaseController
 		String result = "Failed";
 		
 		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
-		String validate = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
+		
+		boolean doValidate = testXmlDocument.getElementsByTagName("validate").getLength() > 0;
 		
 		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
 		
 		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
 		
-		String validateFileStr = "";
 		if (doValidateFile)
 		{	
-			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			
+			String validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
 			
 			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
 			
@@ -261,6 +262,34 @@ public class TestCaseController
 			for (File file : files) {
 				FileUtils.forceDelete(file);
 			}
+			
+		}
+		
+		boolean doValidateFtpFile = testXmlDocument.getElementsByTagName("validate-ftp-file").getLength() > 0;
+		
+		if (doValidateFtpFile) {
+			
+			String validateFileStr = testXmlDocument.getElementsByTagName("validate-ftp-file").item(0).getTextContent();
+			
+			FTPClient ftpClient = new FTPClient();
+			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+		    int reply;
+		    ftpClient.connect("localhost", 9981);
+		    reply = ftpClient.getReplyCode();
+	        if (!FTPReply.isPositiveCompletion(reply)) {
+	        	ftpClient.disconnect();
+	            throw new Exception("Exception in connecting to FTP Server");
+	        }
+	        ftpClient.login("user1", "password");
+	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	        ftpClient.enterLocalPassiveMode();
+	        
+	        FTPFile[] files = ftpClient.listFiles(validateFileStr);
+	        for (FTPFile file : files)
+	        {
+	        	ftpClient.deleteFile(file.getName());
+	        }
+			
 			
 		}
 		
@@ -315,17 +344,53 @@ public class TestCaseController
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
-        
-		File dir = new File(validate.substring(0, validate.lastIndexOf("/")));
-		String fileName = validate.substring(validate.lastIndexOf("/")+1);
+        boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
 		
-		@SuppressWarnings("unchecked")
-		Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
-			
-		if(files != null && files.size() > 0)
+		
+		if (doValidateFTP)
 		{
-			result = "Passed";
-		}	
+			
+			String validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			/* Cleanup files to validate before executing test-case */
+			FTPClient ftpClient2 = new FTPClient();
+			ftpClient2.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+		    ftpClient2.connect("localhost", 9981);
+		    int reply2 = ftpClient2.getReplyCode();
+	        if (!FTPReply.isPositiveCompletion(reply2)) {
+	        	ftpClient2.disconnect();
+	            throw new Exception("Exception in connecting to FTP Server");
+	        }
+	        ftpClient2.login("user1", "password");
+	        ftpClient2.setFileType(FTP.BINARY_FILE_TYPE);
+	        ftpClient2.enterLocalPassiveMode();
+	        
+			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			FTPFile[] files = ftpClient2.listFiles(validateFTPStr);
+			if (files != null && files.length > 0) {
+				result = "Passed";
+			}
+	        
+	        //disconnect from ftp server
+	        if(ftpClient2.isConnected()) 
+	        {
+	        	ftpClient2.logout();
+	        	ftpClient2.disconnect();
+	        }
+		} 
+        
+		if (doValidate) {
+			String validateStr = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
+			File dir = new File(validateStr.substring(0, validateStr.lastIndexOf("/")));
+			String fileName = validateStr.substring(validateStr.lastIndexOf("/")+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+				
+			if(files != null && files.size() > 0)
+			{
+				result = "Passed";
+			}	
+		}
 		
 		return result;
 	}
