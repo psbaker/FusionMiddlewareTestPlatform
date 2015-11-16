@@ -96,6 +96,35 @@ public class TestCaseController
         return "testcase";        	
 	}
 	
+	@RequestMapping(value = "/delete-testcase", method = RequestMethod.GET)
+	public @ResponseBody void deleteTestcase(@RequestParam("domain") String domain, @RequestParam("projectId") String projectId, @RequestParam("testcaseId") String testcaseId, HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			File file = new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId);
+			
+			String text = "";
+			response.setContentType("text/html");
+
+			if(file.exists())
+			{
+				file.delete();
+				text = "Testcase '" + testcaseId + "' has been successfully deleted.";				
+			}
+			else 
+			{
+				text = "Cannot delete testcase '" + testcaseId + "'. File does not exist.";
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.write(text);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping(value = "/run-testcase", method = RequestMethod.GET)
 	public @ResponseBody void runTestcase(@RequestParam String domain, @RequestParam String projectId, @RequestParam String testcaseId, HttpServletRequest request, HttpServletResponse response)
 	{
