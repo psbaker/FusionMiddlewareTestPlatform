@@ -46,7 +46,7 @@
 		
 		<table>
 			<tr>
-				<th>TestCases</th>
+				<th colspan="2">TestCases</th>
 			</tr>
 			
 			<c:forEach items="${model.testcases}" var="testcaseId" varStatus="i" begin="0" >
@@ -56,9 +56,16 @@
 					<c:param name="projectId" value="${model.projectId}"/>
 					<c:param name="testcaseId" value="${testcaseId}"/>
 				</c:url>
+				
+				<c:url var="deleteTestcaseURL" value="delete-testcase">
+					<c:param name="domain" value="${model.domain}"/>
+					<c:param name="projectId" value="${model.projectId}"/>
+					<c:param name="testcaseId" value="${testcaseId}"/>
+				</c:url>
 	
 				<tr>
 					<td><a href="<c:out value="${thisURL}"/>"> <c:out value="${testcaseId}"/> </a></td>
+					<td><a href="<c:out value="${deleteTestcaseURL}"/>"> <c:out value="Delete"/> </a></td>
 				</tr>
 
 			</c:forEach> 		

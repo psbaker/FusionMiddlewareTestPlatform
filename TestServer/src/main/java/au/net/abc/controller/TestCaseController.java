@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FalseFileFilter;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
@@ -91,6 +94,35 @@ public class TestCaseController
         m.addAttribute("testcaseId", testcaseId);
                 
         return "testcase";        	
+	}
+	
+	@RequestMapping(value = "/delete-testcase", method = RequestMethod.GET)
+	public @ResponseBody void deleteTestcase(@RequestParam("domain") String domain, @RequestParam("projectId") String projectId, @RequestParam("testcaseId") String testcaseId, HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			File file = new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId);
+			
+			String text = "";
+			response.setContentType("text/html");
+
+			if(file.exists())
+			{
+				file.delete();
+				text = "Testcase '" + testcaseId + "' has been successfully deleted.";				
+			}
+			else 
+			{
+				text = "Cannot delete testcase '" + testcaseId + "'. File does not exist.";
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.write(text);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value = "/run-testcase", method = RequestMethod.GET)
@@ -234,11 +266,63 @@ public class TestCaseController
 	
 	private String executeFtpTestcase(Document testXmlDocument) throws Exception
 	{
+		
+		FTPClient ftpClient = new FTPClient();
+		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+	    int reply;
+	    ftpClient.connect("localhost", 9981);
+	    reply = ftpClient.getReplyCode();
+        if (!FTPReply.isPositiveCompletion(reply)) {
+        	ftpClient.disconnect();
+            throw new Exception("Exception in connecting to FTP Server");
+        }
+        ftpClient.login("user1", "password");
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        ftpClient.enterLocalPassiveMode();
+		
 		String result = "Failed";
 		
 		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
-		String validate = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
+		
+		boolean doValidate = testXmlDocument.getElementsByTagName("validate").getLength() > 0;
+		
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
+		
+		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		
+		if (doValidateFile)
+		{	
+			
+			String validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			
+			for (File file : files) {
+				FileUtils.forceDelete(file);
+			}
+			
+		}
 
+		boolean doValidateFtpFile = testXmlDocument.getElementsByTagName("validate-ftp-file").getLength() > 0;
+		
+		if (doValidateFtpFile) {
+			
+			String validateFileStr = testXmlDocument.getElementsByTagName("validate-ftp-file").item(0).getTextContent();
+			String path = validateFileStr.substring(0, validateFileStr.lastIndexOf("/"));
+			
+	        FTPFile[] files = ftpClient.listFiles(validateFileStr);
+	        for (FTPFile file : files)
+	        {
+	        	//stupid FTPFile doesn't have fullpath. so we need to do the manually
+	        	ftpClient.deleteFile(path+"/"+file.getName());
+	        }
+		}
+		
 		Map<String, String> fileInNodes = new HashMap<String, String>();
 		
 		int fileInCount = testXmlDocument.getElementsByTagName("file").getLength();
@@ -254,19 +338,6 @@ public class TestCaseController
 			fileInNodes.put(order, fileIn);
 		}
 		
-		FTPClient ftpClient = new FTPClient();
-		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-	    int reply;
-	    ftpClient.connect("localhost", 9981);
-	    reply = ftpClient.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-        	ftpClient.disconnect();
-            throw new Exception("Exception in connecting to FTP Server");
-        }
-        ftpClient.login("user1", "password");
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-        ftpClient.enterLocalPassiveMode();       
-		
         //copy files according to order
         for(int i=1; i <=fileInCount; i++)
 		{
@@ -277,21 +348,58 @@ public class TestCaseController
 		    ftpClient.storeFile(drop + fileInName, input);			
 		}
         
-        //disconnect from ftp server
+        if(doValidateSleep)
+		{
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName("validate-sleep").item(0).getTextContent();
+			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
+		}
+		
+        boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
+		
+		
+		if (doValidateFTP)
+		{
+			
+			String validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
+			if (files != null && files.length > 0) {
+				result = "Passed";
+			}
+			
+		} 
+        
+		if (doValidate) {
+			String validateStr = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
+			File dir = new File(validateStr.substring(0, validateStr.lastIndexOf("/")));
+			String fileName = validateStr.substring(validateStr.lastIndexOf("/")+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+				
+			if(files != null && files.size() > 0)
+			{
+				result = "Passed";
+			}	
+		}
+		
+		boolean doVerifyFtpFileNotExist = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").getLength() > 0;
+		
+		if (doVerifyFtpFileNotExist) {
+			String validateFTPStr = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").item(0).getTextContent();
+			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
+			if (files == null || files.length == 0) {
+				result = "Passed";
+			}
+		}
+		
+
+		// disconnect from ftp server
         if(ftpClient.isConnected()) 
         {
         	ftpClient.logout();
         	ftpClient.disconnect();
         }
 
-		Thread.sleep(20000);
-		
-		File outFile = new File(validate);
-		
-		if(outFile.exists())
-		{
-			result = "Passed";
-		}	
 		
 		return result;
 	}
