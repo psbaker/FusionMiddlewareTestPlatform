@@ -1,0 +1,9 @@
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+   <s:Body>
+      <ExecuteServerMacroResponse xmlns="http://tempuri.org/">
+         <ExecuteServerMacroResult>true</ExecuteServerMacroResult>
+         <p_objParsOut xmlns:a="http://www.w3.org/2001/XMLSchema" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" i:type="a:string"><![CDATA[<?xml version="1.0" encoding="utf-16"?><Result><CaseNumber>C63017-15</CaseNumber><ErrorMsg /></Result>]]></p_objParsOut>
+         <p_strFailMessage/>
+      </ExecuteServerMacroResponse>
+   </s:Body>
+</s:Envelope>
