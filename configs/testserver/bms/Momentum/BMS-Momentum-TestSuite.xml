@@ -1,3 +1,4 @@
 <testsuite>
   <testcase>BMS-Momentum_Success</testcase> 
+  <testcase>BMS-Momentum_FileNotExist</testcase>
 </testsuite>
