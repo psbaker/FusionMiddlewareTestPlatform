@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="mytags" tagdir="/WEB-INF/tags" %>
 
 <html>
@@ -6,6 +7,36 @@
 	<head>
 	
 		<title>ABC FMW Mock Server </title>
+		
+		<style type="text/css">
+		
+			table
+			{
+				float: left;
+				margin: 10px;
+			}
+			
+			table, th, td 
+			{
+    			border: 1px solid black;
+    			border-collapse: collapse;    			
+    			padding: 15px;
+    			text-align: center;    			
+			}
+									
+			/*  Define the background color for all the ODD background rows  */
+			tr:nth-child(odd)
+			{ 
+				background: #b8d1f3;
+			}
+			
+			/*  Define the background color for all the EVEN background rows  */
+			tr:nth-child(even)
+			{
+				background: #dae5f4;
+			}
+		
+		</style>
 		
 	</head>
 	
@@ -17,19 +48,25 @@
 		
 		<p><a href="addoperation-form?sysId=${model.sysId}&serviceId=${model.serviceId}">Add Operation</a></p>
 		
-		<h4>Existing Operations</h4>
+		<table>
+			<tr>
+				<th>Operations</th>				
+			</tr>
 
-		<c:forEach items="${model.operationList}" var="operationId" varStatus="i" begin="0" >
-
-			<c:url var="thisURL" value="operationconfig-form">
-				<c:param name="sysId" value="${model.sysId}"/>
-				<c:param name="serviceId" value="${model.serviceId}"/>
-  				<c:param name="operationId" value="${operationId}"/>
-			</c:url>
-
-			<p> <a href="<c:out value="${thisURL}"/>"> <c:out value="${operationId}"/> </a> </p>
-
-		</c:forEach> 		
+			<c:forEach items="${model.operationList}" var="operationId" varStatus="i" begin="0" >
+				
+				<c:url var="thisURL" value="operationconfig-form">
+					<c:param name="sysId" value="${model.sysId}"/>
+					<c:param name="serviceId" value="${model.serviceId}"/>
+	  				<c:param name="operationId" value="${operationId}"/>
+				</c:url>
+	
+				<tr>
+					<td><a href="<c:out value="${thisURL}"/>"> <c:out value="${operationId}"/> </a></td>
+				</tr>
+	
+			</c:forEach> 		
+		</table>
 		
 	</body>
 	
