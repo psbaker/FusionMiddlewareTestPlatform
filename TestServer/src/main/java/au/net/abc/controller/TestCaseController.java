@@ -266,6 +266,20 @@ public class TestCaseController
 	
 	private String executeFtpTestcase(Document testXmlDocument) throws Exception
 	{
+		
+		FTPClient ftpClient = new FTPClient();
+		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+	    int reply;
+	    ftpClient.connect("localhost", 9981);
+	    reply = ftpClient.getReplyCode();
+        if (!FTPReply.isPositiveCompletion(reply)) {
+        	ftpClient.disconnect();
+            throw new Exception("Exception in connecting to FTP Server");
+        }
+        ftpClient.login("user1", "password");
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        ftpClient.enterLocalPassiveMode();
+		
 		String result = "Failed";
 		
 		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
@@ -293,33 +307,20 @@ public class TestCaseController
 			}
 			
 		}
-		
+
 		boolean doValidateFtpFile = testXmlDocument.getElementsByTagName("validate-ftp-file").getLength() > 0;
 		
 		if (doValidateFtpFile) {
 			
 			String validateFileStr = testXmlDocument.getElementsByTagName("validate-ftp-file").item(0).getTextContent();
+			String path = validateFileStr.substring(0, validateFileStr.lastIndexOf("/"));
 			
-			FTPClient ftpClient = new FTPClient();
-			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-		    int reply;
-		    ftpClient.connect("localhost", 9981);
-		    reply = ftpClient.getReplyCode();
-	        if (!FTPReply.isPositiveCompletion(reply)) {
-	        	ftpClient.disconnect();
-	            throw new Exception("Exception in connecting to FTP Server");
-	        }
-	        ftpClient.login("user1", "password");
-	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient.enterLocalPassiveMode();
-	        
 	        FTPFile[] files = ftpClient.listFiles(validateFileStr);
 	        for (FTPFile file : files)
 	        {
-	        	ftpClient.deleteFile(file.getName());
+	        	//stupid FTPFile doesn't have fullpath. so we need to do the manually
+	        	ftpClient.deleteFile(path+"/"+file.getName());
 	        }
-			
-			
 		}
 		
 		Map<String, String> fileInNodes = new HashMap<String, String>();
@@ -337,19 +338,6 @@ public class TestCaseController
 			fileInNodes.put(order, fileIn);
 		}
 		
-		FTPClient ftpClient = new FTPClient();
-		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-	    int reply;
-	    ftpClient.connect("localhost", 9981);
-	    reply = ftpClient.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-        	ftpClient.disconnect();
-            throw new Exception("Exception in connecting to FTP Server");
-        }
-        ftpClient.login("user1", "password");
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-        ftpClient.enterLocalPassiveMode();       
-		
         //copy files according to order
         for(int i=1; i <=fileInCount; i++)
 		{
@@ -359,13 +347,6 @@ public class TestCaseController
 			InputStream input = new FileInputStream(new File(fileIn));
 		    ftpClient.storeFile(drop + fileInName, input);			
 		}
-        
-        //disconnect from ftp server
-        if(ftpClient.isConnected()) 
-        {
-        	ftpClient.logout();
-        	ftpClient.disconnect();
-        }
         
         if(doValidateSleep)
 		{
@@ -380,31 +361,11 @@ public class TestCaseController
 		{
 			
 			String validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
-			/* Cleanup files to validate before executing test-case */
-			FTPClient ftpClient2 = new FTPClient();
-			ftpClient2.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-		    ftpClient2.connect("localhost", 9981);
-		    int reply2 = ftpClient2.getReplyCode();
-	        if (!FTPReply.isPositiveCompletion(reply2)) {
-	        	ftpClient2.disconnect();
-	            throw new Exception("Exception in connecting to FTP Server");
-	        }
-	        ftpClient2.login("user1", "password");
-	        ftpClient2.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient2.enterLocalPassiveMode();
-	        
-			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
-			FTPFile[] files = ftpClient2.listFiles(validateFTPStr);
+			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
 			if (files != null && files.length > 0) {
 				result = "Passed";
 			}
-	        
-	        //disconnect from ftp server
-	        if(ftpClient2.isConnected()) 
-	        {
-	        	ftpClient2.logout();
-	        	ftpClient2.disconnect();
-	        }
+			
 		} 
         
 		if (doValidate) {
@@ -420,6 +381,25 @@ public class TestCaseController
 				result = "Passed";
 			}	
 		}
+		
+		boolean doVerifyFtpFileNotExist = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").getLength() > 0;
+		
+		if (doVerifyFtpFileNotExist) {
+			String validateFTPStr = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").item(0).getTextContent();
+			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
+			if (files == null || files.length == 0) {
+				result = "Passed";
+			}
+		}
+		
+
+		// disconnect from ftp server
+        if(ftpClient.isConnected()) 
+        {
+        	ftpClient.logout();
+        	ftpClient.disconnect();
+        }
+
 		
 		return result;
 	}
