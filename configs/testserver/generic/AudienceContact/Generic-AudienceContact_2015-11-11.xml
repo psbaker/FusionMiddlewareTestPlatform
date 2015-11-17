@@ -1,0 +1,7 @@
+<testcase>  
+  <protocol>ftp</protocol>
+  <file order="1">/mnt/testsuites/AudienceContact/2015-01-01.xml</file>
+  <drop>/AudienceContact</drop>
+  <validate-sleep>20</validate-sleep>
+  <validate>/mnt/appshare/AudienceContact/archive/*_2015-01-01.xml</validate>
+</testcase>
