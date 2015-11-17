@@ -3,6 +3,6 @@
   <file order="1">/mnt/testsuites/momentum/Asset1_ToABCFromMomentum.xml</file>
   <drop>/to_abc</drop>
   <validate-ftp-file>/from_abc/Asset1.mp3</validate-ftp-file>
-  <validate-sleep>20</validate-sleep>
+  <validate-sleep>30</validate-sleep>
   <validate-ftp-upload>/from_abc/Asset1.mp3</validate-ftp-upload>
 </testcase>
