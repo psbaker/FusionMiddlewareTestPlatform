@@ -1,21 +1,21 @@
 package au.net.abc.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
-import java.io.InputStream;
+import java.io.PrintWriter;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.w3c.dom.Document;
 
 import au.net.abc.config.OperationConfig;
 import au.net.abc.utils.MockServerUtils;
@@ -49,52 +49,42 @@ public class OperationController
         return "redirect:operationconfig-form?sysId="+sysId+"&serviceId="+serviceId+"&operationId="+operationId;
     }
 	
+	@RequestMapping(value = "/delete-operation", method = RequestMethod.GET)
+	public @ResponseBody void deleteOperation(@RequestParam("sysId") String sysId, @RequestParam("serviceId") String serviceId, @RequestParam("operationId") String operationId, HttpServletRequest request, HttpServletResponse response)
+	{
+		try
+		{
+			File file = new File(MockServerUtils.getConfigDir() + "/" + sysId + "/" + serviceId + "/" + operationId);
+			
+			String text = "";
+			response.setContentType("text/html");
+
+			if(file.exists())
+			{
+				file.delete();
+				text = "Operation '" + operationId + "' has been successfully deleted.";				
+			}
+			else 
+			{
+				text = "Cannot delete operation '" + operationId + "'. File does not exist.";
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.write(text);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	private String loadOperation(String sysId, String serviceId, String operationId)
 	{
 		String result = "";
 		
 		try
-		{	
-			
-			/* InputStream is = new FileInputStream(new File(MockServerUtils.getConfigDir() + "/" + sysId + "/" + serviceId + "/" + operationId));  
-			Reader reader = new InputStreamReader(is, "UTF-16"); 
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			InputSource source = new InputSource(reader);  
-			Document document = builder.parse(source); */  
-			
-			
-			/*String xml = new Scanner(new File(MockServerUtils.getConfigDir() + "/" + sysId + "/" + serviceId + "/" + operationId)).useDelimiter("\\Z").next();
-			
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new InputSource(new StringReader(xml)));  */
-			
-			/* OutputFormat format = new OutputFormat(document);
-
-			if (document.getXmlEncoding() != null) {
-			  format.setEncoding(document.getXmlEncoding());
-			}
-
-			format.setLineWidth(100);
-			format.setIndenting(true);
-			format.setIndent(5);
-			Writer out = new StringWriter();
-			XMLSerializer serializer = new XMLSerializer(out, format);
-			serializer.serialize(document);
-			result = out.toString();
-			
-			return result; */
-			
-			
-			InputStream inputStream = new FileInputStream(new File(MockServerUtils.getConfigDir() + "/" + sysId + "/" + serviceId + "/" + operationId));		
-			
-			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			Document document = documentBuilder.parse(inputStream);		
-					
-			result = MockServerUtils.getStringFromDocument(document); 
-
+		{				
+			result = FileUtils.readFileToString(new File(MockServerUtils.getConfigDir() + "/" + sysId + "/" + serviceId + "/" + operationId));
 		}
 		catch(Exception e)
 		{

@@ -50,7 +50,7 @@
 		
 		<table>
 			<tr>
-				<th>Operations</th>				
+				<th colspan="2">Operations</th>				
 			</tr>
 
 			<c:forEach items="${model.operationList}" var="operationId" varStatus="i" begin="0" >
@@ -60,9 +60,16 @@
 					<c:param name="serviceId" value="${model.serviceId}"/>
 	  				<c:param name="operationId" value="${operationId}"/>
 				</c:url>
+				
+				<c:url var="deleteOperationURL" value="delete-operation">
+					<c:param name="sysId" value="${model.sysId}"/>
+					<c:param name="serviceId" value="${model.serviceId}"/>
+	  				<c:param name="operationId" value="${operationId}"/>
+				</c:url>
 	
 				<tr>
 					<td><a href="<c:out value="${thisURL}"/>"> <c:out value="${operationId}"/> </a></td>
+					<td><a href="<c:out value="${deleteOperationURL}"/>"> <c:out value="Delete"/> </a></td>
 				</tr>
 	
 			</c:forEach> 		
