@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ns0:ContactDetail xmlns:ns0="http://au.net.abc/audience/data/1.0">
+  <ns0:FirstName>TestFirst</ns0:FirstName>
+  <ns0:LastName>TestLast</ns0:LastName>
+  <ns0:Email>TestLast.TestFirst@optusnet.com.au</ns0:Email>
+  <ns0:Location>NSW</ns0:Location>
+  <ns0:Comment>Test Comment</ns0:Comment>
+  <ns0:CommentCategory>Complaint</ns0:CommentCategory>
+  <ns0:ResponseRequired>true</ns0:ResponseRequired>
+  <ns0:ServiceName>ABC2</ns0:ServiceName>
+  <ns0:ProgramName>Test Program Name</ns0:ProgramName>
+  <ns0:ProgramDate>2015-01-01T00:00:00</ns0:ProgramDate>
+  <ns0:RecipientName>Audience &amp; Consumer Affairs</ns0:RecipientName>
+  <ns0:EmailCopy>true</ns0:EmailCopy>
+  <ns0:Subject>Test Subject</ns0:Subject>
+  <ns0:Referrer>Contact</ns0:Referrer>
+</ns0:ContactDetail>
