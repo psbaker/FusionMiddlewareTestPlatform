@@ -27,6 +27,12 @@ public class TestServerUtils
 		return getConfigDir() + "/generic";
 	}
 	
+	public static String getTestDataConfigDir()
+	{		
+		return getConfigDir() + "/data";
+	}
+
+	
 	public static String getConfigDir()
 	{		
 		return System.getProperty("user.dir") + "/../../configs/testserver";

@@ -332,7 +332,7 @@ public class TestCaseController
 		{
 			Node fileInNode = testXmlDocument.getElementsByTagName("file").item(i);
 		
-			String fileIn = fileInNode.getTextContent();
+			String fileIn = TestServerUtils.getTestDataConfigDir()+fileInNode.getTextContent();
 			String order = fileInNode.getAttributes().getNamedItem("order").getNodeValue();
 			
 			fileInNodes.put(order, fileIn);
