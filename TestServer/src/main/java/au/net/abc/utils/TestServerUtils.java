@@ -29,7 +29,7 @@ public class TestServerUtils
 	
 	public static String getTestDataConfigDir()
 	{		
-		return getConfigDir() + "/data";
+		return System.getProperty("user.dir") + "/../../configs/data";
 	}
 
 	
