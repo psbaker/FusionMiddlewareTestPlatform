@@ -70,7 +70,19 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory14 = new DirectoryEntry("/www/xmlcontent/tv/guide/OnAirIviewInput");
 		fileSystem.add(directory14);
-		  
+
+		//Audience Contact application
+		DirectoryEntry directory15 = new DirectoryEntry("/AudienceContact");
+		fileSystem.add(directory15);
+
+		//Momentum application
+		DirectoryEntry directory16 = new DirectoryEntry("/to_abc");
+		fileSystem.add(directory16);
+
+		DirectoryEntry directory17 = new DirectoryEntry("/from_abc");
+		fileSystem.add(directory17);
+
+		
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
 		  
