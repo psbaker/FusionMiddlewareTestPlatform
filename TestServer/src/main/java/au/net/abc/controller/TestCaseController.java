@@ -479,30 +479,16 @@ public class TestCaseController
 		if (doValidateFile)
 		{	
 			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
 			
-			if(validateFileStr.contains("*"))
-			{
-				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-				
-				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
-				
-				for(File f: dir.listFiles())
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						f.delete();
-					}
-				}
+			@SuppressWarnings("unchecked")
+			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			for (File file : listFiles) {
+				FileUtils.forceDelete(file);
 			}
-			else
-			{
-				/* Cleanup files to validate before executing test-case */
-				File fileValidate = new File(validateFileStr);		
-				if(fileValidate.exists())  
-				{
-					fileValidate.delete();
-				}
-			}
+			
 		}
 		
 		boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
@@ -600,29 +586,13 @@ public class TestCaseController
 		boolean outFileExists = true;
 		if (doValidateFile)
 		{
-			outFileExists = false;
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
 			
-			if(validateFileStr.contains("*"))
-			{				
-				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-				
-				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
-				
-				for(File f: dir.listFiles())
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						outFileExists = true;
-						break;
-					}
-				}
-				
-			}
-			else
-			{
-				File outFile = new File(validateFileStr);
-				outFileExists = outFile.exists();	
-			}
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			outFileExists = listFiles != null && !listFiles.isEmpty(); 
 		}
 		
 		boolean ftpFileUploaded = true;
