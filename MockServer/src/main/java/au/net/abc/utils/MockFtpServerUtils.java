@@ -81,7 +81,13 @@ public class MockFtpServerUtils
 
 		DirectoryEntry directory17 = new DirectoryEntry("/from_abc");
 		fileSystem.add(directory17);
-
+		
+		//Harvester application
+		DirectoryEntry directory18 = new DirectoryEntry("/mediahub/ABCNews24Ticker/RollingFeeds");
+		fileSystem.add(directory18);
+		
+		DirectoryEntry directory19 = new DirectoryEntry("/mediahub/ABCNews24Ticker/BreakingNews");
+		fileSystem.add(directory19);
 		
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
