@@ -480,7 +480,7 @@ public class TestCaseController
 			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
 
 			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
@@ -597,7 +597,7 @@ public class TestCaseController
 		{
 			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
 			
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
