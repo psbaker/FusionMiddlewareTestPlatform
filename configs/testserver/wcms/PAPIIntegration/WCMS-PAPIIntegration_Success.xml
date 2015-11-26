@@ -1,0 +1,19 @@
+<testcase>  
+  <protocol>http</protocol>
+  <url>http://127.0.0.1:7001/ML.PAPIDataRetrieveEventListener</url>
+  
+  <validate-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/papi_*.xml</validate-file>
+  <validate-sleep>10</validate-sleep>
+  <validate>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/papi_*.xml</validate>
+  
+  <request>
+    <![CDATA[        
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/papi/wcms/data/1.0">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:SchedulePAPIDataRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>
+      ]]>
+  </request>
+</testcase>

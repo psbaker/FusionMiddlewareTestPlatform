@@ -1,0 +1,14 @@
+<testcase>  
+  
+	<protocol>file</protocol>
+   
+	<file drop="1" order="1">/home/bakerp2y/TEST/schedule_NETASI_20150805.xml</file>
+  	<file drop="1" order="2">/home/bakerp2y/TEST/programmes_episode_20150805.xml</file>  	
+    <file drop="2" order="3">/home/bakerp2y/TEST/trigger.sem</file>   
+  
+	<drop id="1">/mnt/WCMS/wcmsinteg/WCMSCI/BTS/Processing/InputData</drop>  
+    <drop id="2">/mnt/WCMS/wcmsinteg/WCMSCI/BTS/Processing</drop>
+  
+	<validate>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/*_bts_*.xml</validate>	
+
+</testcase>

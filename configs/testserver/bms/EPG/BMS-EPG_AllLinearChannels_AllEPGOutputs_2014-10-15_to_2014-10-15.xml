@@ -4,9 +4,13 @@
   
   <url>http://127.0.0.1:7001/EPG_SB/Proxy_Services/EPG</url>
   
+  <validate-sleep>180</validate-sleep>
+  
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
   
-  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC4.xml</validate-file>
+  <!-- <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC4.xml</validate-file> -->
+  
+  <validate-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/onair_ABC1_*.xml</validate-file>
   
   <validate-ftp-upload>/onair/epg/internet/ABC3.xml</validate-ftp-upload>
     

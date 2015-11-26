@@ -160,6 +160,35 @@
 		</service>
      
     </system>  
-   
+
+    <!-- Resolve -->
+    <system>
+		<system-id>Resolve</system-id>
+		<system-uri>/Resolve</system-uri>
+	
+		<service>
+			<service-id>ResolveCallInSvc</service-id>	
+            <service-uri>/ResolveCallInSvc</service-uri>
+			<operation>				
+				<operation-id>ExecuteServerMacroResponse-Success</operation-id>	
+				<token>test.test@abc.net.au</token>		
+			</operation>				          	
+			<operation>				
+				<operation-id>ExecuteServerMacroResponse-Success</operation-id>	
+				<token>2015-01-01</token>		
+			</operation>				          	
+			<operation>				
+				<operation-id>ExecuteServerMacroResponse-ErrorMsg</operation-id>	
+				<token>2015-01-02</token>		
+			</operation>				          	
+			<operation>				
+				<operation-id>ExecuteServerMacroResponse-ValidationMsg</operation-id>	
+				<token>2015-01-03</token>		
+			</operation>				          	
+		</service>
+     
+    </system>  
+
+  
 		
 </mockserver-config>
