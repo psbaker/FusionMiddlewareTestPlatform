@@ -469,7 +469,6 @@ public class TestCaseController
 	{
 		String requestXml = testXmlDocument.getElementsByTagName("request").item(0).getTextContent();
 		String endpoint = testXmlDocument.getElementsByTagName("url").item(0).getTextContent();
-		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
 		
 		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
 		
@@ -479,30 +478,16 @@ public class TestCaseController
 		if (doValidateFile)
 		{	
 			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
 			
-			if(validateFileStr.contains("*"))
-			{
-				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-				
-				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
-				
-				for(File f: dir.listFiles())
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						f.delete();
-					}
-				}
+			@SuppressWarnings("unchecked")
+			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			for (File file : listFiles) {
+				FileUtils.forceDelete(file);
 			}
-			else
-			{
-				/* Cleanup files to validate before executing test-case */
-				File fileValidate = new File(validateFileStr);		
-				if(fileValidate.exists())  
-				{
-					fileValidate.delete();
-				}
-			}
+			
 		}
 		
 		boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
@@ -587,42 +572,36 @@ public class TestCaseController
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(response.getEntity().getContent());
 		
-		XPathFactory xPathfactory = XPathFactory.newInstance();
-		XPath xpath = xPathfactory.newXPath();
-		XPathExpression expr = xpath.compile(xpathStr);
 		
-		NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		boolean doValidateResponse = testXmlDocument.getElementsByTagName("validate-response").getLength() > 0;
+		boolean xpathValid = true;
+		if (doValidateResponse) {
+			
+			String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
+			
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(response.getEntity().getContent());
+			
+			XPathFactory xPathfactory = XPathFactory.newInstance();
+			XPath xpath = xPathfactory.newXPath();
+			XPathExpression expr = xpath.compile(xpathStr);
+			
+			NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+			xpathValid = nl.getLength() > 0;
+		}
 		
 		boolean outFileExists = true;
 		if (doValidateFile)
 		{
-			outFileExists = false;
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
 			
-			if(validateFileStr.contains("*"))
-			{				
-				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-				
-				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1, validateFileStr.lastIndexOf("*"));
-				
-				for(File f: dir.listFiles())
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						outFileExists = true;
-						break;
-					}
-				}
-				
-			}
-			else
-			{
-				File outFile = new File(validateFileStr);
-				outFileExists = outFile.exists();	
-			}
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			outFileExists = listFiles != null && !listFiles.isEmpty(); 
 		}
 		
 		boolean ftpFileUploaded = true;
@@ -688,8 +667,9 @@ public class TestCaseController
 		System.out.println("OutFileExists:"+outFileExists);
 		System.out.println("ftpFileUploaded:"+ftpFileUploaded);
 		System.out.println("emailDelivered:"+emailDelivered);
+		System.out.println("xpathValid:"+xpathValid);
 				
-		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
+		return (xpathValid) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String domain, String projectId, String testcaseId)
