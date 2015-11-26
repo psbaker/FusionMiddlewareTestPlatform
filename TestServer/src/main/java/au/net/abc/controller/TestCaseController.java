@@ -469,7 +469,6 @@ public class TestCaseController
 	{
 		String requestXml = testXmlDocument.getElementsByTagName("request").item(0).getTextContent();
 		String endpoint = testXmlDocument.getElementsByTagName("url").item(0).getTextContent();
-		String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
 		
 		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
 		
@@ -573,15 +572,25 @@ public class TestCaseController
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(response.getEntity().getContent());
 		
-		XPathFactory xPathfactory = XPathFactory.newInstance();
-		XPath xpath = xPathfactory.newXPath();
-		XPathExpression expr = xpath.compile(xpathStr);
 		
-		NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		boolean doValidateResponse = testXmlDocument.getElementsByTagName("validate-response").getLength() > 0;
+		boolean xpathValid = true;
+		if (doValidateResponse) {
+			
+			String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
+			
+			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+			Document document = documentBuilder.parse(response.getEntity().getContent());
+			
+			XPathFactory xPathfactory = XPathFactory.newInstance();
+			XPath xpath = xPathfactory.newXPath();
+			XPathExpression expr = xpath.compile(xpathStr);
+			
+			NodeList nl = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+			xpathValid = nl.getLength() > 0;
+		}
 		
 		boolean outFileExists = true;
 		if (doValidateFile)
@@ -658,8 +667,9 @@ public class TestCaseController
 		System.out.println("OutFileExists:"+outFileExists);
 		System.out.println("ftpFileUploaded:"+ftpFileUploaded);
 		System.out.println("emailDelivered:"+emailDelivered);
+		System.out.println("xpathValid:"+xpathValid);
 				
-		return (nl.getLength() > 0) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
+		return (xpathValid) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
 	}
 	
 	private String getTestXml(String domain, String projectId, String testcaseId)
