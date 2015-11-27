@@ -1,3 +1,7 @@
 <testsuite>
   
+  <testcase>Generic-Harvester-LoadConfig</testcase> 
+  <testcase>Generic-Harvester-SaveConfig</testcase> 
+  <testcase>Generic-Harvester-FeedSchedule</testcase> 
+  
 </testsuite>

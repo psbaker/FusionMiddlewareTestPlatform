@@ -1,6 +1,6 @@
 <testcase>  
   <protocol>ftp</protocol>
-  <file order="1">/mnt/testsuites/momentum/Asset1_ToABCFromMomentum.xml</file>
+  <file order="1">/momentum/Asset1_ToABCFromMomentum.xml</file>
   <drop>/to_abc</drop>
   <validate-ftp-file>/from_abc/Asset1.mp3</validate-ftp-file>
   <validate-sleep>40</validate-sleep>
