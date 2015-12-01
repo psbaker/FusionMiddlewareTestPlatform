@@ -42,7 +42,7 @@ import java.util.MissingResourceException;
  * Abstract superclass for CommandHandler classes for the "Fake" server.
  *
  * @author Chris Mair
- * @version $Revision: 214 $ - $Date: 2008-12-27 01:00:19 +0000 (Sat, 27 Dec 2008) $
+ * @version $Revision: 214 $ - $Date: 2008-12-26 20:00:19 -0500 (Fri, 26 Dec 2008) $
  */
 public abstract class AbstractFakeCommandHandler extends AbstractCommandHandler implements ServerConfigurationAware {
 

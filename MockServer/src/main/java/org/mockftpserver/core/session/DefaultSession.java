@@ -15,6 +15,19 @@
  */
 package org.mockftpserver.core.session;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.mockftpserver.core.MockFtpServerException;
+import org.mockftpserver.core.command.Command;
+import org.mockftpserver.core.command.CommandHandler;
+import org.mockftpserver.core.command.CommandNames;
+import org.mockftpserver.core.socket.DefaultServerSocketFactory;
+import org.mockftpserver.core.socket.DefaultSocketFactory;
+import org.mockftpserver.core.socket.ServerSocketFactory;
+import org.mockftpserver.core.socket.SocketFactory;
+import org.mockftpserver.core.util.Assert;
+import org.mockftpserver.core.util.AssertFailedException;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,34 +47,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
-import org.mockftpserver.core.MockFtpServerException;
-import org.mockftpserver.core.command.Command;
-import org.mockftpserver.core.command.CommandHandler;
-import org.mockftpserver.core.command.CommandNames;
-import org.mockftpserver.core.socket.DefaultServerSocketFactory;
-import org.mockftpserver.core.socket.DefaultSocketFactory;
-import org.mockftpserver.core.socket.ServerSocketFactory;
-import org.mockftpserver.core.socket.SocketFactory;
-import org.mockftpserver.core.util.Assert;
-import org.mockftpserver.core.util.AssertFailedException;
-
 /**
  * Default implementation of the {@link Session} interface.
  *
  * @author Chris Mair
- * @version $Revision: 264 $ - $Date: 2012-07-18 01:19:23 +0000 (Wed, 18 Jul 2012) $
+ * @version $Revision: 280 $ - $Date: 2015-05-22 16:30:20 -0400 (Fri, 22 May 2015) $
  */
 public class DefaultSession implements Session {
 
-    private static final Logger LOG = Logger.getLogger(DefaultSession.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultSession.class);
     private static final String END_OF_LINE = "\r\n";
     protected static final int DEFAULT_CLIENT_DATA_PORT = 21;
 
     protected SocketFactory socketFactory = new DefaultSocketFactory();
     protected ServerSocketFactory serverSocketFactory = new DefaultServerSocketFactory();
 
-    private BufferedReader controlConnectionReader;
+    BufferedReader controlConnectionReader; // non-private for testing
     private Writer controlConnectionWriter;
     private Socket controlSocket;
     private Socket dataSocket;
@@ -142,7 +143,6 @@ public class DefaultSession implements Session {
             }
         }
         LOG.debug("Sending Reply [" + buffer.toString() + "]");
-        System.out.println("Sending Reply [" + buffer.toString() + "]");
         writeLineToControlConnection(buffer.toString());
     }
 
@@ -203,6 +203,10 @@ public class DefaultSession implements Session {
             dataOutputStream.close();
             dataInputStream.close();
             dataSocket.close();
+
+            if (passiveModeDataSocket != null) {
+                passiveModeDataSocket.close();
+            }
         }
         catch (IOException e) {
             LOG.error("Error closing client data socket", e);
@@ -231,6 +235,10 @@ public class DefaultSession implements Session {
     public void close() {
         LOG.trace("close()");
         terminate = true;
+    }
+
+    public boolean isClosed() {
+        return terminate;
     }
 
     /**
@@ -283,7 +291,6 @@ public class DefaultSession implements Session {
      *         Package-private to enable testing
      */
     Command readCommand() {
-
         final long socketReadIntervalMilliseconds = 20L;
 
         try {
@@ -294,7 +301,10 @@ public class DefaultSession implements Session {
                 // Don't block; only read command when it is available
                 if (controlConnectionReader.ready()) {
                     String command = controlConnectionReader.readLine();
-                    System.out.println("Received command: [" + command + "]");
+                    LOG.info("Received command: [" + command + "]");
+                    if (command == null) {
+                        return null;
+                    }
                     return parseCommand(command);
                 }
                 try {

@@ -55,7 +55,7 @@ import org.mockftpserver.core.session.Session;
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision: 249 $ - $Date: 2010-03-24 23:50:35 +0000 (Wed, 24 Mar 2010) $
+ * @version $Revision: 249 $ - $Date: 2010-03-24 19:50:35 -0400 (Wed, 24 Mar 2010) $
  * @see SystCommandHandler
  */
 public class ListCommandHandler extends AbstractStubDataCommandHandler implements CommandHandler {

@@ -30,7 +30,7 @@ import org.mockftpserver.core.session.Session;
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision: 194 $ - $Date: 2008-12-07 13:53:58 +0000 (Sun, 07 Dec 2008) $
+ * @version $Revision: 194 $ - $Date: 2008-12-07 08:53:58 -0500 (Sun, 07 Dec 2008) $
  */
 public class StruCommandHandler extends AbstractStubCommandHandler implements CommandHandler {
 

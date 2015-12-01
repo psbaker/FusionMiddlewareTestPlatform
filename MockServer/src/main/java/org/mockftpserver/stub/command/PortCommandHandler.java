@@ -35,7 +35,7 @@ import java.net.UnknownHostException;
  * </ul>
  *
  * @author Chris Mair
- * @version $Revision: 232 $ - $Date: 2009-06-13 23:18:01 +0000 (Sat, 13 Jun 2009) $
+ * @version $Revision: 232 $ - $Date: 2009-06-13 19:18:01 -0400 (Sat, 13 Jun 2009) $
  */
 public class PortCommandHandler extends AbstractStubCommandHandler implements CommandHandler {
 

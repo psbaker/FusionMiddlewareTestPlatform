@@ -15,22 +15,23 @@
  */
 package org.mockftpserver.fake.filesystem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.mockftpserver.core.util.StringUtil;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-
-import org.apache.log4j.Logger;
-import org.mockftpserver.core.util.StringUtil;
 
 /**
  * Unix-specific implementation of the DirectoryListingFormatter interface.
  *
  * @author Chris Mair
- * @version $Revision: 264 $ - $Date: 2012-07-18 01:19:23 +0000 (Wed, 18 Jul 2012) $
+ * @version $Revision: 264 $ - $Date: 2012-07-17 21:19:23 -0400 (Tue, 17 Jul 2012) $
  */
 public class UnixDirectoryListingFormatter implements DirectoryListingFormatter {
 
-    private static final Logger LOG = Logger.getLogger(UnixDirectoryListingFormatter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UnixDirectoryListingFormatter.class);
 
     private static final String DATE_FORMAT = "MMM dd  yyyy";
     private static final int SIZE_WIDTH = 15;

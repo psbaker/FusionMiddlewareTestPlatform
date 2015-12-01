@@ -15,21 +15,21 @@
  */
 package org.mockftpserver.core.command;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.mockftpserver.core.util.Assert;
 
 import java.util.ResourceBundle;
-
-import org.apache.log4j.Logger;
-import org.mockftpserver.core.util.Assert;
 
 /**
  * The abstract superclass for CommandHandler classes.
  *
  * @author Chris Mair
- * @version $Revision: 264 $ - $Date: 2012-07-18 01:19:23 +0000 (Wed, 18 Jul 2012) $
+ * @version $Revision: 264 $ - $Date: 2012-07-17 21:19:23 -0400 (Tue, 17 Jul 2012) $
  */
 public abstract class AbstractCommandHandler implements CommandHandler, ReplyTextBundleAware {
 
-    protected final Logger LOG = Logger.getLogger(getClass());
+    protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
     private ResourceBundle replyTextBundle;
 

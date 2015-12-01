@@ -22,7 +22,7 @@ import java.util.Date;
  * Interface for an entry within a fake file system, representing a single file or directory.
  *
  * @author Chris Mair
- * @version $Revision: 182 $ - $Date: 2008-12-01 02:37:49 +0000 (Mon, 01 Dec 2008) $
+ * @version $Revision: 182 $ - $Date: 2008-11-30 21:37:49 -0500 (Sun, 30 Nov 2008) $
  */
 public interface FileSystemEntry {
 

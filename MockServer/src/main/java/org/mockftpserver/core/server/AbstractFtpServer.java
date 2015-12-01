@@ -15,18 +15,8 @@
  */
 package org.mockftpserver.core.server;
 
-
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.ResourceBundle;
-
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.mockftpserver.core.MockFtpServerException;
 import org.mockftpserver.core.command.Command;
 import org.mockftpserver.core.command.CommandHandler;
@@ -35,6 +25,13 @@ import org.mockftpserver.core.session.Session;
 import org.mockftpserver.core.socket.DefaultServerSocketFactory;
 import org.mockftpserver.core.socket.ServerSocketFactory;
 import org.mockftpserver.core.util.Assert;
+
+import java.io.IOException;
+import java.net.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * This is the abstract superclass for "mock" implementations of an FTP Server,
@@ -69,7 +66,7 @@ import org.mockftpserver.core.util.Assert;
  * {@link #setReplyTextBaseName(String)} method.
  *
  * @author Chris Mair
- * @version $Revision: 264 $ - $Date: 2012-07-18 01:19:23 +0000 (Wed, 18 Jul 2012) $
+ * @version $Revision: 275 $ - $Date: 2015-04-06 16:11:19 -0400 (Mon, 06 Apr 2015) $
  * @see org.mockftpserver.fake.FakeFtpServer
  * @see org.mockftpserver.stub.StubFtpServer
  */
@@ -81,7 +78,7 @@ public abstract class AbstractFtpServer implements Runnable {
     public static final String REPLY_TEXT_BASENAME = "ReplyText";
     private static final int DEFAULT_SERVER_CONTROL_PORT = 21;
 
-    protected Logger LOG = Logger.getLogger(getClass());
+    protected Logger LOG = LoggerFactory.getLogger(getClass());
 
     // Simple value object that holds the socket and thread for a single session
     private static class SessionInfo {
@@ -153,6 +150,7 @@ public abstract class AbstractFtpServer implements Runnable {
 
             while (!terminate) {
                 try {
+                    cleanupClosedSessions();
                     Socket clientSocket = serverSocket.accept();
                     LOG.info("Connection accepted from host " + clientSocket.getInetAddress());
 
@@ -347,6 +345,21 @@ public abstract class AbstractFtpServer implements Runnable {
      */
     protected Session createSession(Socket clientSocket) {
         return new DefaultSession(clientSocket, commandHandlers);
+    }
+
+    private void cleanupClosedSessions() {
+        Iterator iter = sessions.keySet().iterator();
+        while(iter.hasNext()) {
+            Session session = (Session) iter.next();
+            if (session.isClosed()) {
+                iter.remove();
+            }
+        }
+    }
+
+    // For testing
+    public int numberOfSessions() {
+        return sessions.size();
     }
 
     private void closeSessions() throws InterruptedException, IOException {

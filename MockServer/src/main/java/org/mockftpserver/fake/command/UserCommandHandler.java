@@ -32,7 +32,7 @@ import org.mockftpserver.fake.UserAccount;
  * </ol>
  *
  * @author Chris Mair
- * @version $Revision: 198 $ - $Date: 2008-12-11 02:47:32 +0000 (Thu, 11 Dec 2008) $
+ * @version $Revision: 198 $ - $Date: 2008-12-10 21:47:32 -0500 (Wed, 10 Dec 2008) $
  */
 public class UserCommandHandler extends AbstractFakeCommandHandler {
 

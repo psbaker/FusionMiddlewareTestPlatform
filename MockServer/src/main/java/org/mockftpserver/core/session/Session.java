@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Represents an FTP session state and behavior
  * 
- * @version $Revision: 254 $ - $Date: 2011-06-05 12:15:56 +0000 (Sun, 05 Jun 2011) $
+ * @version $Revision: 275 $ - $Date: 2015-04-06 16:11:19 -0400 (Mon, 06 Apr 2015) $
  * 
  * @author Chris Mair
  */
@@ -31,6 +31,8 @@ public interface Session extends Runnable {
      * Close the session, closing the underlying sockets
      */
     public void close();
+
+    public boolean isClosed();
 
     /**
      * Send the specified reply code and text across the control connection.
