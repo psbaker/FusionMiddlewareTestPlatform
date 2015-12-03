@@ -1,0 +1,26 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://localhost:7001/Harvester_SB/Proxy_Services/ConfigLoad</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='LoadConfigResp']/Description[text() = 'SUCCESS']</validate-response>
+  
+  <request>
+    
+    <![CDATA[        
+
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/news24/client/config/loader/1.1">
+         <soapenv:Header/>
+         <soapenv:Body>
+            <ns:LoadConfigReq>
+               <LoadConfig>true</LoadConfig>
+            </ns:LoadConfigReq>
+         </soapenv:Body>
+      </soapenv:Envelope>
+     
+      ]]>
+    
+  </request>
+  
+</testcase>

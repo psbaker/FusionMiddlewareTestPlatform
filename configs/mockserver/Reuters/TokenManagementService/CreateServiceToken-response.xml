@@ -1,0 +1,16 @@
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">
+   <s:Header>
+      <a:Action s:mustUnderstand="1">http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1/CreateServiceToken_1_Reply</a:Action>
+      <CacheResponse xsi:type="DoNotStoreCacheResponse" xmlns="http://www.reuters.com/ns/2008/03/01/webservices/rkd/Cache_1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+         <Date>2015-12-03T04:29:38.2247281Z</Date>
+         <DoNotStore/>
+      </CacheResponse>
+      <a:RelatesTo>1234567890</a:RelatesTo>
+   </s:Header>
+   <s:Body>
+      <CreateServiceToken_Response_1 xmlns="http://www.reuters.com/ns/2006/05/01/webservices/rkd/TokenManagement_1" xmlns:global="http://www.reuters.com/ns/2006/05/01/webservices/rkd/Common_1">
+         <Expiration>2015-12-03T05:59:38.2251516Z</Expiration>
+         <global:Token>3A564BDC96D0AE11FB990B6E4C9E100EFE425510336534F888BD4EB6C55BFC359C223AF67ACEFE310CA7B6BE0C2988F94E5370BC4744C48EDEE722032550324628B8DF557B3E632B774005AF13BE902DE55014E3DB5F2C7479C391A5AB15B52A</global:Token>
+      </CreateServiceToken_Response_1>
+   </s:Body>
+</s:Envelope>

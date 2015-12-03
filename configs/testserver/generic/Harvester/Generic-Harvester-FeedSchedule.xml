@@ -1,0 +1,28 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://localhost:7001/Harvester_SB/Proxy_Services/FeedSchedule</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='ScheduleFeedResp']/Description[text() = 'SUCCESS']</validate-response>
+  
+  <validate-ftp-upload>/mediahub/ABCNews24Ticker/RollingFeeds/rolling_feed.xml</validate-ftp-upload>
+    
+  <request>
+    
+    <![CDATA[        
+
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/news24/schedule/feed/1.1">
+         <soapenv:Header/>
+         <soapenv:Body>
+            <ns:ScheduleFeedReq>
+               <ScheduleFeed>true</ScheduleFeed>
+            </ns:ScheduleFeedReq>
+         </soapenv:Body>
+      </soapenv:Envelope>
+     
+      ]]>
+    
+  </request>
+  
+</testcase>
