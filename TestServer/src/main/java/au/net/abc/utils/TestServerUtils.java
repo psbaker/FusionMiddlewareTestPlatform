@@ -1,5 +1,6 @@
 package au.net.abc.utils;
 
+import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.xml.transform.Transformer;
@@ -8,7 +9,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.commons.net.PrintCommandListener;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.ftp.FTPReply;
 import org.w3c.dom.Document;
+
+import au.net.abc.utils.TestCaseConstants.FTPDetails;
 
 public class TestServerUtils
 {	
@@ -59,5 +66,21 @@ public class TestServerUtils
 		}
 	    return result;
 	}
-
+	
+	
+	public static FTPClient buildFTPClient() throws Exception {
+		FTPClient ftpClient = new FTPClient();
+		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+	    int reply;
+	    ftpClient.connect(FTPDetails.FTP_HOST, FTPDetails.FTP_PORT);
+	    reply = ftpClient.getReplyCode();
+        if (!FTPReply.isPositiveCompletion(reply)) {
+        	ftpClient.disconnect();
+            throw new Exception("Exception in connecting to FTP Server");
+        }
+        ftpClient.login(FTPDetails.FTP_USER, FTPDetails.FTP_PASSWORD);
+        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+        ftpClient.enterLocalPassiveMode();
+        return ftpClient;
+	}
 }

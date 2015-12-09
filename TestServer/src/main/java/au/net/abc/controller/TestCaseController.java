@@ -19,13 +19,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.apache.commons.net.PrintCommandListener;
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPReply;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -44,6 +42,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import au.net.abc.config.Testcase;
+import au.net.abc.utils.TestCaseConstants;
+import au.net.abc.utils.TestCaseConstants.Protocol;
+import au.net.abc.utils.TestCaseConstants.XmlTags;
 import au.net.abc.utils.TestServerUtils;
 
 @Controller
@@ -65,8 +66,8 @@ public class TestCaseController
     {
 		try 
 		{
-			System.out.println("Adding testcase: " + TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
-			File file = new File(TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId() + ".xml");
+			System.out.println("Adding testcase: " + TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + testcase.getDomain() + IOUtils.DIR_SEPARATOR + testcase.getProjectId() + IOUtils.DIR_SEPARATOR + testcase.getTestcaseId() + ".xml");
+			File file = new File(TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + testcase.getDomain() + IOUtils.DIR_SEPARATOR + testcase.getProjectId() + IOUtils.DIR_SEPARATOR + testcase.getTestcaseId() + ".xml");
 			FileWriter writer = new FileWriter(file, false);
 			writer.write(testcase.getTestXml());
 			writer.close();
@@ -101,7 +102,7 @@ public class TestCaseController
 	{
 		try
 		{
-			File file = new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId);
+			File file = new File(TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + domain + IOUtils.DIR_SEPARATOR + projectId + IOUtils.DIR_SEPARATOR + testcaseId);
 			
 			String text = "";
 			response.setContentType("text/html");
@@ -158,7 +159,7 @@ public class TestCaseController
 		if(action.equals("Save"))
 		{
 			System.out.println("Saving Testcase: " + testcase.getTestcaseId());
-			String location = TestServerUtils.getConfigDir() + "/" + testcase.getDomain() + "/" + testcase.getProjectId() + "/" + testcase.getTestcaseId();
+			String location = TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + testcase.getDomain() + IOUtils.DIR_SEPARATOR + testcase.getProjectId() + IOUtils.DIR_SEPARATOR + testcase.getTestcaseId();
 			String xml = testcase.getTestXml();
 			saveTest(location, xml);
 		    result = "redirect:testcase?domain="+testcase.getDomain()+"&projectId="+testcase.getProjectId()+"&testcaseId="+testcase.getTestcaseId();    
@@ -190,16 +191,16 @@ public class TestCaseController
 	
 	private String executeTest(String domain, String projectId, String testcaseId)
 	{
-		String result = "Failed";
+		String result = TestCaseConstants.FAILED;
 		try 
 		{	
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId));			
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + domain + IOUtils.DIR_SEPARATOR + projectId + IOUtils.DIR_SEPARATOR + testcaseId));			
 			
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document testXmlDocument = documentBuilder.parse(inputStream);
 			
-			boolean isTestSuite = testXmlDocument.getElementsByTagName("testsuite").getLength() > 0;
+			boolean isTestSuite = testXmlDocument.getElementsByTagName(XmlTags.TEST_SUITE_TAG).getLength() > 0;
 			
 			System.out.println("IsTestSuite: " + isTestSuite);
 			
@@ -221,8 +222,8 @@ public class TestCaseController
 	
 	private String executeTestSuite(Document xmlDoc, String domain, String projectId) throws Exception
 	{
-		String result = "Failed";
-		NodeList testcaseNodes = xmlDoc.getElementsByTagName("testcase");
+		String result = TestCaseConstants.FAILED;
+		NodeList testcaseNodes = xmlDoc.getElementsByTagName(XmlTags.TEST_CASE_TAG);
 		
 		for (int j = 0; j < testcaseNodes.getLength(); j++)
 		{
@@ -230,14 +231,14 @@ public class TestCaseController
 			
 			System.out.println("Execute Test Case: " + domain + " " + projectId + " " + testCaseId);				
 			
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testCaseId + ".xml"));
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + domain + IOUtils.DIR_SEPARATOR + projectId + IOUtils.DIR_SEPARATOR + testCaseId + ".xml"));
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document testXmlDocument = documentBuilder.parse(inputStream);
 			
 			result = executeTestCase(testXmlDocument);
 			
-			if("Failed".equals(result))
+			if(TestCaseConstants.FAILED.equals(result))
 			{
 				return result;
 				
@@ -248,13 +249,13 @@ public class TestCaseController
 	
 	private String executeTestCase(Document testXmlDocument) throws Exception
 	{
-		String protocol = testXmlDocument.getElementsByTagName("protocol").item(0).getTextContent();
+		String protocol = testXmlDocument.getElementsByTagName(XmlTags.PROTOCOL_TAG).item(0).getTextContent();
 		
-		if("http".equals(protocol))
+		if(Protocol.HTTP_PROTOCOL.equals(protocol))
 		{
 			return executeHttpTestcase(testXmlDocument);
 		}
-		else if("ftp".equals(protocol))
+		else if(Protocol.FTP_PROTOCOL.equals(protocol))
 		{
 			return executeFtpTestcase(testXmlDocument);
 		}
@@ -267,37 +268,26 @@ public class TestCaseController
 	private String executeFtpTestcase(Document testXmlDocument) throws Exception
 	{
 		
-		FTPClient ftpClient = new FTPClient();
-		ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-	    int reply;
-	    ftpClient.connect("localhost", 9981);
-	    reply = ftpClient.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-        	ftpClient.disconnect();
-            throw new Exception("Exception in connecting to FTP Server");
-        }
-        ftpClient.login("user1", "password");
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-        ftpClient.enterLocalPassiveMode();
+		FTPClient ftpClient = TestServerUtils.buildFTPClient();
 		
-		String result = "Failed";
+		String result = TestCaseConstants.FAILED;
 		
-		String drop = testXmlDocument.getElementsByTagName("drop").item(0).getTextContent();
+		String drop = testXmlDocument.getElementsByTagName(XmlTags.DROP_TAG).item(0).getTextContent();
 		
-		boolean doValidate = testXmlDocument.getElementsByTagName("validate").getLength() > 0;
+		boolean doValidate = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_TAG).getLength() > 0;
 		
-		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).getLength() > 0;
 		
-		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		boolean doValidateFile = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).getLength() > 0;
 		
 		if (doValidateFile)
 		{	
 			
-			String validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			String validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(0).getTextContent();
 			
-			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
 			
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
@@ -308,32 +298,32 @@ public class TestCaseController
 			
 		}
 
-		boolean doValidateFtpFile = testXmlDocument.getElementsByTagName("validate-ftp-file").getLength() > 0;
+		boolean doValidateFtpFile = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_FILE_TAG).getLength() > 0;
 		
 		if (doValidateFtpFile) {
 			
-			String validateFileStr = testXmlDocument.getElementsByTagName("validate-ftp-file").item(0).getTextContent();
-			String path = validateFileStr.substring(0, validateFileStr.lastIndexOf("/"));
+			String validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_FILE_TAG).item(0).getTextContent();
+			String path = validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
 			
 	        FTPFile[] files = ftpClient.listFiles(validateFileStr);
 	        for (FTPFile file : files)
 	        {
 	        	//stupid FTPFile doesn't have fullpath. so we need to do the manually
-	        	ftpClient.deleteFile(path+"/"+file.getName());
+	        	ftpClient.deleteFile(path+IOUtils.DIR_SEPARATOR+file.getName());
 	        }
 		}
 		
 		Map<String, String> fileInNodes = new HashMap<String, String>();
 		
-		int fileInCount = testXmlDocument.getElementsByTagName("file").getLength();
+		int fileInCount = testXmlDocument.getElementsByTagName(XmlTags.FILE_TAG).getLength();
 		
 		//put files to copy into map, 'order' is the key
 		for(int i=0; i <fileInCount; i++)
 		{
-			Node fileInNode = testXmlDocument.getElementsByTagName("file").item(i);
+			Node fileInNode = testXmlDocument.getElementsByTagName(XmlTags.FILE_TAG).item(i);
 		
 			String fileIn = TestServerUtils.getTestDataConfigDir()+fileInNode.getTextContent();
-			String order = fileInNode.getAttributes().getNamedItem("order").getNodeValue();
+			String order = fileInNode.getAttributes().getNamedItem(XmlTags.ORDER_ATTRIBUTE).getNodeValue();
 			
 			fileInNodes.put(order, fileIn);
 		}
@@ -342,7 +332,7 @@ public class TestCaseController
         for(int i=1; i <=fileInCount; i++)
 		{
 			String fileIn = fileInNodes.get(String.valueOf(i));
-			String fileInName = fileIn.substring(fileIn.lastIndexOf("/"));		
+			String fileInName = fileIn.substring(fileIn.lastIndexOf(IOUtils.DIR_SEPARATOR));		
 			
 			InputStream input = new FileInputStream(new File(fileIn));
 		    ftpClient.storeFile(drop + fileInName, input);			
@@ -350,45 +340,45 @@ public class TestCaseController
         
         if(doValidateSleep)
 		{
-			String doValidateSleepStr = testXmlDocument.getElementsByTagName("validate-sleep").item(0).getTextContent();
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).item(0).getTextContent();
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
-        boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
+        boolean doValidateFTP = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).getLength() > 0;
 		
 		
 		if (doValidateFTP)
 		{
 			
-			String validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			String validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(0).getTextContent();
 			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
 			if (files != null && files.length > 0) {
-				result = "Passed";
+				result = TestCaseConstants.PASSED;
 			}
 			
 		} 
         
 		if (doValidate) {
-			String validateStr = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
-			File dir = new File(validateStr.substring(0, validateStr.lastIndexOf("/")));
-			String fileName = validateStr.substring(validateStr.lastIndexOf("/")+1);
+			String validateStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_TAG).item(0).getTextContent();
+			File dir = new File(validateStr.substring(0, validateStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+			String fileName = validateStr.substring(validateStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
 				
 			if(files != null && files.size() > 0)
 			{
-				result = "Passed";
+				result = TestCaseConstants.PASSED;
 			}	
 		}
 		
-		boolean doVerifyFtpFileNotExist = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").getLength() > 0;
+		boolean doVerifyFtpFileNotExist = testXmlDocument.getElementsByTagName(XmlTags.VERIFY_FTP_FILE_NOT_EXIST_TAG).getLength() > 0;
 		
 		if (doVerifyFtpFileNotExist) {
-			String validateFTPStr = testXmlDocument.getElementsByTagName("verify-ftp-file-not-exist").item(0).getTextContent();
+			String validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VERIFY_FTP_FILE_NOT_EXIST_TAG).item(0).getTextContent();
 			FTPFile[] files = ftpClient.listFiles(validateFTPStr);
 			if (files == null || files.length == 0) {
-				result = "Passed";
+				result = TestCaseConstants.PASSED;
 			}
 		}
 		
@@ -406,18 +396,18 @@ public class TestCaseController
 	
 	private String executeFileTestcase(Document testXmlDocument) throws Exception
 	{
-		String result = "Failed";
+		String result = TestCaseConstants.FAILED;
 				
-		String validate = testXmlDocument.getElementsByTagName("validate").item(0).getTextContent();
+		String validate = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_TAG).item(0).getTextContent();
 		
 		Map<String, Node> fileInNodes = new HashMap<String, Node>();
 		Map<String, String> dropNodes = new HashMap<String, String>();
 				
 		// put each drop location into a map, using 'id' as the key
-		int dropCount = testXmlDocument.getElementsByTagName("drop").getLength();		
+		int dropCount = testXmlDocument.getElementsByTagName(XmlTags.DROP_TAG).getLength();		
 		for(int i=0; i <dropCount; i++)
 		{
-			Node dropNode = testXmlDocument.getElementsByTagName("drop").item(i);
+			Node dropNode = testXmlDocument.getElementsByTagName(XmlTags.DROP_TAG).item(i);
 		
 			String dropDir = dropNode.getTextContent();
 			String dropId = dropNode.getAttributes().getNamedItem("id").getNodeValue();
@@ -426,12 +416,12 @@ public class TestCaseController
 		}
 		
 		// put files to copy into map, 'order' is the key
-		int fileInCount = testXmlDocument.getElementsByTagName("file").getLength();
+		int fileInCount = testXmlDocument.getElementsByTagName(XmlTags.FILE_TAG).getLength();
 		for(int i=0; i <fileInCount; i++)
 		{
-			Node fileInNode = testXmlDocument.getElementsByTagName("file").item(i);
+			Node fileInNode = testXmlDocument.getElementsByTagName(XmlTags.FILE_TAG).item(i);
 		
-			String order = fileInNode.getAttributes().getNamedItem("order").getNodeValue();
+			String order = fileInNode.getAttributes().getNamedItem(XmlTags.ORDER_ATTRIBUTE).getNodeValue();
 			
 			fileInNodes.put(order, fileInNode);
 		}
@@ -445,7 +435,7 @@ public class TestCaseController
 			File srcFile = new File(fileIn);
 			
 			/* find matching 'drop' */
-			String dropId = fileInNode.getAttributes().getNamedItem("drop").getNodeValue();
+			String dropId = fileInNode.getAttributes().getNamedItem(XmlTags.DROP_TAG).getNodeValue();
 			String dropDir = dropNodes.get(dropId);
 			
 			File destFile = new File(dropDir);
@@ -459,7 +449,7 @@ public class TestCaseController
 		
 		if(outFile.exists())
 		{
-			result = "Passed";
+			result = TestCaseConstants.PASSED;
 		}	
 		
 		return result;
@@ -467,20 +457,20 @@ public class TestCaseController
 	
 	private String executeHttpTestcase(Document testXmlDocument) throws Exception
 	{
-		String requestXml = testXmlDocument.getElementsByTagName("request").item(0).getTextContent();
-		String endpoint = testXmlDocument.getElementsByTagName("url").item(0).getTextContent();
+		String requestXml = testXmlDocument.getElementsByTagName(XmlTags.REQUEST_TAG).item(0).getTextContent();
+		String endpoint = testXmlDocument.getElementsByTagName(XmlTags.URL_TAG).item(0).getTextContent();
 		
-		boolean doValidateFile = testXmlDocument.getElementsByTagName("validate-file").getLength() > 0;
+		boolean doValidateFile = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).getLength() > 0;
 		
-		boolean doValidateSleep = testXmlDocument.getElementsByTagName("validate-sleep").getLength() > 0;
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).getLength() > 0;
 		
 		String validateFileStr = "";
 		if (doValidateFile)
 		{	
-			validateFileStr = testXmlDocument.getElementsByTagName("validate-file").item(0).getTextContent();
+			validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(0).getTextContent();
 
-			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
@@ -490,38 +480,27 @@ public class TestCaseController
 			
 		}
 		
-		boolean doValidateFTP = testXmlDocument.getElementsByTagName("validate-ftp-upload").getLength() > 0;
+		boolean doValidateFTP = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).getLength() > 0;
 		
 		String validateFTPStr = "";
 		if (doValidateFTP)
 		{	
 			/* Cleanup files to validate before executing test-case */
-			FTPClient ftpClient = new FTPClient();
-			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-		    int reply;
-		    ftpClient.connect("localhost", 9981);
-		    reply = ftpClient.getReplyCode();
-	        if (!FTPReply.isPositiveCompletion(reply)) {
-	        	ftpClient.disconnect();
-	            throw new Exception("Exception in connecting to FTP Server");
-	        }
-	        ftpClient.login("user1", "password");
-	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient.enterLocalPassiveMode();
+			FTPClient ftpClient = TestServerUtils.buildFTPClient();
 	        
-			validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+			validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(0).getTextContent();
 			
 			if(validateFTPStr.contains("*"))
 			{
-				String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf("/"));
+				String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
 				
-				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf("/")+1, validateFTPStr.lastIndexOf("*"));
+				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
 				
 				for(FTPFile f: ftpClient.listFiles(dir))
 				{
 					if(f.getName().startsWith(fileName))
 					{
-						ftpClient.deleteFile(dir+"/"+f.getName());			
+						ftpClient.deleteFile(dir+IOUtils.DIR_SEPARATOR+f.getName());			
 					}
 				}
 			}
@@ -567,18 +546,18 @@ public class TestCaseController
 		
 		if(doValidateSleep)
 		{
-			String doValidateSleepStr = testXmlDocument.getElementsByTagName("validate-sleep").item(0).getTextContent();
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).item(0).getTextContent();
 			
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
 		
 		
 		
-		boolean doValidateResponse = testXmlDocument.getElementsByTagName("validate-response").getLength() > 0;
+		boolean doValidateResponse = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_RESPONSE_TAG).getLength() > 0;
 		boolean xpathValid = true;
 		if (doValidateResponse) {
 			
-			String xpathStr = testXmlDocument.getElementsByTagName("validate-response").item(0).getTextContent();
+			String xpathStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_RESPONSE_TAG).item(0).getTextContent();
 			
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -595,9 +574,9 @@ public class TestCaseController
 		boolean outFileExists = true;
 		if (doValidateFile)
 		{
-			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf("/")));
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
 			
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf("/")+1);
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
 			
 			@SuppressWarnings("unchecked")
 			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
@@ -609,26 +588,15 @@ public class TestCaseController
 		{	
 			ftpFileUploaded = false;
 			
-			FTPClient ftpClient = new FTPClient();
-			ftpClient.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
-		    int reply;
-		    ftpClient.connect("localhost", 9981);
-		    reply = ftpClient.getReplyCode();
-	        if (!FTPReply.isPositiveCompletion(reply)) {
-	        	ftpClient.disconnect();
-	            throw new Exception("Exception in connecting to FTP Server");
-	        }
-	        ftpClient.login("user1", "password");
-	        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-	        ftpClient.enterLocalPassiveMode();
+			FTPClient ftpClient = TestServerUtils.buildFTPClient();
 	        
-	        validateFTPStr = testXmlDocument.getElementsByTagName("validate-ftp-upload").item(0).getTextContent();
+	        validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(0).getTextContent();
 	        
 	        if(validateFTPStr.contains("*"))
 	        {
-	        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf("/"));
+	        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
 				
-				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf("/")+1, validateFTPStr.lastIndexOf("*"));
+				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
 				
 				for(FTPFile f: ftpClient.listFiles(dir))
 				{
@@ -669,7 +637,7 @@ public class TestCaseController
 		System.out.println("emailDelivered:"+emailDelivered);
 		System.out.println("xpathValid:"+xpathValid);
 				
-		return (xpathValid) && outFileExists && ftpFileUploaded && emailDelivered ? "Passed" : "Failed";
+		return (xpathValid) && outFileExists && ftpFileUploaded && emailDelivered ? TestCaseConstants.PASSED : TestCaseConstants.FAILED;
 	}
 	
 	private String getTestXml(String domain, String projectId, String testcaseId)
@@ -678,7 +646,7 @@ public class TestCaseController
 		
 		try
 		{
-			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + "/" + domain + "/" + projectId + "/" + testcaseId));
+			InputStream inputStream = new FileInputStream(new File(TestServerUtils.getConfigDir() + IOUtils.DIR_SEPARATOR + domain + IOUtils.DIR_SEPARATOR + projectId + IOUtils.DIR_SEPARATOR + testcaseId));
 			
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
