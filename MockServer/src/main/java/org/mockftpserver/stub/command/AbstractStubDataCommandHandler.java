@@ -47,7 +47,7 @@ import org.mockftpserver.core.util.AssertFailedException;
  * {@link #setFinalReplyMessageKey(String)} and/or {@link #setFinalReplyText(String)} methods.
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2008-12-07 13:07:10 +0000 (Sun, 07 Dec 2008) $
+ * @version $Revision: 193 $ - $Date: 2008-12-07 08:07:10 -0500 (Sun, 07 Dec 2008) $
  */
 public abstract class AbstractStubDataCommandHandler extends AbstractTrackingCommandHandler implements CommandHandler {
 

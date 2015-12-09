@@ -26,7 +26,7 @@ import java.util.List;
  * Objects of this class are immutable.
  *
  * @author Chris Mair
- * @version $Revision: 77 $ - $Date: 2008-07-02 02:11:32 +0000 (Wed, 02 Jul 2008) $
+ * @version $Revision: 77 $ - $Date: 2008-07-01 22:11:32 -0400 (Tue, 01 Jul 2008) $
  */
 public final class Command {
 

@@ -25,7 +25,7 @@ import java.io.OutputStream;
  * File system entry representing a file
  *
  * @author Chris Mair
- * @version $Revision: 219 $ - $Date: 2009-02-08 02:58:49 +0000 (Sun, 08 Feb 2009) $
+ * @version $Revision: 219 $ - $Date: 2009-02-07 21:58:49 -0500 (Sat, 07 Feb 2009) $
  */
 public class FileEntry extends AbstractFileSystemEntry {
 

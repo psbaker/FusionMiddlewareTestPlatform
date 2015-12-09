@@ -19,7 +19,7 @@ package org.mockftpserver.core.util;
  * Contains static utility methods related to pattern-matching and regular expressions.
  *
  * @author Chris Mair
- * @version $Revision: 240 $ - $Date: 2010-03-20 00:28:25 +0000 (Sat, 20 Mar 2010) $
+ * @version $Revision: 240 $ - $Date: 2010-03-19 20:28:25 -0400 (Fri, 19 Mar 2010) $
  */
 public class PatternUtil {
 

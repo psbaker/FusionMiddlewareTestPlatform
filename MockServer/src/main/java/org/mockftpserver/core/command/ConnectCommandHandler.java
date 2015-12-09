@@ -27,7 +27,7 @@ import org.mockftpserver.core.session.Session;
  * Each invocation record stored by this CommandHandler contains no data elements.
  *
  * @author Chris Mair
- * @version $Revision: 191 $ - $Date: 2008-12-06 02:55:29 +0000 (Sat, 06 Dec 2008) $
+ * @version $Revision: 191 $ - $Date: 2008-12-05 21:55:29 -0500 (Fri, 05 Dec 2008) $
  */
 public final class ConnectCommandHandler extends AbstractStaticReplyCommandHandler implements CommandHandler {
 

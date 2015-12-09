@@ -20,7 +20,7 @@ import org.mockftpserver.core.session.Session;
 /**
  * Interface for classes that can handle an FTP command.
  * 
- * @version $Revision: 8 $ - $Date: 2007-12-19 03:42:32 +0000 (Wed, 19 Dec 2007) $
+ * @version $Revision: 8 $ - $Date: 2007-12-18 22:42:32 -0500 (Tue, 18 Dec 2007) $
  * 
  * @author Chris Mair
  */

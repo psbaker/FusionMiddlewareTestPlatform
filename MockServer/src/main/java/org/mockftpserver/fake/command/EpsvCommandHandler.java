@@ -32,7 +32,7 @@ import java.net.InetAddress;
  * See RFC2428 for more information.
  *
  * @author Chris Mair
- * @version $Revision: 262 $ - $Date: 2012-07-15 12:33:02 +0000 (Sun, 15 Jul 2012) $
+ * @version $Revision: 262 $ - $Date: 2012-07-15 08:33:02 -0400 (Sun, 15 Jul 2012) $
  */
 public class EpsvCommandHandler extends AbstractFakeCommandHandler {
 

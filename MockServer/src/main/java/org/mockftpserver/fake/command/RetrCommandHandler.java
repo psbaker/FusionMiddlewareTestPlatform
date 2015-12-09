@@ -42,12 +42,11 @@ import java.io.InputStream;
  * </ol>
  *
  * @author Chris Mair
- * @version $Revision: 214 $ - $Date: 2008-12-27 01:00:19 +0000 (Sat, 27 Dec 2008) $
+ * @version $Revision: 214 $ - $Date: 2008-12-26 20:00:19 -0500 (Fri, 26 Dec 2008) $
  */
 public class RetrCommandHandler extends AbstractFakeCommandHandler {
 
     protected void handle(Command command, Session session) {
-    	System.out.println("CALLING RETR COMMAND!!!!!!!!!!!!!!!!!!!!!!");
         verifyLoggedIn(session);
         this.replyCodeForFileSystemException = ReplyCodes.READ_FILE_ERROR;
 

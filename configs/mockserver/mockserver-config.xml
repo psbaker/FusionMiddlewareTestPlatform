@@ -1,11 +1,11 @@
 <mockserver-config>
  
-    <!-- ONAIR -->
+    <!-- ONAIR SYSTEM -->
 	<system>
 		<system-id>onAir</system-id>
 		<system-uri>/onAir</system-uri>
 	
-		<!-- Login Token -->      
+		<!-- Login Token Service -->      
 		<service>
 			<service-id>loginToken</service-id>	
 			<service-uri>/getLoginToken</service-uri>
@@ -16,7 +16,7 @@
 			</operation>				
 		</service>
       
-      	<!-- EPG -->
+      	<!-- EPG Service -->
         <service>
 			<service-id>getEPGService</service-id>	
 			<service-uri>/getEPGService</service-uri>
@@ -37,7 +37,7 @@
 			</operation>
 		</service>
       
-      	<!-- TransWeb -->
+      	<!-- TransWeb Service -->
 		<service>
 			<service-id>getTransWebService</service-id>	
 			<service-uri>/getTransWebService</service-uri>
@@ -58,7 +58,7 @@
 			</operation>				
 		</service>
       
-      <!-- BxfPlayist -->
+      <!-- BxfPlayist Service -->
 		<service>
 			<service-id>getBxfPlaylistService</service-id>	
 			<service-uri>/getBxfPlaylistService</service-uri>
@@ -77,7 +77,7 @@
 			</operation>
 		</service>
       
-      <!-- CreateOnAirProgramService -->
+      <!-- CreateOnAirProgramService Service -->
 		<service>
 			<service-id>createOnAirProgramService</service-id>	
 			<service-uri>/createOnAirProgramService</service-uri>
@@ -106,7 +106,7 @@
       
 	</system>
   
-    <!-- WALLACE -->
+    <!-- WALLACE SYSTEM -->
     <system>
 		<system-id>Wallace</system-id>
 		<system-uri>/Wallace</system-uri>
@@ -123,7 +123,7 @@
      
     </system>  
     
-    <!-- PAPI -->
+    <!-- PAPI SYSTEM -->
     <system>
 		<system-id>papi</system-id>
 		<system-uri>/papi</system-uri>
@@ -161,7 +161,7 @@
      
     </system>  
 
-    <!-- Resolve -->
+    <!-- RESOLVE SYSTEM -->
     <system>
 		<system-id>Resolve</system-id>
 		<system-uri>/Resolve</system-uri>
@@ -189,6 +189,22 @@
      
     </system>  
 
+  
+    <!-- REUTERS SYSTEM -->
+    <system>
+		<system-id>Reuters</system-id>
+		<system-uri>/Reuters</system-uri>
+	
+		<service>
+			<service-id>TokenManagementService</service-id>	
+            <service-uri>/TokenManagementService</service-uri>
+			<operation>				
+				<operation-id>CreateServiceToken</operation-id>	
+				<token>RyanPeterAbcNetAu</token>		
+			</operation>				          					          	
+		</service>
+     
+    </system>
   
 		
 </mockserver-config>

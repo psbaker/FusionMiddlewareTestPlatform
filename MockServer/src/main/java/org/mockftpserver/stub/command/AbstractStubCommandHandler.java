@@ -24,7 +24,7 @@ import org.mockftpserver.core.command.AbstractStaticReplyCommandHandler;
  * {@link #setReplyCode(int)}, {@link #setReplyMessageKey(String)} and {@link #setReplyText(String)}.
  *
  * @author Chris Mair
- * @version $Revision: 193 $ - $Date: 2008-12-07 13:07:10 +0000 (Sun, 07 Dec 2008) $
+ * @version $Revision: 193 $ - $Date: 2008-12-07 08:07:10 -0500 (Sun, 07 Dec 2008) $
  */
 public abstract class AbstractStubCommandHandler extends AbstractStaticReplyCommandHandler {
 

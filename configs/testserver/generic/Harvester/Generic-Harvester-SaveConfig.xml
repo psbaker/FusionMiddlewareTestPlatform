@@ -1,0 +1,76 @@
+<testcase>  
+  
+  <protocol>http</protocol>
+  
+  <url>http://localhost:7001/Harvester_SB/Proxy_Services/ConfigSave</url>
+  
+  <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='saveConfigResp']/Description[text() = 'SUCCESS']</validate-response>
+  
+  <validate-ftp-upload>/mediahub/ABCNews24Ticker/BreakingNews/breakingnews_feed.xml</validate-ftp-upload>
+  
+  <request>
+    
+    <![CDATA[        
+
+      <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://osb.abc.net.au/news24/client/config/saver/1.1" xmlns:ns1="http://osb.abc.net.au/news24/client/config/common/1.1">
+       <soapenv:Header/>
+       <soapenv:Body>
+          <ns:saveConfigReq>
+             <ns:FeedCtrlConfig>
+                <ns:UserConfig>
+                   <ns:User>AUS\bakerp2y</ns:User>
+                </ns:UserConfig>
+                <ns:TimerConfig>
+                   <ns:id>1</ns:id>
+                   <ns:Modified>false</ns:Modified>
+                   <ns:Frequency>120</ns:Frequency>
+                </ns:TimerConfig>
+                <ns:RollingFeedConfig>
+                   <ns:DataFeed id="1">
+                      <ns1:Name>Manual Text</ns1:Name>
+                      <ns1:Priority>1</ns1:Priority>
+                      <ns1:Activated>true</ns1:Activated>
+                      <ns1:FeedSrc>Manual text entry - Harvester GUI</ns1:FeedSrc>
+                      <ns1:HeaderLine id="1"/>
+                      <ns1:ItemLine id="7541">1~Twitter: @ABCNews24 | Facebook: Facebook.com/abcnews24.au Facebook Facebook 0123456</ns1:ItemLine>
+                      <ns1:ItemLine id="7542">2~Watch ABC News 24 online: abc.net.au/abcnews24</ns1:ItemLine>
+                      <ns1:Type>MTXT</ns1:Type>
+                   </ns:DataFeed>
+                   <ns:DataFeed id="2">
+                      <ns1:Name>Sports</ns1:Name>
+                      <ns1:Priority>2</ns1:Priority>
+                      <ns1:Activated>true</ns1:Activated>
+                      <ns1:FeedSrc>http://www.abc.net.au/news/feed/2566676/rss.xml</ns1:FeedSrc>
+                      <ns1:HeaderLine id="2">The top sport stories from abc.net.au/grandstand The top sport stories from 123456</ns1:HeaderLine>
+                      <ns1:Type>RSS</ns1:Type>
+                   </ns:DataFeed>
+                   <ns:DataFeed id="3">
+                      <ns1:Name>Finance</ns1:Name>
+                      <ns1:Priority>3</ns1:Priority>
+                      <ns1:Activated>true</ns1:Activated>
+                      <ns1:FeedSrc>http://www.abc.net.au/xmlcontent/news/businessdata/rss/ticker.xml</ns1:FeedSrc>
+                      <ns1:HeaderLine id="3">The top business stories from abc.net.au/business</ns1:HeaderLine>
+                      <ns1:Type>RSS</ns1:Type>
+                   </ns:DataFeed>
+                </ns:RollingFeedConfig>
+                <ns:BreakingNewsFeedConfig>
+                   <ns:BreakingNewsFeed id="4" name="Breaking News">
+                      <ns1:Priority>0</ns1:Priority>
+                      <ns1:Activated>true</ns1:Activated>
+                      <ns1:FeedSrc>Manual text entry - Harvester GUI</ns1:FeedSrc>
+                      <ns1:HeaderLine id="4">Header</ns1:HeaderLine>
+                      <ns1:ItemLine id="7802">1~Emergency warning for fire at Pipeline Rd Nantawarra, SA Nantawarra Nantawarr 0123</ns1:ItemLine>
+                      <ns1:UseStandardColours>false</ns1:UseStandardColours>
+                      <ns1:Type>BNWS</ns1:Type>
+                   </ns:BreakingNewsFeed>
+                </ns:BreakingNewsFeedConfig>
+             </ns:FeedCtrlConfig>
+          </ns:saveConfigReq>
+       </soapenv:Body>
+    </soapenv:Envelope>
+     
+      ]]>
+    
+  </request>
+  
+</testcase>

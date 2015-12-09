@@ -21,7 +21,7 @@ import org.mockftpserver.fake.filesystem.FileSystem;
  * Interface for objects that provide access to server-specific information.
  *
  * @author Chris Mair
- * @version $Revision: 200 $ - $Date: 2008-12-12 00:01:21 +0000 (Fri, 12 Dec 2008) $
+ * @version $Revision: 200 $ - $Date: 2008-12-11 19:01:21 -0500 (Thu, 11 Dec 2008) $
  */
 public interface ServerConfiguration {
 

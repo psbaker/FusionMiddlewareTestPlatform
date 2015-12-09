@@ -27,7 +27,7 @@ import org.mockftpserver.core.util.AssertFailedException;
  * <p>
  * Each invocation record stored by this CommandHandler contains no data elements.
  * 
- * @version $Revision: 184 $ - $Date: 2008-12-03 22:52:39 +0000 (Wed, 03 Dec 2008) $
+ * @version $Revision: 184 $ - $Date: 2008-12-03 17:52:39 -0500 (Wed, 03 Dec 2008) $
  * 
  * @author Chris Mair
  */

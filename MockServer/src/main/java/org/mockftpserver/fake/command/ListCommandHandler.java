@@ -42,12 +42,11 @@ import java.util.List;
  * </ol>
  *
  * @author Chris Mair
- * @version $Revision: 220 $ - $Date: 2009-02-08 04:05:06 +0000 (Sun, 08 Feb 2009) $
+ * @version $Revision: 220 $ - $Date: 2009-02-07 23:05:06 -0500 (Sat, 07 Feb 2009) $
  */
 public class ListCommandHandler extends AbstractFakeCommandHandler {
 
     protected void handle(Command command, Session session) {
-    	
         verifyLoggedIn(session);
         sendReply(session, ReplyCodes.TRANSFER_DATA_INITIAL_OK);
 
@@ -55,12 +54,9 @@ public class ListCommandHandler extends AbstractFakeCommandHandler {
 
         // User must have read permission to the path
         if (getFileSystem().exists(path)) {
-        	//System.out.println("FileSystem path exists: " + getFileSystem().exists(path));
             this.replyCodeForFileSystemException = ReplyCodes.READ_FILE_ERROR;
             verifyReadPermission(session, path);
         }
-        
-        //System.out.println("Read permission verified");
 
         this.replyCodeForFileSystemException = ReplyCodes.SYSTEM_ERROR;
         List fileEntries = getFileSystem().listFiles(path);
@@ -69,21 +65,16 @@ public class ListCommandHandler extends AbstractFakeCommandHandler {
         while (iter.hasNext()) {
             FileSystemEntry entry = (FileSystemEntry) iter.next();
             lines.add(getFileSystem().formatDirectoryListing(entry));
-            
         }
         String result = StringUtil.join(lines, endOfLine());
         result += result.length() > 0 ? endOfLine() : "";
 
-      //  System.out.println("RESULT" + result);
-        
         session.openDataConnection();
         LOG.info("Sending [" + result + "]");
         session.sendData(result.getBytes(), result.length());
-        
+        session.closeDataConnection();
 
         sendReply(session, ReplyCodes.TRANSFER_DATA_FINAL_OK);
-        
-        session.closeDataConnection();
     }
 
 }

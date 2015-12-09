@@ -15,6 +15,12 @@
  */
 package org.mockftpserver.fake.filesystem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.mockftpserver.core.util.Assert;
+import org.mockftpserver.core.util.PatternUtil;
+import org.mockftpserver.core.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -22,11 +28,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.mockftpserver.core.util.Assert;
-import org.mockftpserver.core.util.PatternUtil;
-import org.mockftpserver.core.util.StringUtil;
 
 /**
  * Abstract superclass for implementation of the FileSystem interface that manage the files
@@ -42,11 +43,11 @@ import org.mockftpserver.core.util.StringUtil;
  * filesystem-specific manner. This property must be initialized by concrete subclasses.
  *
  * @author Chris Mair
- * @version $Revision: 264 $ - $Date: 2012-07-18 01:19:23 +0000 (Wed, 18 Jul 2012) $
+ * @version $Revision: 264 $ - $Date: 2012-07-17 21:19:23 -0400 (Tue, 17 Jul 2012) $
  */
 public abstract class AbstractFakeFileSystem implements FileSystem {
 
-    private static final Logger LOG = Logger.getLogger(AbstractFakeFileSystem.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractFakeFileSystem.class);
 
     /**
      * If <code>true</code>, creating a directory or file will automatically create

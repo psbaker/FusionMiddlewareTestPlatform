@@ -27,7 +27,7 @@ import org.mockftpserver.core.session.Session;
  * </ol>
  *
  * @author Chris Mair
- * @version $Revision: 195 $ - $Date: 2008-12-08 00:53:07 +0000 (Mon, 08 Dec 2008) $
+ * @version $Revision: 195 $ - $Date: 2008-12-07 19:53:07 -0500 (Sun, 07 Dec 2008) $
  */
 public class SmntCommandHandler extends AbstractFakeCommandHandler {
 

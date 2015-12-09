@@ -29,7 +29,7 @@ import org.mockftpserver.core.util.Assert;
  * of {@link UnixDirectoryListingFormatter}.
  *
  * @author Chris Mair
- * @version $Revision: 233 $ - $Date: 2009-06-14 00:31:02 +0000 (Sun, 14 Jun 2009) $
+ * @version $Revision: 233 $ - $Date: 2009-06-13 20:31:02 -0400 (Sat, 13 Jun 2009) $
  */
 public class UnixFakeFileSystem extends AbstractFakeFileSystem {
 

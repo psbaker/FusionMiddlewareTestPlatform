@@ -34,7 +34,7 @@ import java.net.InetAddress;
  * Each invocation record stored by this CommandHandler contains no data elements.
  *
  * @author Chris Mair
- * @version $Revision: 230 $ - $Date: 2009-06-13 11:44:57 +0000 (Sat, 13 Jun 2009) $
+ * @version $Revision: 230 $ - $Date: 2009-06-13 07:44:57 -0400 (Sat, 13 Jun 2009) $
  */
 public class EpsvCommandHandler extends AbstractStubCommandHandler implements CommandHandler {
 

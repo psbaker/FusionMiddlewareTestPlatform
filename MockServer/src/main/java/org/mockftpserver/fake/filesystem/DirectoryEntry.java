@@ -19,7 +19,7 @@ package org.mockftpserver.fake.filesystem;
  * File system entry representing a directory
  *
  * @author Chris Mair
- * @version $Revision: 199 $ - $Date: 2008-12-11 03:03:52 +0000 (Thu, 11 Dec 2008) $
+ * @version $Revision: 199 $ - $Date: 2008-12-10 22:03:52 -0500 (Wed, 10 Dec 2008) $
  */
 public class DirectoryEntry extends AbstractFileSystemEntry {
 

@@ -32,7 +32,7 @@ import org.mockftpserver.core.command.Command;
  * </ol>
  *
  * @author Chris Mair
- * @version $Revision: 201 $ - $Date: 2008-12-12 00:39:48 +0000 (Fri, 12 Dec 2008) $
+ * @version $Revision: 201 $ - $Date: 2008-12-11 19:39:48 -0500 (Thu, 11 Dec 2008) $
  */
 public class StouCommandHandler extends AbstractStoreFileCommandHandler {
 
