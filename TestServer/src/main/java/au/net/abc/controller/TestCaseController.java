@@ -427,12 +427,12 @@ public class TestCaseController
 		}
 		
 		//copy files according to order
-		for(int i=1; i <=fileInCount; i++)
+		for(int i=1; i <= fileInCount; i++)
 		{
 			Node fileInNode = fileInNodes.get(String.valueOf(i)); 
 			String fileIn = fileInNode.getTextContent();
 								
-			File srcFile = new File(fileIn);
+			File srcFile = new File(TestServerUtils.getTestDataConfigDir(), fileIn);
 			
 			/* find matching 'drop' */
 			String dropId = fileInNode.getAttributes().getNamedItem(XmlTags.DROP_TAG).getNodeValue();
