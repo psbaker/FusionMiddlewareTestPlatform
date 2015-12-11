@@ -515,14 +515,14 @@ public class TestCaseController
 			        //remove files from ftp server
 			        ftpClient.deleteFile(validateFTPStr);				
 				}
-		        
-		        //disconnect from ftp server
-		        if(ftpClient.isConnected()) 
-		        {
-		        	ftpClient.logout();
-		        	ftpClient.disconnect();
-		        }
 			}
+	        
+	        //disconnect from ftp server
+	        if(ftpClient.isConnected()) 
+	        {
+	        	ftpClient.logout();
+	        	ftpClient.disconnect();
+	        }
 		} 
 		
 		boolean doValidateSMTP = testXmlDocument.getElementsByTagName("verify-email").getLength() > 0;
@@ -593,20 +593,23 @@ public class TestCaseController
 				@SuppressWarnings("unchecked")
 				Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
 				outFileExists = listFiles != null && !listFiles.isEmpty(); 
+				
+				if(!outFileExists)
+				{
+					break;
+				}
 			}
 		}
 		
-		boolean ftpFileUploaded = true;
+		boolean ftpFileUploaded = false;
 		if(doValidateFTP)
 		{
+			FTPClient ftpClient = TestServerUtils.buildFTPClient();
+			
 			NodeList validateFTPUploadTags = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG);
 			
 			for (int j = 0; j < validateFTPUploadTags.getLength(); j++)				
 			{
-				ftpFileUploaded = false;
-				
-				FTPClient ftpClient = TestServerUtils.buildFTPClient();
-		        
 		        String validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(j).getTextContent();
 		        
 		        if(validateFTPStr.contains("*"))
@@ -621,6 +624,10 @@ public class TestCaseController
 						{
 							ftpFileUploaded = true;			
 						}
+						else 
+						{
+							break;
+						}
 					}
 		        }
 		        else
@@ -632,15 +639,19 @@ public class TestCaseController
 			        {
 			        	ftpFileUploaded = true;
 			        }
-		        }
-		        
-		        //disconnect from ftp server
-		        if(ftpClient.isConnected()) 
-		        {
-		        	ftpClient.logout();
-		        	ftpClient.disconnect();
+			        else
+			        {
+			        	break;
+			        }
 		        }
 			}
+		        
+	        //disconnect from ftp server
+	        if(ftpClient.isConnected()) 
+	        {
+	        	ftpClient.logout();
+	        	ftpClient.disconnect();
+	        }
 		}
 		
 		boolean emailDelivered = true;
