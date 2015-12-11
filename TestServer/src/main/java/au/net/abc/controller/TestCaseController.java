@@ -397,8 +397,24 @@ public class TestCaseController
 	private String executeFileTestcase(Document testXmlDocument) throws Exception
 	{
 		String result = TestCaseConstants.FAILED;
-				
-		String validate = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_TAG).item(0).getTextContent();
+		
+		boolean doCleanUpFile = testXmlDocument.getElementsByTagName(XmlTags.CLEAN_UP_FILE_TAG).getLength() > 0;
+		
+		if (doCleanUpFile)
+		{	
+			
+			String cleanUpFileStr = testXmlDocument.getElementsByTagName(XmlTags.CLEAN_UP_FILE_TAG).item(0).getTextContent();
+			File dir = new File(cleanUpFileStr.substring(0, cleanUpFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+			String fileName = cleanUpFileStr.substring(cleanUpFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+			
+			for (File file : files) {
+				FileUtils.forceDelete(file);
+			}
+			
+		}
 		
 		Map<String, Node> fileInNodes = new HashMap<String, Node>();
 		Map<String, String> dropNodes = new HashMap<String, String>();
@@ -443,14 +459,31 @@ public class TestCaseController
 			FileUtils.copyFileToDirectory(srcFile, destFile);			
 		}
 		
-		Thread.sleep(10000);
 		
-		File outFile = new File(validate);
+		boolean doValidateSleep = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).getLength() > 0;
+
+		if (doValidateSleep) {
+			String doValidateSleepStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).item(0).getTextContent();
+			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
+		}
 		
-		if(outFile.exists())
-		{
-			result = TestCaseConstants.PASSED;
-		}	
+		boolean doValidateFile = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).getLength() > 0;
+		
+		if (doValidateFile) {
+			
+			String validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(0).getTextContent();
+			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
+			
+			@SuppressWarnings("unchecked")
+			Collection<File> files = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+
+			if(files != null && !files.isEmpty())
+			{
+				result = TestCaseConstants.PASSED;
+			}	
+		
+		}
 		
 		return result;
 	}

@@ -27,6 +27,7 @@ public interface TestCaseConstants {
 		public static final String URL_TAG = "url";
 		public static final String DROP_TAG = "drop";
 		public static final String FILE_TAG = "file";
+		public static final String CLEAN_UP_FILE_TAG = "clean-up-file";
 		public static final String VALIDATE_TAG = "validate";
 		public static final String VALIDATE_FILE_TAG = "validate-file";
 		public static final String VALIDATE_FTP_FILE_TAG = "validate-ftp-file";
