@@ -89,6 +89,19 @@ public class MockFtpServerUtils
 		DirectoryEntry directory19 = new DirectoryEntry("/mediahub/ABCNews24Ticker/BreakingNews");
 		fileSystem.add(directory19);
 		
+		//Divitech application
+		DirectoryEntry directory20 = new DirectoryEntry("/divitech/sundial1a");
+		fileSystem.add(directory20);
+		
+		DirectoryEntry directory21 = new DirectoryEntry("/divitech/sundial1b");
+		fileSystem.add(directory21);
+		
+		DirectoryEntry directory22 = new DirectoryEntry("/divitech/sundialdr");
+		fileSystem.add(directory22);
+		
+		DirectoryEntry directory23 = new DirectoryEntry("/divitech/divitechdr");
+		fileSystem.add(directory23);
+		
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
 		  
