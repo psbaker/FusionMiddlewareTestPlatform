@@ -464,58 +464,65 @@ public class TestCaseController
 		
 		boolean doValidateSleep = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_SLEEP_TAG).getLength() > 0;
 		
-		String validateFileStr = "";
 		if (doValidateFile)
 		{	
-			validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(0).getTextContent();
+			NodeList validateFileTags = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG);
+			
+			for (int i = 0; i < validateFileTags.getLength(); i++)
+			{
+				String validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(i).getTextContent();
 
-			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
-			
-			@SuppressWarnings("unchecked")
-			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
-			for (File file : listFiles) {
-				FileUtils.forceDelete(file);
+				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
+				
+				@SuppressWarnings("unchecked")
+				Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+				for (File file : listFiles) {
+					FileUtils.forceDelete(file);
+				}
 			}
-			
 		}
 		
 		boolean doValidateFTP = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).getLength() > 0;
 		
-		String validateFTPStr = "";
 		if (doValidateFTP)
 		{	
 			/* Cleanup files to validate before executing test-case */
 			FTPClient ftpClient = TestServerUtils.buildFTPClient();
 	        
-			validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(0).getTextContent();
+			NodeList validateFTPUploadTags = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG);
 			
-			if(validateFTPStr.contains("*"))
+			for (int j = 0; j < validateFTPUploadTags.getLength(); j++)				
 			{
-				String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
+				String validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(j).getTextContent();
 				
-				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
-				
-				for(FTPFile f: ftpClient.listFiles(dir))
+				if(validateFTPStr.contains("*"))
 				{
-					if(f.getName().startsWith(fileName))
+					String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
+					
+					String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
+					
+					for(FTPFile f: ftpClient.listFiles(dir))
 					{
-						ftpClient.deleteFile(dir+IOUtils.DIR_SEPARATOR+f.getName());			
+						if(f.getName().startsWith(fileName))
+						{
+							ftpClient.deleteFile(dir+IOUtils.DIR_SEPARATOR+f.getName());			
+						}
 					}
 				}
+				else
+				{
+			        //remove files from ftp server
+			        ftpClient.deleteFile(validateFTPStr);				
+				}
+		        
+		        //disconnect from ftp server
+		        if(ftpClient.isConnected()) 
+		        {
+		        	ftpClient.logout();
+		        	ftpClient.disconnect();
+		        }
 			}
-			else
-			{
-		        //remove files from ftp server
-		        ftpClient.deleteFile(validateFTPStr);				
-			}
-	        
-	        //disconnect from ftp server
-	        if(ftpClient.isConnected()) 
-	        {
-	        	ftpClient.logout();
-	        	ftpClient.disconnect();
-	        }
 		} 
 		
 		boolean doValidateSMTP = testXmlDocument.getElementsByTagName("verify-email").getLength() > 0;
@@ -550,8 +557,7 @@ public class TestCaseController
 			
 			Thread.sleep(Integer.valueOf(doValidateSleepStr)*1000);
 		}
-		
-		
+			
 		
 		boolean doValidateResponse = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_RESPONSE_TAG).getLength() > 0;
 		boolean xpathValid = true;
@@ -574,55 +580,67 @@ public class TestCaseController
 		boolean outFileExists = true;
 		if (doValidateFile)
 		{
-			File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+			NodeList validateFileTags = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG);
 			
-			String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
-			
-			@SuppressWarnings("unchecked")
-			Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
-			outFileExists = listFiles != null && !listFiles.isEmpty(); 
+			for (int i = 0; i < validateFileTags.getLength(); i++)
+			{
+				String validateFileStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FILE_TAG).item(i).getTextContent();
+				
+				File dir = new File(validateFileStr.substring(0, validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)));
+				
+				String fileName = validateFileStr.substring(validateFileStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1);
+				
+				@SuppressWarnings("unchecked")
+				Collection<File> listFiles = FileUtils.listFiles(dir, new WildcardFileFilter(fileName), FalseFileFilter.INSTANCE);
+				outFileExists = listFiles != null && !listFiles.isEmpty(); 
+			}
 		}
 		
 		boolean ftpFileUploaded = true;
 		if(doValidateFTP)
-		{	
-			ftpFileUploaded = false;
+		{
+			NodeList validateFTPUploadTags = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG);
 			
-			FTPClient ftpClient = TestServerUtils.buildFTPClient();
-	        
-	        validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(0).getTextContent();
-	        
-	        if(validateFTPStr.contains("*"))
-	        {
-	        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
+			for (int j = 0; j < validateFTPUploadTags.getLength(); j++)				
+			{
+				ftpFileUploaded = false;
 				
-				String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
-				
-				for(FTPFile f: ftpClient.listFiles(dir))
-				{
-					if(f.getName().startsWith(fileName))
-					{
-						ftpFileUploaded = true;			
-					}
-				}
-	        }
-	        else
-	        {
-		        //retrieve file from ftp server
-		        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
-		        int replyCode = ftpClient.getReplyCode();
-		        if(fileStream != null && replyCode != 550)
+				FTPClient ftpClient = TestServerUtils.buildFTPClient();
+		        
+		        String validateFTPStr = testXmlDocument.getElementsByTagName(XmlTags.VALIDATE_FTP_UPLOAD_TAG).item(j).getTextContent();
+		        
+		        if(validateFTPStr.contains("*"))
 		        {
-		        	ftpFileUploaded = true;
+		        	String dir = validateFTPStr.substring(0, validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR));
+					
+					String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
+					
+					for(FTPFile f: ftpClient.listFiles(dir))
+					{
+						if(f.getName().startsWith(fileName))
+						{
+							ftpFileUploaded = true;			
+						}
+					}
 		        }
-	        }
-	        
-	        //disconnect from ftp server
-	        if(ftpClient.isConnected()) 
-	        {
-	        	ftpClient.logout();
-	        	ftpClient.disconnect();
-	        }
+		        else
+		        {
+			        //retrieve file from ftp server
+			        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
+			        int replyCode = ftpClient.getReplyCode();
+			        if(fileStream != null && replyCode != 550)
+			        {
+			        	ftpFileUploaded = true;
+			        }
+		        }
+		        
+		        //disconnect from ftp server
+		        if(ftpClient.isConnected()) 
+		        {
+		        	ftpClient.logout();
+		        	ftpClient.disconnect();
+		        }
+			}
 		}
 		
 		boolean emailDelivered = true;
