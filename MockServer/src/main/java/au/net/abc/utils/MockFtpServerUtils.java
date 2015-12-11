@@ -101,6 +101,22 @@ public class MockFtpServerUtils
 		
 		DirectoryEntry directory23 = new DirectoryEntry("/divitech/divitechdr");
 		fileSystem.add(directory23);
+
+                //PlayList application
+		DirectoryEntry directory24 = new DirectoryEntry("/MHA_Pretend/In/Schedule");
+		fileSystem.add(directory24);
+		
+		DirectoryEntry directory25 = new DirectoryEntry("/onair/Playlist");
+		fileSystem.add(directory25);
+		
+		DirectoryEntry directory26 = new DirectoryEntry("/onair/PlaylistDR/ABC1NSWM");
+		fileSystem.add(directory26);
+		
+		DirectoryEntry directory27 = new DirectoryEntry("/onair/PlaylistDR/ABC2NSW");
+		fileSystem.add(directory27);
+
+		DirectoryEntry directory28 = new DirectoryEntry("/onair/PlaylistDR/ABC3");
+		fileSystem.add(directory28);
 		
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
