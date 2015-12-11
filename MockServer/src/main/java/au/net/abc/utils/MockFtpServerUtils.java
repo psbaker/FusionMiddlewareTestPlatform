@@ -89,6 +89,7 @@ public class MockFtpServerUtils
 		DirectoryEntry directory19 = new DirectoryEntry("/mediahub/ABCNews24Ticker/BreakingNews");
 		fileSystem.add(directory19);
 		
+		//Divitech application
 		DirectoryEntry directory20 = new DirectoryEntry("/divitech/sundial1a");
 		fileSystem.add(directory20);
 		
