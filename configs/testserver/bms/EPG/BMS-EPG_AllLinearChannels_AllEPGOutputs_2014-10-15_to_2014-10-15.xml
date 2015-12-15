@@ -8,11 +8,27 @@
   
   <validate-response>//Envelope/*[local-name()='Body']/*[local-name()='scheduleEpgResp']/Description[text() = 'SUCCESS']</validate-response>
   
-  <!-- <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC4.xml</validate-file> -->
-  
-  <validate-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/onair_ABC1_*.xml</validate-file>
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/ABCOnlineTVGuide/ABC4.xml</validate-file>
   
   <validate-ftp-upload>/onair/epg/internet/ABC3.xml</validate-ftp-upload>
+  
+  <!-- OnAir-WCMS Integration -->
+  
+  <validate-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/onair_ABC1_*.xml</validate-file>  
+  
+  <!-- Divitech -->
+  
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/FTAEPG/archive/Divitech/1111.xml</validate-file>
+  
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/FTAEPG/archive/Divitech/4122.xml</validate-file>
+  
+  <validate-file>/mnt/BMS/TVOnAirInterfaceData/OnAir/EPG/FTAEPG/archive/Divitech/2133.xml</validate-file>
+    
+  <validate-ftp-upload>/divitech/sundial1a/1111.xml</validate-ftp-upload>
+  
+  <validate-ftp-upload>/divitech/sundial1b/4122.xml</validate-ftp-upload>
+  
+  <validate-ftp-upload>/divitech/sundialdr/2133.xml</validate-ftp-upload>
     
   <request>
     
