@@ -634,7 +634,7 @@ public class TestCaseController
 			}
 		}
 		
-		boolean ftpFileUploaded = false;
+		boolean ftpFileUploaded = true;
 		if(doValidateFTP)
 		{
 			FTPClient ftpClient = TestServerUtils.buildFTPClient();
@@ -653,12 +653,9 @@ public class TestCaseController
 					
 					for(FTPFile f: ftpClient.listFiles(dir))
 					{
-						if(f.getName().startsWith(fileName))
+						if(!f.getName().startsWith(fileName))
 						{
-							ftpFileUploaded = true;			
-						}
-						else 
-						{
+							ftpFileUploaded = false;
 							break;
 						}
 					}
@@ -668,12 +665,9 @@ public class TestCaseController
 			        //retrieve file from ftp server
 			        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
 			        int replyCode = ftpClient.getReplyCode();
-			        if(fileStream != null && replyCode != 550)
+			        if(!(fileStream != null && replyCode != 550))
 			        {
-			        	ftpFileUploaded = true;
-			        }
-			        else
-			        {
+			        	ftpFileUploaded = false;
 			        	break;
 			        }
 		        }
