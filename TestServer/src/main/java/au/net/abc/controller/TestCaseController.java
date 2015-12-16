@@ -651,25 +651,29 @@ public class TestCaseController
 					
 					String fileName = validateFTPStr.substring(validateFTPStr.lastIndexOf(IOUtils.DIR_SEPARATOR)+1, validateFTPStr.lastIndexOf("*"));
 					
+					boolean fileFound = false;
 					for(FTPFile f: ftpClient.listFiles(dir))
 					{
-						if(!f.getName().startsWith(fileName))
-						{
-							ftpFileUploaded = false;
+						if(f.getName().startsWith(fileName))
+						{	
+							fileFound = true;
 							break;
 						}
+					}
+					if(!fileFound) {
+						ftpFileUploaded = false;
+						break;
 					}
 		        }
 		        else
 		        {
 			        //retrieve file from ftp server
-			        InputStream fileStream = ftpClient.retrieveFileStream(validateFTPStr);
-			        int replyCode = ftpClient.getReplyCode();
-			        if(!(fileStream != null && replyCode != 550))
-			        {
-			        	ftpFileUploaded = false;
+		        	int fileCount = ftpClient.listFiles(validateFTPStr).length;
+		        	if(fileCount == 0)
+		        	{
+		        		ftpFileUploaded = false;			        	
 			        	break;
-			        }
+		        	}
 		        }
 			}
 		        
