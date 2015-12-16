@@ -118,6 +118,9 @@ public class MockFtpServerUtils
 		DirectoryEntry directory28 = new DirectoryEntry("/onair/PlaylistDR/ABC3");
 		fileSystem.add(directory28);
 		
+		DirectoryEntry directory29 = new DirectoryEntry("/DR_Morpheus_Pretend/Schedules/Schedule_Drop");
+		fileSystem.add(directory29);
+
 		ftpServer.setFileSystem(fileSystem);
 		ftpServer.setSystemName("UNIX");
 		  
