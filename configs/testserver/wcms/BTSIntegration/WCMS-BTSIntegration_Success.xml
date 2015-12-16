@@ -1,0 +1,22 @@
+<testcase>  
+  
+  <protocol>file</protocol>
+
+  <!-- pre condition -->
+  <clean-up-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/bts_*.xml</clean-up-file>
+  
+  <!--setup -->
+  <file drop="1" order="1">/BTS/programmes_episode_20150618.xml</file>
+  <file drop="1" order="2">/BTS/schedule_NETASI_20150618.xml</file>
+  <file drop="2" order="3">/BTS/trigger.sem</file>
+  <drop id="1">/mnt/WCMS/wcmsinteg/WCMSCI/BTS/Processing/InputData</drop>
+  <drop id="2">/mnt/WCMS/wcmsinteg/WCMSCI/BTS/Processing</drop>
+  
+  <!-- execution -->
+  <validate-sleep>100</validate-sleep>
+  
+  
+  <!-- post condition -->
+  <validate-file>/mnt/WCMS/wcmsinteg/WCMSCI/MessageExport/bts_*.xml</validate-file>
+
+</testcase>
