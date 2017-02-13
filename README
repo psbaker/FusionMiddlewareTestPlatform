@@ -1,6 +1,6 @@
-
 1. Import 'MockServer' and 'TestServer' projects into eclipse
 2. Place 'apache-tomcat-7.0.42' in home directory
 3. Place 'mockserver' and 'testserver' folders in home directory
 4. Build projects using maven command 'mvn clean compile package' to build, package & deploy projects to tomcat
 5. Start tomcat & go to: 'http://<host>:<port/MockServerWebApp/index' and 'http://<host>:<port>/TestServerWebApp/index'
+6. <ToDo>
